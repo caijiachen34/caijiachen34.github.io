@@ -145,6 +145,227 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/29/%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2Hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/29/%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2Hexo/" class="post-title-link" itemprop="url">阿里云部署Hexo</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-10-29 14:54:46 / Modified: 14:57:48" itemprop="dateCreated datePublished" datetime="2022-10-29T14:54:46+08:00">2022-10-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在一番折腾下，终于把博客部署到阿里云。</p>
+<h3 id="1-1安装git以及配置仓库"><a href="#1-1安装git以及配置仓库" class="headerlink" title="1.1安装git以及配置仓库"></a>1.1安装git以及配置仓库</h3><p>安装git以及新建git用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br><span class="line"></span><br><span class="line">adduser git</span><br><span class="line"></span><br><span class="line">chmod 740 /etc/sudoers</span><br><span class="line"></span><br><span class="line">vi /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<p>在如下位置添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>vi指令执行之后按i进入输入模式，编辑完成之后按一下esc，然后输入:wq即可退出。<br><img src="/../images/%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2Hexo/image-20221027094130923.png" alt="image-20221027094130923"><br>执行以下指令更改文件夹权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 /etc/sudoers</span><br><span class="line"></span><br><span class="line">sudo passwd git</span><br></pre></td></tr></table></figure>
+
+<p>切换git用户并且建立密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line"></span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">mkdir .ssh</span><br><span class="line"></span><br><span class="line">cd .ssh</span><br><span class="line"></span><br><span class="line">vi authorized_keys</span><br><span class="line"></span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure>
+
+<p>创建git仓库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">git init --bare blog.git</span><br><span class="line"></span><br><span class="line">vi ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --work-tree=/home/www/website --git-dir=/home/git/blog.git checkout -f</span><br></pre></td></tr></table></figure>
+
+<p>保存退出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+
+<p>*以上指令都需要在su git 之后执行 如果中途断开重新连接过，需要重新执行 su git指令 进入git账户。</p>
+<p>新建&#x2F;home&#x2F;www&#x2F;website文件夹,在root用户下执行，所限先su root切换为root账户。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br><span class="line"></span><br><span class="line">输入密码</span><br><span class="line"></span><br><span class="line">cd /home</span><br><span class="line"></span><br><span class="line">mkdir www</span><br><span class="line"></span><br><span class="line">cd www</span><br><span class="line"></span><br><span class="line">mkdir website</span><br><span class="line"></span><br><span class="line">修改文件夹权限 这步很重要 视频中没有提及</span><br><span class="line"></span><br><span class="line">chmod 777 /home/www/website</span><br><span class="line"></span><br><span class="line">chmod 777 /home/www</span><br></pre></td></tr></table></figure>
+
+<p>在本地电脑输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -v git@服务器的公网ip</span><br></pre></td></tr></table></figure>
+
+<p>返回如下则成功<br><img src="/../images/%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2Hexo/image-20221027094205946.png" alt="image-20221027094205946"><br>修改本地配置文件<br><img src="/../images/%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2Hexo/image-20221027094232162.png" alt="image-20221027094232162"><br>repo: git@这里改为服务器公网IP:&#x2F;home&#x2F;git&#x2F;blog.git</p>
+<h3 id="2-1配置Nginx"><a href="#2-1配置Nginx" class="headerlink" title="2.1配置Nginx"></a>2.1配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此时ssh工具断开服务器重新连接，进入Linux账户</span><br></pre></td></tr></table></figure>
+
+<p>这里选用宝塔面板来一键部署Nginx，Linux面板6.0安装命令(暂时仅兼容Centos7.x，其它系统版本请安装5.9稳定版)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
+
+<p>Linux面板6.0升级专业版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://download.bt.cn/install/update6.sh|bash</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后会显示面板后台地址·账号·密码。打开面板后台地址登陆面板，选择Nginx的部署方案，静静等待部署。<br>部署完成，点击网站-添加站点-输入域名(没有域名的输入自己的IP地址)-底部的PHP版本选择”纯静态”(其他不改<br>或者根据自己的习惯来改)-提交。<br>网站创建完成后点击设置-配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    # server_name 填写自己的域名(若没有可不填)</span><br><span class="line">    server_name ali6.cn blog.ali6.cn;</span><br><span class="line">    index index.php index.html index.htm default.php default.htm default.html;</span><br><span class="line">    # 这里root填写自己的网站根目录，修改为/home/www/website</span><br><span class="line">    root /home/www/website;</span><br></pre></td></tr></table></figure>
+
+<p>至此，服务器端的部署已经全部完成</p>
+<p>下面开始测试部署</p>
+<p>本地git执行如下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><blockquote>
+<p><strong><a target="_blank" rel="noopener" href="https://lneverl.gitee.io/posts/2092ec56.html">https://lneverl.gitee.io/posts/2092ec56.html</a></strong></p>
+</blockquote>
+<blockquote>
+<p><strong><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/702417">https://yq.aliyun.com/articles/702417</a></strong></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/28/mysql%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/28/mysql%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">mysql学习</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-10-28 20:36:56" itemprop="dateCreated datePublished" datetime="2022-10-28T20:36:56+08:00">2022-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-30 21:15:54" itemprop="dateModified" datetime="2022-10-30T21:15:54+08:00">2022-10-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h3><p>1.数据库：数据存储的仓库</p>
+<p>2.数据库管理系统：操作和管理数据库的大型软件</p>
+<p>3.SQL：操作关系型数据库的编程语言，一一套通用标准</p>
+<h3 id="启动与停止"><a href="#启动与停止" class="headerlink" title="启动与停止"></a>启动与停止</h3><h4 id="mysql服务开启"><a href="#mysql服务开启" class="headerlink" title="mysql服务开启"></a>mysql服务开启</h4><p>1.windows服务里开启</p>
+<p>2.命令行</p>
+<p>启动:<code>net start mysql80</code></p>
+<p>停止:<code>net stop mysql80</code></p>
+<h4 id="mysql启动"><a href="#mysql启动" class="headerlink" title="mysql启动"></a>mysql启动</h4><p>客户端连接</p>
+<p>​	方式一：MySql提供的客户端命令行工具</p>
+<p>​	方式二：<code>mysql [-h 127.0.0.1] [-p 3306] -u root -p</code></p>
+<h3 id="数据库类型"><a href="#数据库类型" class="headerlink" title="数据库类型"></a>数据库类型</h3><p>关系型数据库：通过表来存储数据的数据库叫做关系型数据库</p>
+<p>非关系型数据库：不通过表来存储数据的数据库叫做关系型数据库</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>一个数据库服务器中可以创建多个服务器，一个数据库服务器可以创建多个表<img src="/../images/mysql%E5%AD%A6%E4%B9%A0/image-20221029204633847.png" alt="image-20221029204633847"></p>
+<h5 id="字符类型"><a href="#字符类型" class="headerlink" title="字符类型"></a>字符类型</h5><h6 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h6><p><img src="/../images/mysql%E5%AD%A6%E4%B9%A0/image-20221030204404987.png" alt="image-20221030204404987"></p>
+<p>精度标度：123.45   5是精度（五位数），2是标度（小数后几位）</p>
+<p>age：0~1xx，正整数即可。所以使用 <code>age TINYINT UNSIGNED</code></p>
+<p>score：0~100，需要小数点后一位。所以使用：<code>score double(4,1)</code></p>
+<h6 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h6><p><img src="/../images/mysql%E5%AD%A6%E4%B9%A0/image-20221030205508438.png" alt="image-20221030205508438"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>后面<span class="number">10</span>表示容纳的最长字符串</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>定长字符串，不管存几位，都占用<span class="number">10</span>个字符</span><br><span class="line"><span class="type">char</span>(<span class="number">10</span>)  <span class="comment">----&gt;性能较好  例如：性别</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>变长字符串，根据实际情况改变占用空间，但最大<span class="number">10</span></span><br><span class="line"><span class="type">varchar</span>(<span class="number">10</span>) <span class="comment">----&gt; 性能较差（需要计算占用空间） 例如：名字</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h6><p><img src="/../images/mysql%E5%AD%A6%E4%B9%A0/image-20221030210134505.png" alt="image-20221030210134505"></p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><h3 id="SQl通用语法"><a href="#SQl通用语法" class="headerlink" title="SQl通用语法"></a>SQl通用语法</h3><p>​	①SQL语句可以单行或多行书写，以分号结尾</p>
+<p>​	②SQL语句可以使用空格或者缩进来增强可读性</p>
+<p>​	③MySql数据库的SQL语句不区分大小写，关键字建议大写</p>
+<p>​	④注释</p>
+<p>​		* 单行注释：<code>-- 注释内容</code>或<code># 注释内容</code></p>
+<p>​		* 多行注释：<code>/* 注释内容 */</code></p>
+<h3 id="数据库语句分类"><a href="#数据库语句分类" class="headerlink" title="数据库语句分类"></a>数据库语句分类</h3><ul>
+<li>DDL: 数据定义语言，用来定义数据库对象（数据库、表、字段）</li>
+<li>DML: 数据操作语言，用来对数据库表中的数据进行增删改</li>
+<li>DQL: 数据查询语言，用来查询数据库中表的记录</li>
+<li>DCL: 数据控制语言，用来创建数据库用户、控制数据库的控制权限</li>
+</ul>
+<h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><p>查询所有数据库：<br><code>SHOW DATABASES;</code><br>查询当前数据库：<br><code>SELECT DATABASE();</code><br>创建数据库：<br><code>CREATE DATABASE [ IF NOT EXISTS ] 数据库名 [ DEFAULT CHARSET 字符集] [COLLATE 排序规则 ];</code><br>删除数据库：<br><code>DROP DATABASE [ IF EXISTS ] 数据库名;</code><br>使用数据库：<br><code>USE 数据库名;</code></p>
+<h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><ul>
+<li>UTF8字符集长度为3字节，有些符号占4字节，所以推荐用utf8mb4字符集</li>
+</ul>
+<h4 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h4><p>查询当前数据库所有表：<br><code>SHOW TABLES;</code><br>查询表结构：<br><code>DESC 表名;</code><br>查询指定表的建表语句：<br><code>SHOW CREATE TABLE 表名;</code></p>
+<p>创建表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名(    </span><br><span class="line">字段<span class="number">1</span> 字段<span class="number">1</span>类型 [COMMENT 字段<span class="number">1</span>注释],    </span><br><span class="line">字段<span class="number">2</span> 字段<span class="number">2</span>类型 [COMMENT 字段<span class="number">2</span>注释],    </span><br><span class="line">字段<span class="number">3</span> 字段<span class="number">3</span>类型 [COMMENT 字段<span class="number">3</span>注释],   </span><br><span class="line">...    </span><br><span class="line">字段n 字段n类型 [COMMENT 字段n注释]</span><br><span class="line">)[ COMMENT 表注释 ];</span><br></pre></td></tr></table></figure>
+
+<p><strong>最后一个字段后面没有逗号</strong></p>
+<p>p09</p>
+<h1 id="进阶篇"><a href="#进阶篇" class="headerlink" title="进阶篇"></a>进阶篇</h1><h1 id="运维篇"><a href="#运维篇" class="headerlink" title="运维篇"></a>运维篇</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/27/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -676,7 +897,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-29 14:56:55" itemprop="dateModified" datetime="2022-10-29T14:56:55+08:00">2022-10-29</time>
+                <time title="Modified: 2022-11-13 19:09:59" itemprop="dateModified" datetime="2022-11-13T19:09:59+08:00">2022-11-13</time>
               </span>
 
           
@@ -733,7 +954,7 @@
 <p><img src="/../images/Javase01/388881509227357.png" alt="数组元素获取"></p>
 <p>获取数组长度 <code>.lenght</code></p>
 <h5 id="一维数组默认初始化值"><a href="#一维数组默认初始化值" class="headerlink" title="一维数组默认初始化值"></a>一维数组默认初始化值</h5><p>整形：0;<br>浮点：0.0；<br>char类型：0或’\u0000’（ascall码是0，不是’0’）<br>boolean：false<br>String类型：null，非”null”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int arr2 [] = new int[3];</span><br><span class="line">System.out.println(arr2[]); 内存地址</span><br><span class="line">System.out.println(arr2[1]); 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int arr2 [] = new int[3];</span><br><span class="line">System.out.println(arr2[]); 内存地址</span><br><span class="line">System.out.println(arr2[1]); 0</span><br></pre></td></tr></table></figure>
 
 
 <h5 id="一维数组jvm内存解析"><a href="#一维数组jvm内存解析" class="headerlink" title="一维数组jvm内存解析"></a>一维数组jvm内存解析</h5><p><img src="/../images/Javase01/141500010247523.png" alt="jvm内存解析"></p>
@@ -869,7 +1090,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
