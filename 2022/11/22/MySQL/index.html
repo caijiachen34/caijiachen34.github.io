@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://example.com/images/MySQL/%E5%8E%9F%E7%90%86%E5%9B%BE_20220318194454880073.png">
 <meta property="og:image" content="http://example.com/images/MySQL/%E6%BC%94%E7%A4%BA%E5%9B%BE_20220319215403721066.png">
 <meta property="article:published_time" content="2022-11-22T06:14:46.000Z">
-<meta property="article:modified_time" content="2022-11-22T06:14:14.480Z">
+<meta property="article:modified_time" content="2022-11-24T12:26:20.910Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -186,10 +186,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-11-22 14:14:46 / Modified: 14:14:14" itemprop="dateCreated datePublished" datetime="2022-11-22T14:14:46+08:00">2022-11-22</time>
+              <time title="Created: 2022-11-22 14:14:46" itemprop="dateCreated datePublished" datetime="2022-11-22T14:14:46+08:00">2022-11-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-24 20:26:20" itemprop="dateModified" datetime="2022-11-24T20:26:20+08:00">2022-11-24</time>
+              </span>
 
           
 
@@ -234,7 +240,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	字段列表</span><br><span class="line">FROM</span><br><span class="line">	表名字段</span><br><span class="line">WHERE</span><br><span class="line">	条件列表</span><br><span class="line">GROUP BY</span><br><span class="line">	分组字段列表</span><br><span class="line">HAVING</span><br><span class="line">	分组后的条件列表</span><br><span class="line">ORDER BY</span><br><span class="line">	排序字段列表</span><br><span class="line">LIMIT</span><br><span class="line">	分页参数</span><br></pre></td></tr></table></figure>
 
 <h4 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h4><p>查询多个字段：<br><code>SELECT 字段1, 字段2, 字段3, ... FROM 表名;</code><br><code>SELECT * FROM 表名;</code></p>
-<p>设置别名：<br><code>SELECT 字段1 [ AS 别名1 ], 字段2 [ AS 别名2 ], 字段3 [ AS 别名3 ], ... FROM 表名;</code><br><code>SELECT 字段1 [ 别名1 ], 字段2 [ 别名2 ], 字段3 [ 别名3 ], ... FROM 表名;</code></p>
+<p>设置别名（as可以省略）：<br><code>SELECT 字段1 [ AS 别名1 ], 字段2 [ AS 别名2 ], 字段3 [ AS 别名3 ], ... FROM 表名;</code><br><code>SELECT 字段1 [ 别名1 ], 字段2 [ 别名2 ], 字段3 [ 别名3 ], ... FROM 表名;</code></p>
 <p>去除重复记录：<br><code>SELECT DISTINCT 字段列表 FROM 表名;</code></p>
 <p>转义：<br><code>SELECT * FROM 表名 WHERE name LIKE &#39;/_张三&#39; ESCAPE &#39;/&#39;</code><br>&#x2F; 之后的_不作为通配符</p>
 <h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><p>语法：<br><code>SELECT 字段列表 FROM 表名 WHERE 条件列表;</code></p>
@@ -320,7 +326,7 @@
 </thead>
 <tbody><tr>
 <td>count</td>
-<td>统计数量</td>
+<td>统计数量（不统计null）</td>
 </tr>
 <tr>
 <td>max</td>
@@ -462,11 +468,11 @@
 </tr>
 <tr>
 <td>LPAD(str, n, pad)</td>
-<td>左填充，用字符串pad对str的左边进行填充，达到n个字符串长度</td>
+<td>左填充，用字符串pad对str的左边进行填充，直到达到n个字符串长度</td>
 </tr>
 <tr>
 <td>RPAD(str, n, pad)</td>
-<td>右填充，用字符串pad对str的右边进行填充，达到n个字符串长度</td>
+<td>右填充，用字符串pad对str的右边进行填充，直到达到n个字符串长度</td>
 </tr>
 <tr>
 <td>TRIM(str)</td>
@@ -513,6 +519,9 @@
 <td>求参数x的四舍五入值，保留y位小数</td>
 </tr>
 </tbody></table>
+<p>示例：通过数据库的数据，生成一个六位数的随机验证码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 通过数据库的数据，生成一个六位数的随机验证码</span><br><span class="line">select lpad((round((rand()*1000000),0)),6,&#x27;0&#x27;);</span><br></pre></td></tr></table></figure>
+
 <h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><p>常用函数：</p>
 <table>
 <thead>
@@ -582,8 +591,13 @@
 <td>如果expr的值等于val1，返回res1，… 否则返回default默认值</td>
 </tr>
 </tbody></table>
-<p>例子：</p>
+<p>例子1：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">	name,</span><br><span class="line">	(case when age &gt; 30 then &#x27;中年&#x27; else &#x27;青年&#x27; end)</span><br><span class="line">from employee;</span><br><span class="line">select</span><br><span class="line">	name,</span><br><span class="line">	(case workaddress when &#x27;北京市&#x27; then &#x27;一线城市&#x27; when &#x27;上海市&#x27; then &#x27;一线城市&#x27; else &#x27;二线城市&#x27; end) as &#x27;工作地址&#x27;</span><br><span class="line">from employee;</span><br></pre></td></tr></table></figure>
+
+<p>例子2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select itcast.emp.name, (case when itcast.emp.age&lt;20 then &#x27;少年&#x27; when itcast.emp.age between 20 and 40 then &#x27;青年&#x27; when itcast.emp.age&gt;40 then &#x27;中老年&#x27; end) as &#x27;年龄区间&#x27; from itcast.emp;</span><br></pre></td></tr></table></figure>
+
+
 
 <h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p>分类：</p>
 <table>
@@ -696,7 +710,7 @@
 <p>更改删除&#x2F;更新行为：<br><code>ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段) REFERENCES 主表名(主表字段名) ON UPDATE 行为 ON DELETE 行为;</code></p>
 <h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><h3 id="多表关系"><a href="#多表关系" class="headerlink" title="多表关系"></a>多表关系</h3><ul>
 <li>一对多（多对一）</li>
-<li>多对多</li>
+<li>多对多（需要用额外的表来维护表之间的关系 ）</li>
 <li>一对一</li>
 </ul>
 <h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><p>案例：部门与员工<br>关系：一个部门对应多个员工，一个员工对应一个部门<br>实现：在多的一方建立外键，指向一的一方的主键</p>
@@ -1854,7 +1868,10 @@
     <a href="/2022/11/21/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" rel="prev" title="Java8新特性">
       <i class="fa fa-chevron-left"></i> Java8新特性
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/26/JDBC/" rel="next" title="JDBC">
+      JDBC <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -1927,12 +1944,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

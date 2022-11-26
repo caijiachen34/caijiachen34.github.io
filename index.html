@@ -209,6 +209,66 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/26/JDBC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/26/JDBC/" class="post-title-link" itemprop="url">JDBC</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-11-26 15:22:04 / Modified: 15:23:50" itemprop="dateCreated datePublished" datetime="2022-11-26T15:22:04+08:00">2022-11-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/../images/JDBC/image-20221126152347434.png" alt="image-20221126152347434"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/22/MySQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,10 +293,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-11-22 14:14:46 / Modified: 14:14:14" itemprop="dateCreated datePublished" datetime="2022-11-22T14:14:46+08:00">2022-11-22</time>
+              <time title="Created: 2022-11-22 14:14:46" itemprop="dateCreated datePublished" datetime="2022-11-22T14:14:46+08:00">2022-11-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-24 20:26:20" itemprop="dateModified" datetime="2022-11-24T20:26:20+08:00">2022-11-24</time>
+              </span>
 
           
 
@@ -281,7 +347,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	字段列表</span><br><span class="line">FROM</span><br><span class="line">	表名字段</span><br><span class="line">WHERE</span><br><span class="line">	条件列表</span><br><span class="line">GROUP BY</span><br><span class="line">	分组字段列表</span><br><span class="line">HAVING</span><br><span class="line">	分组后的条件列表</span><br><span class="line">ORDER BY</span><br><span class="line">	排序字段列表</span><br><span class="line">LIMIT</span><br><span class="line">	分页参数</span><br></pre></td></tr></table></figure>
 
 <h4 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h4><p>查询多个字段：<br><code>SELECT 字段1, 字段2, 字段3, ... FROM 表名;</code><br><code>SELECT * FROM 表名;</code></p>
-<p>设置别名：<br><code>SELECT 字段1 [ AS 别名1 ], 字段2 [ AS 别名2 ], 字段3 [ AS 别名3 ], ... FROM 表名;</code><br><code>SELECT 字段1 [ 别名1 ], 字段2 [ 别名2 ], 字段3 [ 别名3 ], ... FROM 表名;</code></p>
+<p>设置别名（as可以省略）：<br><code>SELECT 字段1 [ AS 别名1 ], 字段2 [ AS 别名2 ], 字段3 [ AS 别名3 ], ... FROM 表名;</code><br><code>SELECT 字段1 [ 别名1 ], 字段2 [ 别名2 ], 字段3 [ 别名3 ], ... FROM 表名;</code></p>
 <p>去除重复记录：<br><code>SELECT DISTINCT 字段列表 FROM 表名;</code></p>
 <p>转义：<br><code>SELECT * FROM 表名 WHERE name LIKE &#39;/_张三&#39; ESCAPE &#39;/&#39;</code><br>&#x2F; 之后的_不作为通配符</p>
 <h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><p>语法：<br><code>SELECT 字段列表 FROM 表名 WHERE 条件列表;</code></p>
@@ -367,7 +433,7 @@
 </thead>
 <tbody><tr>
 <td>count</td>
-<td>统计数量</td>
+<td>统计数量（不统计null）</td>
 </tr>
 <tr>
 <td>max</td>
@@ -509,11 +575,11 @@
 </tr>
 <tr>
 <td>LPAD(str, n, pad)</td>
-<td>左填充，用字符串pad对str的左边进行填充，达到n个字符串长度</td>
+<td>左填充，用字符串pad对str的左边进行填充，直到达到n个字符串长度</td>
 </tr>
 <tr>
 <td>RPAD(str, n, pad)</td>
-<td>右填充，用字符串pad对str的右边进行填充，达到n个字符串长度</td>
+<td>右填充，用字符串pad对str的右边进行填充，直到达到n个字符串长度</td>
 </tr>
 <tr>
 <td>TRIM(str)</td>
@@ -560,6 +626,9 @@
 <td>求参数x的四舍五入值，保留y位小数</td>
 </tr>
 </tbody></table>
+<p>示例：通过数据库的数据，生成一个六位数的随机验证码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 通过数据库的数据，生成一个六位数的随机验证码</span><br><span class="line">select lpad((round((rand()*1000000),0)),6,&#x27;0&#x27;);</span><br></pre></td></tr></table></figure>
+
 <h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><p>常用函数：</p>
 <table>
 <thead>
@@ -629,8 +698,13 @@
 <td>如果expr的值等于val1，返回res1，… 否则返回default默认值</td>
 </tr>
 </tbody></table>
-<p>例子：</p>
+<p>例子1：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">	name,</span><br><span class="line">	(case when age &gt; 30 then &#x27;中年&#x27; else &#x27;青年&#x27; end)</span><br><span class="line">from employee;</span><br><span class="line">select</span><br><span class="line">	name,</span><br><span class="line">	(case workaddress when &#x27;北京市&#x27; then &#x27;一线城市&#x27; when &#x27;上海市&#x27; then &#x27;一线城市&#x27; else &#x27;二线城市&#x27; end) as &#x27;工作地址&#x27;</span><br><span class="line">from employee;</span><br></pre></td></tr></table></figure>
+
+<p>例子2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select itcast.emp.name, (case when itcast.emp.age&lt;20 then &#x27;少年&#x27; when itcast.emp.age between 20 and 40 then &#x27;青年&#x27; when itcast.emp.age&gt;40 then &#x27;中老年&#x27; end) as &#x27;年龄区间&#x27; from itcast.emp;</span><br></pre></td></tr></table></figure>
+
+
 
 <h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p>分类：</p>
 <table>
@@ -743,7 +817,7 @@
 <p>更改删除&#x2F;更新行为：<br><code>ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段) REFERENCES 主表名(主表字段名) ON UPDATE 行为 ON DELETE 行为;</code></p>
 <h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><h3 id="多表关系"><a href="#多表关系" class="headerlink" title="多表关系"></a>多表关系</h3><ul>
 <li>一对多（多对一）</li>
-<li>多对多</li>
+<li>多对多（需要用额外的表来维护表之间的关系 ）</li>
 <li>一对一</li>
 </ul>
 <h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><p>案例：部门与员工<br>关系：一个部门对应多个员工，一个员工对应一个部门<br>实现：在多的一方建立外键，指向一的一方的主键</p>
@@ -3261,120 +3335,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/08/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E4%B8%8E%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/08/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E4%B8%8E%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">枚举类与注解</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-08 17:09:42" itemprop="dateCreated datePublished" datetime="2022-11-08T17:09:42+08:00">2022-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-20 16:22:42" itemprop="dateModified" datetime="2022-11-20T16:22:42+08:00">2022-11-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h1><p>一、枚举类的使用</p>
-<p>1.枚举类的理解：类的对象只有有限个，确定的。我们称此类为枚举类</p>
-<p>2.当需要定义一组常量时，强烈建议使用枚举类</p>
-<p>3.如果枚举类中只有一个对象，则可以作为单例模式的实现方式。</p>
-<p>二、如何定义枚举类</p>
-<p>方式一：jdk5.0之前，自定义枚举类</p>
-<p>方式二：jdk5.0，可以使用enum关键字定义枚举类</p>
-<h2 id="例子：自定义枚举类"><a href="#例子：自定义枚举类" class="headerlink" title="例子：自定义枚举类"></a>例子：自定义枚举类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Season</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String desc;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Season</span><span class="params">(String name, String desc)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDesc</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;SeasonTest&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, desc=&#x27;&quot;</span> + desc + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Season</span> <span class="variable">SPRING</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Season</span>(<span class="string">&quot;春天&quot;</span>,<span class="string">&quot;春暖花开&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Season</span> <span class="variable">SUMMER</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Season</span>(<span class="string">&quot;夏天&quot;</span>,<span class="string">&quot;夏日炎炎&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Season</span> <span class="variable">AUTUMN</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Season</span>(<span class="string">&quot;秋天&quot;</span>,<span class="string">&quot;秋高气爽&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Season</span> <span class="variable">WINTER</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Season</span>(<span class="string">&quot;冬天&quot;</span>,<span class="string">&quot;冰天雪地&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SeasonTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Season</span> <span class="variable">autumn</span> <span class="operator">=</span> Season.AUTUMN;</span><br><span class="line">        System.out.println(autumn.getDesc());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例子：使用enum关键字"><a href="#例子：使用enum关键字" class="headerlink" title="例子：使用enum关键字"></a>例子：使用enum关键字</h2><p>说明：定义的枚举类默认继承于java.lang.Enum类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Info</span>&#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Season2</span> <span class="keyword">implements</span> <span class="title class_">Info</span>&#123;</span><br><span class="line"></span><br><span class="line">    SPRING(<span class="string">&quot;春天&quot;</span>,<span class="string">&quot;春暖花开&quot;</span>)&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;这是&quot;</span>+ <span class="built_in">this</span>.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    SUMMER(<span class="string">&quot;夏天&quot;</span>,<span class="string">&quot;夏日炎炎&quot;</span>) &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;这是&quot;</span>+ <span class="built_in">this</span>.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    AUTUMN(<span class="string">&quot;秋天&quot;</span>,<span class="string">&quot;秋高气爽&quot;</span>) &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;这是&quot;</span>+ <span class="built_in">this</span>.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    WINTER(<span class="string">&quot;冬天&quot;</span>,<span class="string">&quot;冰天雪地&quot;</span>) &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;这是&quot;</span>+ <span class="built_in">this</span>.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String desc;</span><br><span class="line"></span><br><span class="line">    Season2(String name, String desc) &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDesc</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SeasonTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Season2</span> <span class="variable">spring</span> <span class="operator">=</span> Season2.SPRING;</span><br><span class="line">        System.out.println(spring.getDesc());</span><br><span class="line">        Season2[] values = Season2.values();</span><br><span class="line">        System.out.println(Arrays.toString(values));</span><br><span class="line">        System.out.println(<span class="string">&quot;**************************&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">            System.out.println(values[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">Season2</span> <span class="variable">winter</span> <span class="operator">=</span> Season2.valueOf(<span class="string">&quot;SUMMER&quot;</span>);</span><br><span class="line">        winter.show();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="注解-Annotation"><a href="#注解-Annotation" class="headerlink" title="注解(Annotation)"></a>注解(Annotation)</h1><h2 id="理解Annotation"><a href="#理解Annotation" class="headerlink" title="理解Annotation"></a>理解Annotation</h2><p>① jdk 5.0 新增的功能</p>
-<p>② Annotation 其实就是代码里的特殊标记, 这些标记可以在编译, 类加载, 运行时被读取, 并执行相应的处理。通过使用 Annotation,</p>
-<p>程序员可以在不改变原有逻辑的情况下, 在源文件中嵌入一些补充信息。</p>
-<p>③在JavaSE中，注解的使用目的比较简单，例如标记过时的功能，忽略警告等。在JavaEE&#x2F;Android中注解占据了更重要的角色，例如用来配置应用程序的任何切面，代替JavaEE旧版中所遗留的繁冗代码和XML配置等。</p>
-<h2 id="Annocation的使用示例"><a href="#Annocation的使用示例" class="headerlink" title="Annocation的使用示例"></a>Annocation的使用示例</h2><p>示例一：生成文档相关的注解</p>
-<p>示例二：在编译时进行格式检查(JDK内置的三个基本注解)<br>@Override: 限定重写父类方法, 该注解只能用于方法<br>@Deprecated: 用于表示所修饰的元素(类, 方法等)已过时。通常是因为所修饰的结构危险或存在更好的选择<br>@SuppressWarnings: 抑制编译器警告</p>
-<p>示例三：跟踪代码依赖性，实现替代配置文件功能</p>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>如何自定义注解：参照@SuppressWarnings定义</p>
-<p>① 注解声明为：***@interface***</p>
-<p>② 内部定义成员，通常使用value表示</p>
-<p>③ 可以指定成员的默认值，使用default定义</p>
-<p>④ 如果自定义注解没有成员，表明是一个标识作用。</p>
-<p>例子：自定义注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Repeatable(MyAnnotations.class)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(&#123;TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE,TYPE_PARAMETER,TYPE_USE&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果注解有成员，在使用注解时，需要指明成员的值。<br>自定义注解必须配上注解的信息处理流程(使用反射)才有意义。<br>自定义注解通过都会指明两个元注解：Retention、Target</p>
-<h2 id="jdk-提供的4种元注解"><a href="#jdk-提供的4种元注解" class="headerlink" title="jdk 提供的4种元注解"></a>jdk 提供的4种元注解</h2><p>*元注解：对现有的注解进行解释说明的注解</p>
-<ul>
-<li>Retention：指定所修饰的 Annotation 的生命周期:SOURCE\CLASS（默认）\RUNTIME，只有声明为RUNTIME生命周期的注解，才能通过反射获取。</li>
-<li>Target:用于指定被修饰的 Annotation 能用于修饰哪些程序元素&#x2F;结构，如方法&#x2F;属性&#x2F;构造器&#x2F;类等。</li>
-<li>Documented（*不常用）:表示所修饰的注解在被javadoc解析时，保留下来。</li>
-<li>Inherited（*不常用）:被它修饰的 Annotation 将具有继承性，父类有此注解，子类也会默认有此注解的特性。</li>
-</ul>
-<h2 id="通过反射获取注解信息"><a href="#通过反射获取注解信息" class="headerlink" title="通过反射获取注解信息"></a>通过反射获取注解信息</h2><p>*到反射内容时系统讲解</p>
-<h2 id="jdk-8-中注解的新特性：可重复注解、类型注解"><a href="#jdk-8-中注解的新特性：可重复注解、类型注解" class="headerlink" title="jdk 8 中注解的新特性：可重复注解、类型注解"></a>jdk 8 中注解的新特性：可重复注解、类型注解</h2><h3 id="可重复注解"><a href="#可重复注解" class="headerlink" title="可重复注解"></a>可重复注解</h3><p>① 在MyAnnotation上声明@Repeatable，成员值为MyAnnotations.class</p>
-<p>② MyAnnotation的Target和Retention等元注解与MyAnnotations相同。</p>
-<h3 id="类型注解"><a href="#类型注解" class="headerlink" title="类型注解"></a>类型注解</h3><p>ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中（如：泛型声明）。<br> ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -3440,12 +3404,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
