@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="泛型泛型的使用是jdk5.0新增的特性在集合中使用泛型总结： ① 集合接口或集合类在jdk5.0时都修改为带泛型的结构。 ② 在实例化集合类时，可以指明具体的泛型类型 ③ 指明完以后，在集合类或接口中凡是定义类或接口时，内部结构（比如：方法、构造器、属性等）使用到类的泛型的位置，都指定为实例化的泛型类型。 比如：add(E e)  —&gt;实例化以后：add(Integer e) ④ 注意点：泛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="泛型">
+<meta property="og:url" content="http://example.com/2022/11/13/%E6%B3%9B%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="泛型泛型的使用是jdk5.0新增的特性在集合中使用泛型总结： ① 集合接口或集合类在jdk5.0时都修改为带泛型的结构。 ② 在实例化集合类时，可以指明具体的泛型类型 ③ 指明完以后，在集合类或接口中凡是定义类或接口时，内部结构（比如：方法、构造器、属性等）使用到类的泛型的位置，都指定为实例化的泛型类型。 比如：add(E e)  —&gt;实例化以后：add(Integer e) ④ 注意点：泛">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-13T02:19:36.000Z">
+<meta property="article:modified_time" content="2022-11-13T13:44:36.527Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="JavaSe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/11/13/%E6%B3%9B%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>泛型 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/13/%E6%B3%9B%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          泛型
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-11-13 10:19:36 / Modified: 21:44:36" itemprop="dateCreated datePublished" datetime="2022-11-13T10:19:36+08:00">2022-11-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><h2 id="泛型的使用"><a href="#泛型的使用" class="headerlink" title="泛型的使用"></a>泛型的使用</h2><h3 id="是jdk5-0新增的特性"><a href="#是jdk5-0新增的特性" class="headerlink" title="是jdk5.0新增的特性"></a>是jdk5.0新增的特性</h3><h3 id="在集合中使用泛型"><a href="#在集合中使用泛型" class="headerlink" title="在集合中使用泛型"></a>在集合中使用泛型</h3><p>总结：</p>
+<p>① 集合接口或集合类在jdk5.0时都修改为带泛型的结构。</p>
+<p>② 在实例化集合类时，可以指明具体的泛型类型</p>
+<p>③ 指明完以后，在集合类或接口中凡是定义类或接口时，内部结构（比如：方法、构造器、属性等）使用到类的泛型的位置，都指定为实例化的泛型类型。</p>
+<p>比如：add(E e)  —&gt;实例化以后：add(Integer e)</p>
+<p>④ 注意点：泛型的类型必须是类，不能是基本数据类型。需要用到基本数据类型的位置，拿包装类替换</p>
+<p>⑤ 如果实例化时，没有指明泛型的类型。默认类型为java.lang.Object类型。</p>
+<p>例：在集合中使用泛型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">ArrayList</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    list.add(<span class="number">78</span>);</span><br><span class="line">    list.add(<span class="number">76</span>);</span><br><span class="line">    list.add(<span class="number">89</span>);</span><br><span class="line">    list.add(<span class="number">88</span>);</span><br><span class="line">    <span class="comment">//问题一：类型不安全</span></span><br><span class="line">    list.add(<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Object obj : list) &#123;</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">    ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    list.add(<span class="number">78</span>);</span><br><span class="line">    list.add(<span class="number">87</span>);</span><br><span class="line">    list.add(<span class="number">99</span>);</span><br><span class="line">    list.add(<span class="number">65</span>);</span><br><span class="line">    <span class="comment">//编译时，就会进行类型检查，保证数据的安全</span></span><br><span class="line">    <span class="comment">//list.add(&quot;Tom&quot;);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Integer score : list) &#123;</span><br><span class="line">        System.out.println(score);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Iterator&lt;Integer&gt; iterator = list.iterator();</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">        System.out.println(iterator.next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//jdk7新特性：类型推断</span></span><br><span class="line">    HashMap&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    map.put(<span class="string">&quot;Tom&quot;</span>, <span class="number">87</span>);</span><br><span class="line">    map.put(<span class="string">&quot;Jerry&quot;</span>, <span class="number">87</span>);</span><br><span class="line">    map.put(<span class="string">&quot;Jack&quot;</span>, <span class="number">67</span>);</span><br><span class="line">    <span class="comment">//类型错误</span></span><br><span class="line">    <span class="comment">//map.put(123,&quot;ABC&quot;);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//泛型的嵌套</span></span><br><span class="line">    Set&lt;Map.Entry&lt;String, Integer&gt;&gt; entry = map.entrySet();</span><br><span class="line">    Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; iterator = entry.iterator();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">        Map.Entry&lt;String, Integer&gt; next = iterator.next();</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> next.getKey();</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">value</span> <span class="operator">=</span> next.getValue();</span><br><span class="line">        System.out.println(key + <span class="string">&quot;--&gt;&quot;</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="自定义泛型结构"><a href="#自定义泛型结构" class="headerlink" title="自定义泛型结构"></a>自定义泛型结构</h3><p>如何自定义泛型结构：泛型类、泛型接口；泛型方法。</p>
+<p>​	①如果定义了泛型类，实例化没有指明类的泛型，则认为此泛型类型为Object类型<br>​		要求：如果大家定义了类是带泛型的，建议在实例化时要指明类的泛型。且异常类不能声明为泛型类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例化时指明类的泛型</span></span><br><span class="line">Order&lt;String&gt; order1 = <span class="keyword">new</span> <span class="title class_">Order</span>&lt;String&gt;(<span class="string">&quot;orderAA&quot;</span>,<span class="number">1001</span>,<span class="string">&quot;order:AA&quot;</span>);</span><br><span class="line">order1.setOrderT(<span class="string">&quot;AA:hello&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>由于子类在继承带泛型的父类时，指明了泛型类型。则实例化子类对象时，不再需要指明泛型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SubOrder:不是泛型类&lt;&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SubOrder</span> <span class="keyword">extends</span> <span class="title class_">Order</span>&lt;Integer&gt;    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SubOrder</span> <span class="variable">sub1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SubOrder</span>();</span><br><span class="line">       <span class="comment">//由于子类在继承带泛型的父类时，指明了泛型类型。则实例化子类对象时，不再需要指明泛型。</span></span><br><span class="line">       sub1.setOrderT(<span class="number">1122</span>);</span><br><span class="line"></span><br><span class="line">       SubOrder1&lt;String&gt; sub2 = <span class="keyword">new</span> <span class="title class_">SubOrder1</span>&lt;&gt;();</span><br><span class="line">       sub2.setOrderT(<span class="string">&quot;order2...&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>②泛型方法</p>
+<p>泛型方法：在方法中出现了泛型的结构，泛型参数与类的泛型参数没有任何关系。<br>    换句话说，泛型方法所属的类是不是泛型类都没有关系。<br>    泛型方法，可以声明为静态的。原因：泛型参数是在调用方法时确定的。并非在实例化类时确定。</p>
+<p>泛型方法在调用时，指明泛型参数的类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span>&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    String orderName;</span><br><span class="line">    <span class="type">int</span> orderId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//类的内部结构就可以使用类的泛型</span></span><br><span class="line">    T orderT;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Order</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//编译不通过</span></span><br><span class="line">        <span class="comment">//T[] arr = new T[10];</span></span><br><span class="line">        <span class="comment">//编译通过</span></span><br><span class="line">        T[] arr = (T[])<span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Order</span><span class="params">(String orderName, <span class="type">int</span> orderId, T orderT)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderName = orderName;</span><br><span class="line">        <span class="built_in">this</span>.orderId = orderId;</span><br><span class="line">        <span class="built_in">this</span>.orderT = orderT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getOrderName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> orderName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setOrderName</span><span class="params">(String orderName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderName = orderName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrderId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> orderId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setOrderId</span><span class="params">(<span class="type">int</span> orderId)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderId = orderId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如下的三个方法都不是泛型方法</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getOrderT</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> orderT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setOrderT</span><span class="params">(T orderT)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderT = orderT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Order&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;orderName=&#x27;&quot;</span> + orderName + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, orderId=&quot;</span> + orderId +</span><br><span class="line">                <span class="string">&quot;, orderT=&quot;</span> + orderT +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态方法中不能使用类的泛型。</span></span><br><span class="line"><span class="comment">//    public static void show(T orderT)&#123;</span></span><br><span class="line"><span class="comment">//        System.out.println(orderT);</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//编译不通过</span></span><br><span class="line"><span class="comment">//        try &#123;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        &#125;catch (T t)&#123;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> &lt;E&gt; List&lt;E&gt; <span class="title function_">copyFromArrayToList</span><span class="params">(E[] arr)</span>&#123;</span><br><span class="line">        ArrayList&lt;E&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (E e:arr)&#123;</span><br><span class="line">            list.add(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SubOrder</span> <span class="keyword">extends</span> <span class="title class_">Order</span>&lt;Integer&gt; &#123;<span class="comment">//SubOrder:不是泛型类</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  &lt;E&gt; List&lt;E&gt; <span class="title function_">copyFromArrayToList</span><span class="params">(E[] arr)</span>&#123;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;E&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(E e : arr)&#123;</span><br><span class="line">            list.add(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SubOrder1&lt;T&gt;:仍然是泛型类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SubOrder1</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">Order</span>&lt;T&gt;&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericTest02</span> &#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Order</span>();</span><br><span class="line">        order.setOrderT(<span class="number">123</span>);</span><br><span class="line">        order.setOrderT(<span class="string">&quot;ABC&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Order&lt;String&gt; order1 = <span class="keyword">new</span> <span class="title class_">Order</span>&lt;&gt;(<span class="string">&quot;orderAA&quot;</span>,<span class="number">1001</span>,<span class="string">&quot;order:AA&quot;</span>);</span><br><span class="line">        <span class="comment">//类型错误，报错</span></span><br><span class="line">        <span class="comment">//order1.setOrderT(&quot;AAA&quot;);</span></span><br><span class="line">        order1.setOrderT(<span class="string">&quot;AAA&quot;</span>);</span><br><span class="line">        System.out.println(order1);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">SubOrder</span> <span class="variable">order</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SubOrder</span>();</span><br><span class="line">        order.orderT = <span class="number">1122</span>;</span><br><span class="line">        order.setOrderT(<span class="number">5566</span>);</span><br><span class="line">        System.out.println(order);</span><br><span class="line">        SubOrder1&lt;String&gt; order1 = <span class="keyword">new</span> <span class="title class_">SubOrder1</span>&lt;&gt;();</span><br><span class="line">        order1.setOrderT(<span class="string">&quot;2233&quot;</span>);</span><br><span class="line">        System.out.println(order1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">        Order&lt;String&gt; order = <span class="keyword">new</span> <span class="title class_">Order</span>&lt;&gt;();</span><br><span class="line">        Integer[] arr = <span class="keyword">new</span> <span class="title class_">Integer</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line">        List&lt;Integer&gt; integers = Order.copyFromArrayToList(arr);</span><br><span class="line">        System.out.println(integers);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="泛型的注意事项"><a href="#泛型的注意事项" class="headerlink" title="泛型的注意事项"></a>泛型的注意事项</h3><p>①泛型在继承方面的体现：虽然类A是类B的父类，</p>
+<p>但是G<A> 和G<B>二者不具备子父类关系，二者是并列关系。</p>
+<p> 补充：类A是类B的父类，A<G> 是 B<G> 的父类</p>
+<p>②通配符的使用<br>    通配符：?</p>
+<p>类A是类B的父类，G<A>和G<B>是没有关系的，二者共同的父类是：G&lt;?&gt;</p>
+<p>③有限制条件的通配符的使用。<br>        ? extends A:<br>                G&lt;? extends A&gt; 可以作为G<A>和G<B>的父类，其中B是A的子类</p>
+<pre><code>    ? super A:
+            G&lt;? super A&gt; 可以作为G&lt;A&gt;和G&lt;B&gt;的父类，其中B是A的父类
+</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        obj = str;</span><br><span class="line"></span><br><span class="line">        Object[] arr1 = <span class="literal">null</span>;</span><br><span class="line">        String[] arr2 = <span class="literal">null</span>;</span><br><span class="line">        arr1 = arr2;</span><br><span class="line">        <span class="comment">//编译不通过</span></span><br><span class="line"><span class="comment">//        Date date = new Date();</span></span><br><span class="line"><span class="comment">//        str = date;</span></span><br><span class="line">        List&lt;Object&gt; list1 = <span class="literal">null</span>;</span><br><span class="line">        List&lt;String&gt; list2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">        <span class="comment">//此时的list1和list2的类型不具有子父类关系</span></span><br><span class="line">        <span class="comment">//编译不通过</span></span><br><span class="line"><span class="comment">//        list1 = list2;</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        反证法：</span></span><br><span class="line"><span class="comment">        假设list1 = list2;</span></span><br><span class="line"><span class="comment">           list1.add(123);导致混入非String的数据。出错</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        show(list1);</span><br><span class="line">        <span class="comment">//show1(list2);//错误</span></span><br><span class="line">        show1(list2);</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//show1和show2()</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show1</span><span class="params">(List&lt;String&gt; list)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(List&lt;Object&gt; list)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">        AbstractList&lt;String&gt; list1 = <span class="literal">null</span>;</span><br><span class="line">        List&lt;String&gt; list2 = <span class="literal">null</span>;</span><br><span class="line">        ArrayList&lt;String&gt; list3 = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以赋值</span></span><br><span class="line">        list1 = list3;</span><br><span class="line">        list2 = list3;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; list4 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">        List&lt;Object&gt; list1 = <span class="literal">null</span>;</span><br><span class="line">        List&lt;String&gt; list2 = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        List&lt;?&gt; list = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        list = list1;</span><br><span class="line">        list = list2;</span><br><span class="line">        <span class="comment">//编译通过</span></span><br><span class="line"><span class="comment">//        print(list1);</span></span><br><span class="line"><span class="comment">//        print(list2);</span></span><br><span class="line">        List&lt;String&gt; list3 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        list3.add(<span class="string">&quot;AA&quot;</span>);</span><br><span class="line">        list3.add(<span class="string">&quot;BB&quot;</span>);</span><br><span class="line">        list3.add(<span class="string">&quot;CC&quot;</span>);</span><br><span class="line">        list = list3;</span><br><span class="line">        <span class="comment">//添加(写入)：对于List&lt;?&gt;就不能向其内部添加数据。</span></span><br><span class="line">        <span class="comment">//除了添加null之外(所有对象都有null)</span></span><br><span class="line"><span class="comment">//        list.add(&quot;DD&quot;);</span></span><br><span class="line"><span class="comment">//        list.add(&#x27;?&#x27;);</span></span><br><span class="line"></span><br><span class="line">        list.add(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取(读取)：允许读取数据，读取的数据类型为Object。</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> list.get(<span class="number">0</span>);</span><br><span class="line">        System.out.println(o);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(List&lt;?&gt; list)</span> &#123;</span><br><span class="line">        Iterator&lt;?&gt; iterator = list.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">            System.out.println(obj);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test5</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;? <span class="keyword">extends</span> <span class="title class_">Person</span>&gt; list1 = <span class="literal">null</span>;</span><br><span class="line">        List&lt;? <span class="built_in">super</span> Person&gt; list2 = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;Student&gt; students = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Person&gt; people = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Object&gt; objects = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        list1 = students;</span><br><span class="line">        list1 = people;</span><br><span class="line">        <span class="comment">//list1 = objects;</span></span><br><span class="line"></span><br><span class="line">        list2 = people;</span><br><span class="line">        list2 = objects;</span><br><span class="line">        <span class="comment">//list2 = students;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//读取数据</span></span><br><span class="line">        list1 = students;</span><br><span class="line">        <span class="comment">//接受的必须包括所有可能的类</span></span><br><span class="line">        <span class="comment">//Student student = list1.get(0);</span></span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> list1.get(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        list2 = people;</span><br><span class="line">        <span class="comment">//接受的必须包括所有可能的类</span></span><br><span class="line">        <span class="comment">//Person person1 =list2.get(0);</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> list2.get(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//写入数据：</span></span><br><span class="line">        <span class="comment">//编译不通过</span></span><br><span class="line">        <span class="comment">//list1.add(new Student());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//编译通过</span></span><br><span class="line">        list2.add(<span class="keyword">new</span> <span class="title class_">Person</span>());</span><br><span class="line">        list2.add(<span class="keyword">new</span> <span class="title class_">Student</span>());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaSe/" rel="tag"># JavaSe</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/09/Docker%E5%AD%A6%E4%B9%A0/" rel="prev" title="Docker学习">
+      <i class="fa fa-chevron-left"></i> Docker学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/14/IO%E6%B5%81/" rel="next" title="IO流">
+      IO流 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">泛型的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AFjdk5-0%E6%96%B0%E5%A2%9E%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.1.</span> <span class="nav-text">是jdk5.0新增的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E9%9B%86%E5%90%88%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">在集合中使用泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.3.</span> <span class="nav-text">自定义泛型结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.1.4.</span> <span class="nav-text">泛型的注意事项</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
