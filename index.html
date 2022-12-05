@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-12-05 17:18:06" itemprop="dateModified" datetime="2022-12-05T17:18:06+08:00">2022-12-05</time>
+                <time title="Modified: 2022-12-05 17:21:00" itemprop="dateModified" datetime="2022-12-05T17:21:00+08:00">2022-12-05</time>
               </span>
 
           
@@ -274,7 +274,7 @@
 </ul>
 <p><strong>标准化的项目结构：</strong></p>
 <p>项目结构我们都知道，每一个开发工具（IDE）都有自己不同的项目结构，它们互相之间不通用。我再eclipse中创建的目录，无法在idea中进行使用，这就造成了很大的不方便，如下图:前两个是以后开发经常使用的开发工具</p>
-<img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726153521381.png"/>
+<img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726153521381.png" alt="image-20210726153521381" style="zoom:80%;" />
 
 <p>而Maven提供了一套标准化的项目结构，所有的IDE使用Maven构建的项目完全一样，所以IDE创建的Maven项目可以通用。如下图右边就是Maven构建的项目结构。</p>
 <img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726153815028.png" alt="image-20210726153815028" style="zoom:80%;" />
@@ -282,12 +282,12 @@
 
 
 <p><strong>标准化的构建流程：</strong></p>
-<img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154144488.png"/>
+<img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154144488.png" alt="image-20210726154144488" style="zoom:80%;" />
 
 <p>如上图所示我们开发了一套系统，代码需要进行编译、测试、打包、发布，这些操作如果需要反复进行就显得特别麻烦，而Maven提供了一套简单的命令来完成项目构建。</p>
 <p><strong>依赖管理：</strong></p>
 <p>依赖管理其实就是管理你项目所依赖的第三方资源（jar包、插件）。如之前我们项目中需要使用JDBC和Druid的话，就需要去网上下载对应的依赖包（当前之前是老师已经下载好提供给大家了），复制到项目中，还要将jar包加入工作环境这一系列的操作。如下图所示</p>
-<img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154753631.png"/>
+<img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154753631.png" alt="image-20210726154753631" style="zoom:80%;" />
 
 <p>而Maven使用标准的 &#x3D;&#x3D;坐标&#x3D;&#x3D; 配置来管理各种依赖，只需要简单的配置就可以完成依赖管理。</p>
 <img src="../images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154922337.png" alt="image-20210726154922337" style="zoom:80%;" />
@@ -852,7 +852,7 @@
 
 <h5 id="2-5-1-2-查看详情（根据Id查询）"><a href="#2-5-1-2-查看详情（根据Id查询）" class="headerlink" title="2.5.1.2 查看详情（根据Id查询）"></a>2.5.1.2 查看详情（根据Id查询）</h5><ul>
 <li><p>注意点</p>
-<p>①参数占位符：<br>       #{}：会将其替换为？，防止sql注入<br>       ${}: 拼接sql，会存在sql注入问题。在表名或者类名不固定的情况下会使用${}，但依旧存在sql注入问题<br>②参数类型：parameterType：可以省略<br>③特殊字符处理：<br>   1.转义字符<br>   2.CDATA区:内部内容当作纯文本处理</p>
+<p> ①参数占位符：<br>        #{}：会将其替换为？，防止sql注入<br>        ${}: 拼接sql，会存在sql注入问题。在表名或者类名不固定的情况下会使用${}，但依旧存在sql注入问题<br> ②参数类型：parameterType：可以省略<br> ③特殊字符处理：<br>    1.转义字符<br>    2.CDATA区:内部内容当作纯文本处理</p>
 </li>
 </ul>
 <p>BrandMapper.xml</p>
@@ -967,7 +967,7 @@
 </li>
 <li><p>Map集合:直接使用，键名 和 参数占位符名称 一致</p>
 </li>
-<li><p>Collection: 封装为Map集合，建议使用@Param注解，替换Map集合中默认的arg键名<br>map.put(“argo”,colLection集合);<br>map.put(“colLection”,colLection集合);</p>
+<li><p>Collection: 封装为Map集合，建议使用@Param注解，替换Map集合中默认的arg键名<br> map.put(“argo”,colLection集合);<br> map.put(“colLection”,colLection集合);</p>
 </li>
 <li><p>List:封装为Map集合<br>map.put(“argo”,List集合);<br>map.put(“colLection”,List集合);<br>map.put(“Tist”,List集合);</p>
 </li>
