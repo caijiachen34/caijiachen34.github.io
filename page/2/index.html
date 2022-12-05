@@ -145,239 +145,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/09/Docker%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/09/Docker%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Docker学习</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-11-09 18:55:45 / Modified: 21:09:34" itemprop="dateCreated datePublished" datetime="2022-11-09T18:55:45+08:00">2022-11-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="新手篇"><a href="#新手篇" class="headerlink" title="新手篇"></a>新手篇</h1><h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><p>环境配置相当麻烦，换一台机器，就要重来一次，费力费时。很多人想到，能不能从根本上解决问题，软件可以带环境安装？也就是说，安装的时候，把原始环境一模一样地复制过来。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109185759428.png" alt="image-20221109185759428"></p>
-<p>Docker透过镜像(images)将作业系统核心除外，运作应用程式所需要的系统环境，由下而上打包，达到应用程式跨平台间的无缝接轨运作。</p>
-<h3 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2.介绍"></a>2.介绍</h3><p>Docker是基于Go语言实现的云开源项目。Linux的基础上发展过来。将应用打成镜像，通过镜像成为运行在Docker容器上面的实例，而 Docker容器在任何操作系统上都是一致的，这就实现了跨平台、跨服务器。只需要一次配置好环境，换到别的机子上就可以一键部署好，大大简化了操作。</p>
-<p>*解决了运行环境和配置问题的软件容器， 方便做持续集成并有助于整体发布的容器虚拟化技术。</p>
-<h3 id="3-容器VS虚拟机"><a href="#3-容器VS虚拟机" class="headerlink" title="3.容器VS虚拟机"></a>3.容器VS虚拟机</h3><h4 id="虚拟机技术"><a href="#虚拟机技术" class="headerlink" title="虚拟机技术"></a>虚拟机技术</h4><p>虚拟机（virtual machine）就是带环境安装的一种解决方案。</p>
-<p>它可以在一种操作系统里面运行另一种操作系统，比如在Windows10系统里面运行Linux系统CentOS7。应用程序对此毫无感知，因为虚拟机看上去跟真实系统一模一样，而对于底层系统来说，虚拟机就是一个普通文件，不需要了就删掉，对其他部分毫无影响。这类虚拟机完美的运行了另一套系统，能够使应用程序，操作系统和硬件三者之间的逻辑不变。 </p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190238223.png" alt="image-20221109190238223"></p>
-<p>虚拟机缺点：①资源占用多②冗余步骤多③启动慢</p>
-<h4 id="容器虚拟化技术"><a href="#容器虚拟化技术" class="headerlink" title="容器虚拟化技术"></a>容器虚拟化技术</h4><p>由于前面虚拟机存在某些缺点，Linux发展出了另一种虚拟化技术：</p>
-<p>Linux容器(Linux Containers，缩写为 LXC)</p>
-<p>Linux容器是与系统其他部分隔离开的一系列进程，从另一个镜像运行，并由该镜像提供支持进程所需的全部文件。容器提供的镜像包含了应用的所有依赖项，因而在从开发到测试再到生产的整个过程中，它都具有可移植性和一致性。</p>
-<p>Linux 容器不是模拟一个完整的操作系统而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190414995.png" alt="image-20221109190414995"></p>
-<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190508270.png" alt="image-20221109190508270"></p>
-<p>比较了 Docker 和传统虚拟化方式的不同之处：</p>
-<p>*传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；</p>
-<p>*容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</p>
-<p>* 每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</p>
-<h4 id="Docker实际作用"><a href="#Docker实际作用" class="headerlink" title="Docker实际作用"></a>Docker实际作用</h4><p>传统的应用开发完成后，需要提供一堆安装程序和配置说明文档，安装部署后需根据配置文档进行繁杂的配置才能正常运行。Docker化之后只需要交付少量容器镜像文件，在正式生产环境加载镜像并运行即可，应用安装配置在镜像里已经内置好，大大节省部署配置和测试验证时间。</p>
-<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><h3 id="Windows下安装Docker"><a href="#Windows下安装Docker" class="headerlink" title="Windows下安装Docker"></a>Windows下安装Docker</h3><p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190812495.png" alt="image-20221109190812495"></p>
-<p><strong>前提条件</strong></p>
-<p>目前，CentOS 仅发行版本中的内核支持 Docker。Docker 运行在CentOS 7 (64-bit)上，要求系统为64位、Linux系统内核版本为 3.8以上，这里选用Centos7.x</p>
-<p><strong>查看自己的内核</strong></p>
-<p>uname命令用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）。</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190854867.png" alt="image-20221109190854867"></p>
-<h3 id="Docer基本组成"><a href="#Docer基本组成" class="headerlink" title="Docer基本组成"></a>Docer基本组成</h3><h4 id="镜像-image"><a href="#镜像-image" class="headerlink" title="镜像(image)"></a>镜像(image)</h4><p>Docker 镜像（Image）就是一个<strong>只读</strong>的模板。镜像可以用来创建 Docker 容器，一个镜像可以创建很多容器。它也相当于是一个root文件系统。比如官方镜像 centos7 就包含了完整的一套 centos7 最小系统的 root 文件系统。相当于容器的“源代码”，docker镜像文件类似于Java的类模板，而docker容器实例类似于java中new出来的实例对象。</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109191316117.png" alt="image-20221109191316117"></p>
-<h4 id="容器-container"><a href="#容器-container" class="headerlink" title="容器(container)"></a>容器(container)</h4><h5 id="从面向对象角度"><a href="#从面向对象角度" class="headerlink" title="从面向对象角度"></a>从面向对象角度</h5><p>Docker 利用容器（Container）独立运行的一个或一组应用，应用程序或服务运行在容器里面，容器就类似于一个虚拟化的运行环境，容器是用镜像创建的运行实例。就像是Java中的类和实例对象一样，镜像是静态的定义，容器是镜像运行时的实体。容器为镜像提供了一个标准的和隔离的运行环境，它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台</p>
-<h5 id="从镜像容器角度"><a href="#从镜像容器角度" class="headerlink" title="从镜像容器角度"></a>从镜像容器角度</h5><p>可以把容器看做是一个简易版的<strong>Linux</strong>环境（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。</p>
-<h4 id="仓库-repository"><a href="#仓库-repository" class="headerlink" title="仓库(repository)"></a>仓库(repository)</h4><p>仓库（Repository）是集中存放镜像文件的场所。</p>
-<p>类似于Maven仓库，存放各种jar包的地方；github仓库，存放各种git项目的地方；Docker公司提供的官方registry被称为Docker Hub，存放各种镜像模板的地方。</p>
-<p>仓库分为公开仓库（Public）和私有仓库（Private）两种形式。</p>
-<p>最大的公开仓库是 Docker Hub(<a target="_blank" rel="noopener" href="https://hub.docker.com/)%EF%BC%8C">https://hub.docker.com/)，</a></p>
-<p>存放了数量庞大的镜像供用户下载。国内的公开仓库包括阿里云 、网易云等。<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/">阿里云容器服务镜像地址</a></p>
-<p>加速器地址：<a target="_blank" rel="noopener" href="https://osz18i1m.mirror.aliyuncs.com/">https://osz18i1m.mirror.aliyuncs.com</a></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>需要正确的理解仓库&#x2F;镜像&#x2F;容器这几个概念:</p>
-<p>Docker 本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包好形成一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器实例(类似Java中new出来一个对象)。</p>
-<p>image文件可以看作是容器的模板。Docker 根据 image 文件生成容器的实例。同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>镜像文件</p>
-<p>*  image 文件生成的容器实例，本身也是一个文件，称为镜像文件。</p>
-<p>容器实例</p>
-<p>*  一个容器运行一种服务，当我们需要的时候，就可以通过docker客户端创建一个对应的运行实例，也就是我们的容器</p>
-<p>仓库</p>
-<p>* 就是放一堆镜像的地方，我们可以把镜像发布到仓库中，需要的时候再从仓库中拉下来就可以了。</p>
-<h3 id="Docker平台架构图解-架构版"><a href="#Docker平台架构图解-架构版" class="headerlink" title="Docker平台架构图解(架构版)"></a>Docker平台架构图解(架构版)</h3><p>Docker 是一个 C&#x2F;S 模式的架构，后端是一个松耦合架构，众多模块各司其职。 </p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002.jpg" alt="graphic"></p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109192329642.png" alt="image-20221109192329642"></p>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">Docker官方文档</a></p>
-<p>①确定是Centos7及以上版本：<code>cat /etc/redhat-release</code></p>
-<p>②卸载旧版本</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109192913037.png" alt="image-20221109192913037"></p>
-<p>③yum安装gcc相关</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>④安装需要的软件包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
-
-<p>⑤设置stable镜像仓库</p>
-<p>使用阿里镜像仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>⑥更新yum软件包索引</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-
-<p>⑦安装DOCKER CE</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
-
-<p>⑧启动docker</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-
-<p>⑨测试安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
-
-<p>⑩卸载</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop docker</span><br><span class="line">yum remove docker-ce docker-ce-cli containerd.io</span><br><span class="line">rm -rf /var/lib/docker</span><br><span class="line">rm -rf /var/lib/containerd</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>点击控制台</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994168595-2.jpg" alt="graphic"></p>
-<p>选择容器镜像服务</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004.jpg" alt="graphic"></p>
-<p>获取加速器地址</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image006.jpg" alt="graphic"></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://osz18i1m.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><p>启动Docker后台容器(测试运行 hello-world)</p>
-<p>docker run hello-world</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994283685-6.jpg" alt="graphic"></p>
-<p>输出这段提示以后，hello world就会停止运行，容器自动终止。</p>
-<p>run干了什么</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004-1667994283685-7.jpg" alt="graphic"></p>
-<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p>为什么Docker会比VM虚拟机快?</p>
-<p>①docker有着比虚拟机更少的抽象层</p>
-<p>  由于docker不需要Hypervisor(虚拟机)实现硬件资源虚拟化,运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。因此在CPU、内存利用率上docker将会在效率上有明显优势。</p>
-<p>②docker利用的是<em><strong>宿主机</strong></em>的内核,而不需要加载操作系统OS内核，当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统内核。进而避免引寻、加载操作系统内核返回等比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载OS,返回新建过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了返回过程,因此新建一个docker容器只需要几秒钟。</p>
-<p> <img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994372991-10.jpg" alt="graphic"></p>
-<p> <img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004.gif" alt="graphic"></p>
-<h2 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h2><h3 id="帮助启动类命令"><a href="#帮助启动类命令" class="headerlink" title="帮助启动类命令"></a>帮助启动类命令</h3><p>①启动docker： <code>systemctl start docker</code></p>
-<p>②停止docker： <code>systemctl stop docker</code></p>
-<p>③重启docker： <code>systemctl restart docker</code></p>
-<p>④查看docker状态： <code>systemctl status docker</code></p>
-<p>⑤开机启动： <code>systemctl enable docker</code></p>
-<p>⑥查看docker概要信息： <code>docker info</code></p>
-<p>⑦查看docker总体帮助文档： <code>docker --help</code></p>
-<p>⑧查看docker命令帮助文档： <code>docker 具体命令 --help</code></p>
-<h3 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h3><p>①列出本地主机上的镜像：<code>docker images [OPTIONS]</code></p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109195814818.png" alt="image-20221109195814818"></p>
-<p>各个选项说明</p>
-<p>REPOSITORY：表示镜像的仓库源</p>
-<p>TAG：镜像的标签版本号</p>
-<p>IMAGE ID：镜像ID</p>
-<p>CREATED：镜像创建时间</p>
-<p>SIZE：镜像大小</p>
-<p>同一仓库源可以有多个 TAG版本，代表这个仓库源的不同个版本，我们使用 REPOSITORY:TAG 来定义不同的镜像。</p>
-<p>如果你不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像</p>
-<p>[OPTIONS]说明：</p>
-<p>-a :列出本地所有的镜像（含历史映像层）</p>
-<p>-q :只显示镜像ID。</p>
-<p>②docker search [OPTIONS] 镜像名字</p>
-<p><a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker镜像库</a></p>
-<p> docker search [OPTIONS] 镜像名字</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002.gif" alt="graphic"></p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004-1667996115362-13.jpg" alt="graphic"></p>
-<p>[OPTIONS]说明：</p>
-<p>–limit : 只列出N个镜像，默认25个</p>
-<p><code>docker search --limit 5 redis</code></p>
-<p>③docker pull 镜像名字 [:TAG]</p>
-<p>*不加TAG就是最新版，等价于<code>docker pull 镜像名字:latest</code></p>
-<p>④docker system df 查看镜像&#x2F;容器&#x2F;数据卷所占的空间</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667996368769-16.jpg" alt="graphic"></p>
-<p>⑤docker rmi 某个XXX镜像名字ID</p>
-<p>删除单个：<code>docker rmi -f 镜像ID</code></p>
-<p>删除多个：<code>docker rmi -f 镜像名1:TAG 镜像名2:TAG</code></p>
-<p>删除全部：<code>docker rmi -f $(docker images -qa)</code></p>
-<p>*面试题：谈谈docker虚悬镜像是什么？</p>
-<p>仓库名、标签都是<none>的镜像，俗称虚悬镜像dangling image</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202324670.png" alt="image-20221109202324670"></p>
-<h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><p>有镜像才能创建容器， 这是根本前提(下载一个CentOS或者ubuntu镜像演示)</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202612232.png" alt="image-20221109202612232"></p>
-<p>使用Ubuntu容器：</p>
-<ul>
-<li><code>docker pull ubuntu</code></li>
-</ul>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202638970.png" alt="image-20221109202638970"></p>
-<ul>
-<li>新建+启动容器</li>
-</ul>
-<p><code>docker run [OPTIONS] **IMAGE** [COMMAND] [ARG...]</code></p>
-<p>[OPTIONS]说明</p>
-<p> OPTIONS说明（常用）：有些是一个减号，有些是两个减号</p>
-<p>–name&#x3D;”容器新名字”    为容器指定一个名称；</p>
-<p>-d: 后台运行容器并返回容器ID，也即启动守护式容器(后台运行)；</p>
-<p>-i：以交互模式运行容器，通常与 -t 同时使用；</p>
-<p>-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用；</p>
-<p>也即启动交互式容器(前台有伪终端，等待交互)；</p>
-<p>-P: 随机端口映射，大写P</p>
-<p>-p: 指定端口映射，小写p</p>
-<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109203132538.png" alt="image-20221109203132538"></p>
-<p>例：启动交互式容器(前台命令行)</p>
-<p>使用镜像centos:latest以交互模式启动一个容器,在容器内执行&#x2F;bin&#x2F;bash命令。<code>docker run -it centos /bin/bash</code>或</p>
-<p><code>docker run -it centos bash</code></p>
-<p>*参数说明：</p>
-<p>-i: 交互式操作 interactive</p>
-<p>-t: 终端 terminal</p>
-<p>centos : centos 镜像。</p>
-<p>&#x2F;bin&#x2F;bash：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash。要退出终端，直接输入 exit:</p>
-<ul>
-<li>列出当前所有正在运行的容器<code>docker ps [OPTIONS]</code></li>
-</ul>
-<p>p19</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/09/%E9%9B%86%E5%90%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2170,6 +1937,99 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/hexo%E9%85%8D%E5%90%88typora/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/26/hexo%E9%85%8D%E5%90%88typora/" class="post-title-link" itemprop="url">hexo配合typora的使用</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-10-26 15:13:56" itemprop="dateCreated datePublished" datetime="2022-10-26T15:13:56+08:00">2022-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-29 14:57:11" itemprop="dateModified" datetime="2022-10-29T14:57:11+08:00">2022-10-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hexo-typora图片插入解决方法"><a href="#hexo-typora图片插入解决方法" class="headerlink" title="hexo+typora图片插入解决方法"></a>hexo+typora图片插入解决方法</h1><p>使用 hexo 搭建好博客后，主要是用 Markdown 来编写博客，typora 便是我的首选编辑器。但直接使用 typora 编写的 Markdown 文件，图片路径可能存在问题，就导致页面上图片无法显示。</p>
+<h2 id="本地图片"><a href="#本地图片" class="headerlink" title="本地图片"></a>本地图片</h2><p>博客的 Markdown 文档都存储在 <code>source/_posts</code> 下，然后博客相关图片都存在 <code>source/images</code> 下，接着来修改 typora 的设置。</p>
+<p>打开 <code>文件 - 偏好设置 - 图像</code> 进行修改如下图修改</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151600614.png" alt="image-20221026151600614"></p>
+<p>这样拖拽或粘贴过来的图片会自动复制到 <code>source/images</code> 下面，不过这样只是可以在 typora 中查看图片了，要想在 hexo 中查看就需要图片路径与服务器中相符合， <code>source/images</code> 文件夹下的图片在 hexo 中可以用如 <code>/images/abc.png</code> 的路径访问到，而 typora 可以设置图片根目录，设置完了后图片路径都是 <code>/images/abc.png</code> 这样的，这样一配合就解决了图片路径问题，具体做法是在 <code>格式 - 图像 - 设置图片根目录</code> 中 将 <code>source</code> 文件夹设置为图片根目录，也可在每篇 Markdown 文档中 YAML Front Matter 中添加 <code>typora-root-url: ..</code>，或者直接在 <code>scaffolds</code> 中的模板里直接添加，这样每次 <code>hexo new post</code> 时就会自动生成了。</p>
+<h2 id="上传到图床"><a href="#上传到图床" class="headerlink" title="上传到图床"></a>上传到图床</h2><p>上边的方法适用于博客文件放在根目录的情况，如果文件放在子目录下的话暂时没找到解决办法，便直接上传到图床采用绝对路径了。</p>
+<p>在 typora 里可以设置插入图片时自动上传，如下图设置，这里使用 <code>PicGo</code> App 来上传图片。</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151643590.png" alt="image-20221026151643590"></p>
+<p>PicGo 可以点击下载按钮到浏览器下载，安装完成后配置好图床，就可以上传图片了。这里使用 GitHub 图床（SM.MS 体验应该更好）。</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151700513.png" alt="image-20221026151700513"></p>
+<p>具体就是在 GitHub 新建一个仓库专门用来存放图片，然后在 PicGo 里填写 用户名&#x2F;仓库名，分支一般写 main ，token 在 GitHub 设置里生成。</p>
+<p>下边是 PicGo 文档里 GitHub 图床的详细步骤，其他图床可参考官方文档。<br>如果 GitHub 图片访问过慢的话，可以将自定义域名设置为 <code>https://fastly.jsdelivr.net/gh/&#123;用户名&#125;/&#123;仓库名&#125;@&#123;分支名&#125;</code>。<br>鉴于网络环境，建议自行寻找可用的图床。</p>
+<p><strong>1.</strong> 首先你得有一个 GitHub 账号。注册 GitHub 就不用我多言。</p>
+<p><strong>2.</strong> 新建一个仓库</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151809681.png" alt="image-20221026151809681"></p>
+<p>记下你取的仓库名。</p>
+<p><strong>3.</strong> 生成一个 token 用于 PicGo 操作你的仓库：</p>
+<p>访问：<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>然后点击<code>Generate new token</code>。</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151836687.png" alt="image-20221026151836687"></p>
+<p>把 repo 的勾打上即可。然后翻到页面最底部，点击<code>Generate token</code>的绿色按钮生成 token。</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151851471.png" alt="image-20221026151851471">一下存到其他地方以备以后要用。</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151908411.png" alt="image-20221026151908411"></p>
+<p><strong>注意：</strong>仓库名的格式是<code>用户名/仓库</code>，比如我创建了一个叫做<code>test</code>的仓库，在 PicGo 里我要设定的仓库名就是<code>Molunerfinn/test</code>。一般我们选择<code>main</code>分支即可。然后记得点击确定以生效，然后可以点击<code>设为默认图床</code>来确保上传的图床是 GitHub。</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151921929.png" alt="image-20221026151921929"></p>
+<p>至此配置完毕，已经可以使用了。当你上传的时候，你会发现你的仓库里也会增加新的图片了：</p>
+<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151939076.png" alt="image-20221026151939076"></p>
+<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/himeka/p/16306906.html">链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -2239,7 +2099,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -145,99 +145,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/hexo%E9%85%8D%E5%90%88typora/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/hexo%E9%85%8D%E5%90%88typora/" class="post-title-link" itemprop="url">hexo配合typora的使用</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-26 15:13:56" itemprop="dateCreated datePublished" datetime="2022-10-26T15:13:56+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-29 14:57:11" itemprop="dateModified" datetime="2022-10-29T14:57:11+08:00">2022-10-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="hexo-typora图片插入解决方法"><a href="#hexo-typora图片插入解决方法" class="headerlink" title="hexo+typora图片插入解决方法"></a>hexo+typora图片插入解决方法</h1><p>使用 hexo 搭建好博客后，主要是用 Markdown 来编写博客，typora 便是我的首选编辑器。但直接使用 typora 编写的 Markdown 文件，图片路径可能存在问题，就导致页面上图片无法显示。</p>
-<h2 id="本地图片"><a href="#本地图片" class="headerlink" title="本地图片"></a>本地图片</h2><p>博客的 Markdown 文档都存储在 <code>source/_posts</code> 下，然后博客相关图片都存在 <code>source/images</code> 下，接着来修改 typora 的设置。</p>
-<p>打开 <code>文件 - 偏好设置 - 图像</code> 进行修改如下图修改</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151600614.png" alt="image-20221026151600614"></p>
-<p>这样拖拽或粘贴过来的图片会自动复制到 <code>source/images</code> 下面，不过这样只是可以在 typora 中查看图片了，要想在 hexo 中查看就需要图片路径与服务器中相符合， <code>source/images</code> 文件夹下的图片在 hexo 中可以用如 <code>/images/abc.png</code> 的路径访问到，而 typora 可以设置图片根目录，设置完了后图片路径都是 <code>/images/abc.png</code> 这样的，这样一配合就解决了图片路径问题，具体做法是在 <code>格式 - 图像 - 设置图片根目录</code> 中 将 <code>source</code> 文件夹设置为图片根目录，也可在每篇 Markdown 文档中 YAML Front Matter 中添加 <code>typora-root-url: ..</code>，或者直接在 <code>scaffolds</code> 中的模板里直接添加，这样每次 <code>hexo new post</code> 时就会自动生成了。</p>
-<h2 id="上传到图床"><a href="#上传到图床" class="headerlink" title="上传到图床"></a>上传到图床</h2><p>上边的方法适用于博客文件放在根目录的情况，如果文件放在子目录下的话暂时没找到解决办法，便直接上传到图床采用绝对路径了。</p>
-<p>在 typora 里可以设置插入图片时自动上传，如下图设置，这里使用 <code>PicGo</code> App 来上传图片。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151643590.png" alt="image-20221026151643590"></p>
-<p>PicGo 可以点击下载按钮到浏览器下载，安装完成后配置好图床，就可以上传图片了。这里使用 GitHub 图床（SM.MS 体验应该更好）。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151700513.png" alt="image-20221026151700513"></p>
-<p>具体就是在 GitHub 新建一个仓库专门用来存放图片，然后在 PicGo 里填写 用户名&#x2F;仓库名，分支一般写 main ，token 在 GitHub 设置里生成。</p>
-<p>下边是 PicGo 文档里 GitHub 图床的详细步骤，其他图床可参考官方文档。<br>如果 GitHub 图片访问过慢的话，可以将自定义域名设置为 <code>https://fastly.jsdelivr.net/gh/&#123;用户名&#125;/&#123;仓库名&#125;@&#123;分支名&#125;</code>。<br>鉴于网络环境，建议自行寻找可用的图床。</p>
-<p><strong>1.</strong> 首先你得有一个 GitHub 账号。注册 GitHub 就不用我多言。</p>
-<p><strong>2.</strong> 新建一个仓库</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151809681.png" alt="image-20221026151809681"></p>
-<p>记下你取的仓库名。</p>
-<p><strong>3.</strong> 生成一个 token 用于 PicGo 操作你的仓库：</p>
-<p>访问：<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
-<p>然后点击<code>Generate new token</code>。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151836687.png" alt="image-20221026151836687"></p>
-<p>把 repo 的勾打上即可。然后翻到页面最底部，点击<code>Generate token</code>的绿色按钮生成 token。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151851471.png" alt="image-20221026151851471">一下存到其他地方以备以后要用。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151908411.png" alt="image-20221026151908411"></p>
-<p><strong>注意：</strong>仓库名的格式是<code>用户名/仓库</code>，比如我创建了一个叫做<code>test</code>的仓库，在 PicGo 里我要设定的仓库名就是<code>Molunerfinn/test</code>。一般我们选择<code>main</code>分支即可。然后记得点击确定以生效，然后可以点击<code>设为默认图床</code>来确保上传的图床是 GitHub。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151921929.png" alt="image-20221026151921929"></p>
-<p>至此配置完毕，已经可以使用了。当你上传的时候，你会发现你的仓库里也会增加新的图片了：</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151939076.png" alt="image-20221026151939076"></p>
-<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/himeka/p/16306906.html">链接</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/24/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -664,7 +571,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
