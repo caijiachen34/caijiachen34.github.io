@@ -145,6 +145,578 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/09/Docker%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/09/Docker%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Docker学习</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-11-09 18:55:45 / Modified: 21:09:34" itemprop="dateCreated datePublished" datetime="2022-11-09T18:55:45+08:00">2022-11-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="新手篇"><a href="#新手篇" class="headerlink" title="新手篇"></a>新手篇</h1><h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><p>环境配置相当麻烦，换一台机器，就要重来一次，费力费时。很多人想到，能不能从根本上解决问题，软件可以带环境安装？也就是说，安装的时候，把原始环境一模一样地复制过来。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109185759428.png" alt="image-20221109185759428"></p>
+<p>Docker透过镜像(images)将作业系统核心除外，运作应用程式所需要的系统环境，由下而上打包，达到应用程式跨平台间的无缝接轨运作。</p>
+<h3 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2.介绍"></a>2.介绍</h3><p>Docker是基于Go语言实现的云开源项目。Linux的基础上发展过来。将应用打成镜像，通过镜像成为运行在Docker容器上面的实例，而 Docker容器在任何操作系统上都是一致的，这就实现了跨平台、跨服务器。只需要一次配置好环境，换到别的机子上就可以一键部署好，大大简化了操作。</p>
+<p>*解决了运行环境和配置问题的软件容器， 方便做持续集成并有助于整体发布的容器虚拟化技术。</p>
+<h3 id="3-容器VS虚拟机"><a href="#3-容器VS虚拟机" class="headerlink" title="3.容器VS虚拟机"></a>3.容器VS虚拟机</h3><h4 id="虚拟机技术"><a href="#虚拟机技术" class="headerlink" title="虚拟机技术"></a>虚拟机技术</h4><p>虚拟机（virtual machine）就是带环境安装的一种解决方案。</p>
+<p>它可以在一种操作系统里面运行另一种操作系统，比如在Windows10系统里面运行Linux系统CentOS7。应用程序对此毫无感知，因为虚拟机看上去跟真实系统一模一样，而对于底层系统来说，虚拟机就是一个普通文件，不需要了就删掉，对其他部分毫无影响。这类虚拟机完美的运行了另一套系统，能够使应用程序，操作系统和硬件三者之间的逻辑不变。 </p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190238223.png" alt="image-20221109190238223"></p>
+<p>虚拟机缺点：①资源占用多②冗余步骤多③启动慢</p>
+<h4 id="容器虚拟化技术"><a href="#容器虚拟化技术" class="headerlink" title="容器虚拟化技术"></a>容器虚拟化技术</h4><p>由于前面虚拟机存在某些缺点，Linux发展出了另一种虚拟化技术：</p>
+<p>Linux容器(Linux Containers，缩写为 LXC)</p>
+<p>Linux容器是与系统其他部分隔离开的一系列进程，从另一个镜像运行，并由该镜像提供支持进程所需的全部文件。容器提供的镜像包含了应用的所有依赖项，因而在从开发到测试再到生产的整个过程中，它都具有可移植性和一致性。</p>
+<p>Linux 容器不是模拟一个完整的操作系统而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190414995.png" alt="image-20221109190414995"></p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190508270.png" alt="image-20221109190508270"></p>
+<p>比较了 Docker 和传统虚拟化方式的不同之处：</p>
+<p>*传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；</p>
+<p>*容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</p>
+<p>* 每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</p>
+<h4 id="Docker实际作用"><a href="#Docker实际作用" class="headerlink" title="Docker实际作用"></a>Docker实际作用</h4><p>传统的应用开发完成后，需要提供一堆安装程序和配置说明文档，安装部署后需根据配置文档进行繁杂的配置才能正常运行。Docker化之后只需要交付少量容器镜像文件，在正式生产环境加载镜像并运行即可，应用安装配置在镜像里已经内置好，大大节省部署配置和测试验证时间。</p>
+<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><h3 id="Windows下安装Docker"><a href="#Windows下安装Docker" class="headerlink" title="Windows下安装Docker"></a>Windows下安装Docker</h3><p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190812495.png" alt="image-20221109190812495"></p>
+<p><strong>前提条件</strong></p>
+<p>目前，CentOS 仅发行版本中的内核支持 Docker。Docker 运行在CentOS 7 (64-bit)上，要求系统为64位、Linux系统内核版本为 3.8以上，这里选用Centos7.x</p>
+<p><strong>查看自己的内核</strong></p>
+<p>uname命令用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190854867.png" alt="image-20221109190854867"></p>
+<h3 id="Docer基本组成"><a href="#Docer基本组成" class="headerlink" title="Docer基本组成"></a>Docer基本组成</h3><h4 id="镜像-image"><a href="#镜像-image" class="headerlink" title="镜像(image)"></a>镜像(image)</h4><p>Docker 镜像（Image）就是一个<strong>只读</strong>的模板。镜像可以用来创建 Docker 容器，一个镜像可以创建很多容器。它也相当于是一个root文件系统。比如官方镜像 centos7 就包含了完整的一套 centos7 最小系统的 root 文件系统。相当于容器的“源代码”，docker镜像文件类似于Java的类模板，而docker容器实例类似于java中new出来的实例对象。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109191316117.png" alt="image-20221109191316117"></p>
+<h4 id="容器-container"><a href="#容器-container" class="headerlink" title="容器(container)"></a>容器(container)</h4><h5 id="从面向对象角度"><a href="#从面向对象角度" class="headerlink" title="从面向对象角度"></a>从面向对象角度</h5><p>Docker 利用容器（Container）独立运行的一个或一组应用，应用程序或服务运行在容器里面，容器就类似于一个虚拟化的运行环境，容器是用镜像创建的运行实例。就像是Java中的类和实例对象一样，镜像是静态的定义，容器是镜像运行时的实体。容器为镜像提供了一个标准的和隔离的运行环境，它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台</p>
+<h5 id="从镜像容器角度"><a href="#从镜像容器角度" class="headerlink" title="从镜像容器角度"></a>从镜像容器角度</h5><p>可以把容器看做是一个简易版的<strong>Linux</strong>环境（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。</p>
+<h4 id="仓库-repository"><a href="#仓库-repository" class="headerlink" title="仓库(repository)"></a>仓库(repository)</h4><p>仓库（Repository）是集中存放镜像文件的场所。</p>
+<p>类似于Maven仓库，存放各种jar包的地方；github仓库，存放各种git项目的地方；Docker公司提供的官方registry被称为Docker Hub，存放各种镜像模板的地方。</p>
+<p>仓库分为公开仓库（Public）和私有仓库（Private）两种形式。</p>
+<p>最大的公开仓库是 Docker Hub(<a target="_blank" rel="noopener" href="https://hub.docker.com/)%EF%BC%8C">https://hub.docker.com/)，</a></p>
+<p>存放了数量庞大的镜像供用户下载。国内的公开仓库包括阿里云 、网易云等。<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/">阿里云容器服务镜像地址</a></p>
+<p>加速器地址：<a target="_blank" rel="noopener" href="https://osz18i1m.mirror.aliyuncs.com/">https://osz18i1m.mirror.aliyuncs.com</a></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>需要正确的理解仓库&#x2F;镜像&#x2F;容器这几个概念:</p>
+<p>Docker 本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包好形成一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器实例(类似Java中new出来一个对象)。</p>
+<p>image文件可以看作是容器的模板。Docker 根据 image 文件生成容器的实例。同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>镜像文件</p>
+<p>*  image 文件生成的容器实例，本身也是一个文件，称为镜像文件。</p>
+<p>容器实例</p>
+<p>*  一个容器运行一种服务，当我们需要的时候，就可以通过docker客户端创建一个对应的运行实例，也就是我们的容器</p>
+<p>仓库</p>
+<p>* 就是放一堆镜像的地方，我们可以把镜像发布到仓库中，需要的时候再从仓库中拉下来就可以了。</p>
+<h3 id="Docker平台架构图解-架构版"><a href="#Docker平台架构图解-架构版" class="headerlink" title="Docker平台架构图解(架构版)"></a>Docker平台架构图解(架构版)</h3><p>Docker 是一个 C&#x2F;S 模式的架构，后端是一个松耦合架构，众多模块各司其职。 </p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002.jpg" alt="graphic"></p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109192329642.png" alt="image-20221109192329642"></p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">Docker官方文档</a></p>
+<p>①确定是Centos7及以上版本：<code>cat /etc/redhat-release</code></p>
+<p>②卸载旧版本</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109192913037.png" alt="image-20221109192913037"></p>
+<p>③yum安装gcc相关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>④安装需要的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+<p>⑤设置stable镜像仓库</p>
+<p>使用阿里镜像仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>⑥更新yum软件包索引</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<p>⑦安装DOCKER CE</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>⑧启动docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>⑨测试安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>⑩卸载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop docker</span><br><span class="line">yum remove docker-ce docker-ce-cli containerd.io</span><br><span class="line">rm -rf /var/lib/docker</span><br><span class="line">rm -rf /var/lib/containerd</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>点击控制台</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994168595-2.jpg" alt="graphic"></p>
+<p>选择容器镜像服务</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004.jpg" alt="graphic"></p>
+<p>获取加速器地址</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image006.jpg" alt="graphic"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://osz18i1m.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><p>启动Docker后台容器(测试运行 hello-world)</p>
+<p>docker run hello-world</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994283685-6.jpg" alt="graphic"></p>
+<p>输出这段提示以后，hello world就会停止运行，容器自动终止。</p>
+<p>run干了什么</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004-1667994283685-7.jpg" alt="graphic"></p>
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p>为什么Docker会比VM虚拟机快?</p>
+<p>①docker有着比虚拟机更少的抽象层</p>
+<p>  由于docker不需要Hypervisor(虚拟机)实现硬件资源虚拟化,运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。因此在CPU、内存利用率上docker将会在效率上有明显优势。</p>
+<p>②docker利用的是<em><strong>宿主机</strong></em>的内核,而不需要加载操作系统OS内核，当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统内核。进而避免引寻、加载操作系统内核返回等比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载OS,返回新建过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了返回过程,因此新建一个docker容器只需要几秒钟。</p>
+<p> <img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994372991-10.jpg" alt="graphic"></p>
+<p> <img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004.gif" alt="graphic"></p>
+<h2 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h2><h3 id="帮助启动类命令"><a href="#帮助启动类命令" class="headerlink" title="帮助启动类命令"></a>帮助启动类命令</h3><p>①启动docker： <code>systemctl start docker</code></p>
+<p>②停止docker： <code>systemctl stop docker</code></p>
+<p>③重启docker： <code>systemctl restart docker</code></p>
+<p>④查看docker状态： <code>systemctl status docker</code></p>
+<p>⑤开机启动： <code>systemctl enable docker</code></p>
+<p>⑥查看docker概要信息： <code>docker info</code></p>
+<p>⑦查看docker总体帮助文档： <code>docker --help</code></p>
+<p>⑧查看docker命令帮助文档： <code>docker 具体命令 --help</code></p>
+<h3 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h3><p>①列出本地主机上的镜像：<code>docker images [OPTIONS]</code></p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109195814818.png" alt="image-20221109195814818"></p>
+<p>各个选项说明</p>
+<p>REPOSITORY：表示镜像的仓库源</p>
+<p>TAG：镜像的标签版本号</p>
+<p>IMAGE ID：镜像ID</p>
+<p>CREATED：镜像创建时间</p>
+<p>SIZE：镜像大小</p>
+<p>同一仓库源可以有多个 TAG版本，代表这个仓库源的不同个版本，我们使用 REPOSITORY:TAG 来定义不同的镜像。</p>
+<p>如果你不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像</p>
+<p>[OPTIONS]说明：</p>
+<p>-a :列出本地所有的镜像（含历史映像层）</p>
+<p>-q :只显示镜像ID。</p>
+<p>②docker search [OPTIONS] 镜像名字</p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker镜像库</a></p>
+<p> docker search [OPTIONS] 镜像名字</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002.gif" alt="graphic"></p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004-1667996115362-13.jpg" alt="graphic"></p>
+<p>[OPTIONS]说明：</p>
+<p>–limit : 只列出N个镜像，默认25个</p>
+<p><code>docker search --limit 5 redis</code></p>
+<p>③docker pull 镜像名字 [:TAG]</p>
+<p>*不加TAG就是最新版，等价于<code>docker pull 镜像名字:latest</code></p>
+<p>④docker system df 查看镜像&#x2F;容器&#x2F;数据卷所占的空间</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667996368769-16.jpg" alt="graphic"></p>
+<p>⑤docker rmi 某个XXX镜像名字ID</p>
+<p>删除单个：<code>docker rmi -f 镜像ID</code></p>
+<p>删除多个：<code>docker rmi -f 镜像名1:TAG 镜像名2:TAG</code></p>
+<p>删除全部：<code>docker rmi -f $(docker images -qa)</code></p>
+<p>*面试题：谈谈docker虚悬镜像是什么？</p>
+<p>仓库名、标签都是<none>的镜像，俗称虚悬镜像dangling image</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202324670.png" alt="image-20221109202324670"></p>
+<h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><p>有镜像才能创建容器， 这是根本前提(下载一个CentOS或者ubuntu镜像演示)</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202612232.png" alt="image-20221109202612232"></p>
+<p>使用Ubuntu容器：</p>
+<ul>
+<li><code>docker pull ubuntu</code></li>
+</ul>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202638970.png" alt="image-20221109202638970"></p>
+<ul>
+<li>新建+启动容器</li>
+</ul>
+<p><code>docker run [OPTIONS] **IMAGE** [COMMAND] [ARG...]</code></p>
+<p>[OPTIONS]说明</p>
+<p> OPTIONS说明（常用）：有些是一个减号，有些是两个减号</p>
+<p>–name&#x3D;”容器新名字”    为容器指定一个名称；</p>
+<p>-d: 后台运行容器并返回容器ID，也即启动守护式容器(后台运行)；</p>
+<p>-i：以交互模式运行容器，通常与 -t 同时使用；</p>
+<p>-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用；</p>
+<p>也即启动交互式容器(前台有伪终端，等待交互)；</p>
+<p>-P: 随机端口映射，大写P</p>
+<p>-p: 指定端口映射，小写p</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109203132538.png" alt="image-20221109203132538"></p>
+<p>例：启动交互式容器(前台命令行)</p>
+<p>使用镜像centos:latest以交互模式启动一个容器,在容器内执行&#x2F;bin&#x2F;bash命令。<code>docker run -it centos /bin/bash</code>或</p>
+<p><code>docker run -it centos bash</code></p>
+<p>*参数说明：</p>
+<p>-i: 交互式操作 interactive</p>
+<p>-t: 终端 terminal</p>
+<p>centos : centos 镜像。</p>
+<p>&#x2F;bin&#x2F;bash：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash。要退出终端，直接输入 exit:</p>
+<ul>
+<li>列出当前所有正在运行的容器<code>docker ps [OPTIONS]</code></li>
+</ul>
+<p>p19</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/09/%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/09/%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">集合</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-09 10:35:32" itemprop="dateCreated datePublished" datetime="2022-11-09T10:35:32+08:00">2022-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-20 19:14:10" itemprop="dateModified" datetime="2022-11-20T19:14:10+08:00">2022-11-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="集合框架的概述"><a href="#集合框架的概述" class="headerlink" title="集合框架的概述"></a>集合框架的概述</h1><h2 id="集合框架的概述-1"><a href="#集合框架的概述-1" class="headerlink" title="集合框架的概述"></a>集合框架的概述</h2><p>1.集合、数组都是对多个数据进行存储操作的结构，简称Java容器。</p>
+<p>说明：此时的存储，主要指的是内存层面的存储，不涉及到持久化的存储（.txt,.jpg,.avi，数据库中）</p>
+<p>2.1.数组在存储多个数据方面的特点：</p>
+<p>一旦初始化以后，其长度就确定了。</p>
+<p>数组一旦定义好，其元素的类型也就确定了。我们也就只能操作指定类型的数据了。</p>
+<p>比如：String[] arr;int[] arr1;Object[] arr2;</p>
+<p>2.2.数组在存储多个数据方面的缺点：</p>
+<p>一旦初始化以后，其长度就不可修改。</p>
+<p>数组中提供的方法非常有限，对于添加、删除、插入数据等操作，非常不便，同时效率不高。</p>
+<p>获取数组中实际元素的个数的需求，数组没有现成的属性或方可用</p>
+<p>数组存储数据的特点：有序、可重复。对于无序、不可重复的需求，不能满足。</p>
+<h2 id="集合框架类型"><a href="#集合框架类型" class="headerlink" title="集合框架类型"></a>集合框架类型</h2><p>|—-Collection接口：单列集合，用来存储一个一个的对象</p>
+<p>​		|—-List接口：存储有序的、可重复的数据。  –&gt;“动态”数组</p>
+<p>​				|—-ArrayList、LinkedList、Vector</p>
+<p>​		|—-Set接口：存储无序的、不可重复的数据   –&gt;高中讲的“集合”</p>
+<p>​				|—-HashSet、LinkedHashSet、TreeSet</p>
+<p>|—-Map接口：双列集合，用来存储一对(key - value)一对的数据   –&gt;高中函数：y &#x3D; f(x)</p>
+<p>​				|—-HashMap：作为Map的主要实现类，线程不安全效率高；可以存储null的key和value</p>
+<p>​						|—-LinkedHashMap：保证在遍历map元素时，可以按照添加的顺序实现遍历。</p>
+<p>​										原因：在原有的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元素。对于频繁遍历操作，效率会高于HashMap</p>
+<p>​				|—-TreeMap：保证按照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序，底层使用红黑树</p>
+<p>​				|—-Hashtable：作为古老的实现类，线程安全效率低，不可以存储null的key和value，健壮性差</p>
+<p>​						|—-Properties：常用来处理配置文件。key和value都是String类型</p>
+<p>​			HashMap的底层：数组+链表  （jdk7及之前）</p>
+<p>​					数组+链表+红黑树 （jdk 8） </p>
+<h3 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h3><h4 id="Collection的方法"><a href="#Collection的方法" class="headerlink" title="Collection的方法"></a>Collection的方法</h4><p>例子：</p>
+<p>Person类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span> == o) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="literal">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> (Person) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (age != person.age) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> Objects.equals(name, person.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> name != <span class="literal">null</span> ? name.hashCode() : <span class="number">0</span>;</span><br><span class="line">        result = <span class="number">31</span> * result + age;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">col</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        col.add(<span class="number">123</span>);</span><br><span class="line">        col.add(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">        col.add(<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Tom&quot;</span>));</span><br><span class="line">        col.add(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(col.contains(<span class="number">123</span>));</span><br><span class="line">        <span class="comment">//String引用类，内部重写了equals方法，比较的是有没有</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">abc</span> <span class="operator">=</span> col.contains(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Person</span> <span class="variable">cjc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;cjc&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        col.add(cjc);</span><br><span class="line">        System.out.println(col.contains(cjc));</span><br><span class="line">        <span class="comment">//未重写equals方法，还是内部使用“==”比较</span></span><br><span class="line">        System.out.println(col.contains(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;cjc&quot;</span>, <span class="number">20</span>)));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">Collection</span> <span class="variable">col1</span> <span class="operator">=</span> Arrays.asList(<span class="number">123</span>);</span><br><span class="line">        System.out.println(col.containsAll(col1));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//3.remove(Object obj):从当前集合中移除obj元素。</span></span><br><span class="line">        <span class="type">Collection</span> <span class="variable">coll</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        coll.add(<span class="number">123</span>);</span><br><span class="line">        coll.add(<span class="number">456</span>);</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Jerry&quot;</span>, <span class="number">20</span>));</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Tom&quot;</span>));</span><br><span class="line">        coll.add(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        coll.remove(<span class="number">1234</span>);</span><br><span class="line">        System.out.println(coll);</span><br><span class="line"></span><br><span class="line">        coll.remove(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Jerry&quot;</span>, <span class="number">20</span>));</span><br><span class="line">        System.out.println(coll);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4. removeAll(Collection coll1):差集：从当前集合中移除coll1中所有的元素。</span></span><br><span class="line">        <span class="type">Collection</span> <span class="variable">coll1</span> <span class="operator">=</span> Arrays.asList(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line">        coll.removeAll(coll1);</span><br><span class="line">        System.out.println(coll);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">coll</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        coll.add(<span class="number">123</span>);</span><br><span class="line">        coll.add(<span class="number">456</span>);</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Jerry&quot;</span>, <span class="number">20</span>));</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Tom&quot;</span>));</span><br><span class="line">        coll.add(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.retainAll(Collection coll1):交集：获取当前集合和coll1集合的交集，并返回给当前集合</span></span><br><span class="line"><span class="comment">//        Collection coll1 = Arrays.asList(123,456,789);</span></span><br><span class="line"><span class="comment">//        coll.retainAll(coll1);</span></span><br><span class="line"><span class="comment">//        System.out.println(coll);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//6.equals(Object obj):要想返回true，需要当前集合和形参集合的元素都相同。</span></span><br><span class="line">        <span class="type">Collection</span> <span class="variable">coll1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        coll1.add(<span class="number">456</span>);</span><br><span class="line">        coll1.add(<span class="number">123</span>);</span><br><span class="line">        coll1.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Jerry&quot;</span>, <span class="number">20</span>));</span><br><span class="line">        coll1.add(<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Tom&quot;</span>));</span><br><span class="line">        coll1.add(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(coll.equals(coll1));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">coll</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        coll.add(<span class="number">123</span>);</span><br><span class="line">        coll.add(<span class="number">456</span>);</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Jerry&quot;</span>, <span class="number">20</span>));</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Tom&quot;</span>));</span><br><span class="line">        coll.add(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//7.hashCode():返回当前对象的哈希值</span></span><br><span class="line">        System.out.println(coll.hashCode());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//8.集合 ---&gt;数组：toArray()</span></span><br><span class="line">        Object[] arr = coll.toArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            System.out.println(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//拓展：数组 ---&gt;集合:调用Arrays类的静态方法asList()</span></span><br><span class="line">        List&lt;String&gt; list = Arrays.asList(<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;AA&quot;</span>, <span class="string">&quot;BB&quot;</span>, <span class="string">&quot;CC&quot;</span>&#125;);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="type">List</span> <span class="variable">arr1</span> <span class="operator">=</span> Arrays.asList(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">123</span>, <span class="number">456</span>&#125;);</span><br><span class="line">        System.out.println(arr1.size());<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line">        <span class="type">List</span> <span class="variable">arr2</span> <span class="operator">=</span> Arrays.asList(<span class="keyword">new</span> <span class="title class_">Integer</span>[]&#123;<span class="number">123</span>, <span class="number">456</span>&#125;);</span><br><span class="line">        System.out.println(arr2.size());<span class="comment">//2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//9.iterator():返回Iterator接口的实例，用于遍历集合元素。放在IteratorTest.java中测试</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>*结论：向Collection接口的实现类的对象中添加数据obj时，要求obj所在类要重写equals().</p>
+<h5 id="Iterater"><a href="#Iterater" class="headerlink" title="Iterater"></a>Iterater</h5><p><em><strong>集合Collection</strong></em>元素的遍历操作，使用迭代器Iterator接口，不可操作Map</p>
+<p>1.内部的方法：hasNext() 和  next()</p>
+<p>2.集合对象每次调用iterator()方法都得到一个全新的迭代器对象，</p>
+<p>默认游标都在集合的第一个元素之前。</p>
+<p>3.内部定义了remove(),可以在遍历的时候，删除集合中的元素。此方法不同于集合直接调用remove()</p>
+<p>迭代器图例</p>
+<p>注：第一次指向第一个元素之前的指针.</p>
+<p><img src="/../images/%E9%9B%86%E5%90%88/image-20221110121210413.png" alt="image-20221110121210413"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">	System.out.println(iterator.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子：Iterater</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">coll</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        coll.add(<span class="number">123</span>);</span><br><span class="line">        coll.add(<span class="string">&quot;456&quot;</span>);</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Jerry&quot;</span>,<span class="number">20</span>));</span><br><span class="line">        coll.add(<span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Tom&quot;</span>));</span><br><span class="line">        coll.add(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">iterator</span> <span class="operator">=</span> coll.iterator();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//不推荐</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; coll.size(); i++) &#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;*************************&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//推荐</span></span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;+++++++++++++++++++++++++&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//错误方式一：</span></span><br><span class="line"><span class="comment">//        Iterator iterator = coll.iterator();</span></span><br><span class="line"><span class="comment">//        while((iterator.next()) != null)&#123;</span></span><br><span class="line"><span class="comment">//            System.out.println(iterator.next());</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//错误方式二：</span></span><br><span class="line">        <span class="comment">//集合对象每次调用iterator()方法都得到一个全新的迭代器对象，默认游标都在集合的第一个元素之前。</span></span><br><span class="line"><span class="comment">//        while (coll.iterator().hasNext())&#123;</span></span><br><span class="line"><span class="comment">//            System.out.println(coll.iterator().next());</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        iterator = coll.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> iterator.next();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (obj.equals(<span class="string">&quot;Tom&quot;</span>)) &#123; <span class="comment">//也可以&quot;Tom&quot;.equals(obj)</span></span><br><span class="line">                iterator.remove();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        iterator = coll.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h4><p>|—-Collection接口：单列集合，用来存储一个一个的对象</p>
+<p>​		|—-List接口：存储有序的、可重复的数据。  –&gt;“动态”数组</p>
+<p>​				|—-ArrayList       线程不安全</p>
+<p>​				|—-LinkedList	线程不安全</p>
+<p>​				|—-Vector  		线程安全，效率慢，一般不用</p>
+<h5 id="ArrayList的源码分析"><a href="#ArrayList的源码分析" class="headerlink" title="ArrayList的源码分析"></a>ArrayList的源码分析</h5><p><strong>jdk 7</strong></p>
+<p>ArrayList list &#x3D; new ArrayList();&#x2F;&#x2F;底层创建了长度是10的Object[]数组elementData</p>
+<p>list.add(123);&#x2F;&#x2F;elementData[0] &#x3D; new Integer(123);</p>
+<p>…</p>
+<p>list.add(11);&#x2F;&#x2F;如果此次的添加导致底层elementData数组容量不够，则扩容。</p>
+<p>默认情况下，扩容为原来的容量的1.5倍，同时需要将原有数组中的数据复制到新的数组中。</p>
+<p>结论：建议开发中使用带参的构造器：ArrayList list &#x3D; new ArrayList(int capacity)</p>
+<p><strong>jdk 8</strong></p>
+<p>ArrayList list &#x3D; new ArrayList();&#x2F;&#x2F;底层Object[] elementData初始化为{}.并没有创建长度为10的数组<br> *</p>
+<p>list.add(123);&#x2F;&#x2F;第一次调用add()时，底层才创建了长度10的数组，并将数据123添加到elementData[0]</p>
+<p>…</p>
+<p>后续的添加和扩容操作与jdk 7 无异。</p>
+<p><strong>小结</strong></p>
+<p>jdk7中的ArrayList的对象的创建类似于单例的饿汉式，而jdk8中的ArrayList的对象</p>
+<p>的创建类似于单例的懒汉式，延迟了数组的创建，节省内存。</p>
+<h5 id="LinkedList的源码分析"><a href="#LinkedList的源码分析" class="headerlink" title="LinkedList的源码分析"></a>LinkedList的源码分析</h5><p> LinkedList list &#x3D; new LinkedList(); 内部声明了Node类型的first和last属性，默认值为null</p>
+<p>list.add(123);&#x2F;&#x2F;将123封装到Node中，创建了Node对象。<br> *</p>
+<p>其中，Node定义为：体现了LinkedList的双向链表的说法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;E&gt; &#123;</span><br><span class="line">     E item;</span><br><span class="line">     Node&lt;E&gt; next;</span><br><span class="line">     Node&lt;E&gt; prev;</span><br><span class="line"></span><br><span class="line"> Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line"> <span class="built_in">this</span>.item = element;</span><br><span class="line"> <span class="built_in">this</span>.next = next;</span><br><span class="line"> <span class="built_in">this</span>.prev = prev;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Vector的源码分析"><a href="#Vector的源码分析" class="headerlink" title="Vector的源码分析"></a>Vector的源码分析</h5><p>jdk7和jdk8中通过Vector()构造器创建对象时，底层都创建了长度为10的数组。</p>
+<p>在扩容方面，默认扩容为原来的数组长度的2倍。</p>
+<p>面试题：ArrayList、LinkedList、Vector三者的异同？</p>
+<ul>
+<li>同：三个类都是实现了List接口，存储数据的特点相同：存储有序的、可重复的数据</li>
+<li>不同：见上</li>
+</ul>
+<h5 id="List接口中的常用方法"><a href="#List接口中的常用方法" class="headerlink" title="List接口中的常用方法"></a>List接口中的常用方法</h5><ul>
+<li>void add(int index, Object ele):在index位置插入ele元素</li>
+<li>boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来</li>
+<li>Object get(int index):获取指定index位置的元素</li>
+<li>int indexOf(Object obj):返回obj在集合中首次出现的位置</li>
+<li>int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置</li>
+<li>Object remove(int index):移除指定index位置的元素，并返回此元素</li>
+<li>Object set(int index, Object ele):设置指定index位置的元素为ele</li>
+<li>List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的子集合</li>
+</ul>
+<p>总结：常用方法</p>
+<ul>
+<li>增：add(Object obj)</li>
+<li>删：remove(int index) &#x2F; remove(Object obj)</li>
+<li>改：set(int index, Object ele)</li>
+<li>查：get(int index)</li>
+<li>插：add(int index, Object ele)</li>
+<li>长度：size()</li>
+<li>遍历：① Iterator迭代器方式</li>
+<li>​     ② 增强for循环  <code>for(集合元素的类型 局部变量 : 集合对象)</code></li>
+<li>​     ③ 普通的循环</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">ArrayList</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list.add(<span class="number">123</span>);</span><br><span class="line">        list.add(<span class="number">456</span>);</span><br><span class="line">        list.add(<span class="string">&quot;AA&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//方式一：Iterator迭代器方式</span></span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">iterator</span> <span class="operator">=</span> list.iterator();</span><br><span class="line">        <span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;***************&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//方式二：增强for循环</span></span><br><span class="line">        <span class="keyword">for</span>(Object obj : list)&#123;</span><br><span class="line">            System.out.println(obj);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;***************&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//方式三：普通for循环</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; list.size();i++)&#123;</span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">ArrayList</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list.add(<span class="number">123</span>);</span><br><span class="line">        list.add(<span class="number">456</span>);</span><br><span class="line">        list.add(<span class="string">&quot;AA&quot;</span>);</span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">12</span>));</span><br><span class="line">        list.add(<span class="number">456</span>);</span><br><span class="line">        <span class="comment">//int indexOf(Object obj):返回obj在集合中首次出现的位置。如果不存在，返回-1.</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> list.indexOf(<span class="number">4567</span>);</span><br><span class="line">        System.out.println(index);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置。如果不存在，返回-1.</span></span><br><span class="line">        System.out.println(list.lastIndexOf(<span class="number">456</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Object remove(int index):移除指定index位置的元素，并返回此元素</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> list.remove(<span class="number">0</span>);</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Object set(int index, Object ele):设置指定index位置的元素为ele</span></span><br><span class="line">        list.set(<span class="number">1</span>,<span class="string">&quot;CC&quot;</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的左闭右开区间的子集合</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">subList</span> <span class="operator">=</span> list.subList(<span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">        System.out.println(subList);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">ArrayList</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list.add(<span class="number">123</span>);</span><br><span class="line">        list.add(<span class="number">456</span>);</span><br><span class="line">        list.add(<span class="string">&quot;AA&quot;</span>);</span><br><span class="line">        list.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">12</span>));</span><br><span class="line">        list.add(<span class="number">456</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//void add(int index, Object ele):在index位置插入ele元素</span></span><br><span class="line">        list.add(<span class="number">1</span>,<span class="string">&quot;BB&quot;</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list1</span> <span class="operator">=</span> Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        list.addAll(list1);</span><br><span class="line">		<span class="comment">//list.add(list1);</span></span><br><span class="line">        System.out.println(list.size());<span class="comment">//9</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//Object get(int index):获取指定index位置的元素</span></span><br><span class="line">        System.out.println(list.get(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>练习：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testListRemove</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">       list.add(<span class="number">1</span>);</span><br><span class="line">       list.add(<span class="number">2</span>);</span><br><span class="line">       list.add(<span class="number">3</span>);</span><br><span class="line">       updateList(list);</span><br><span class="line">       System.out.println(list);<span class="comment">//</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">updateList</span><span class="params">(List list)</span> &#123;</span><br><span class="line">	<span class="comment">//list.remove(2);  //[1,2]</span></span><br><span class="line">       list.remove(<span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">2</span>));<span class="comment">//[1,3]</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h4><p>|—-Collection接口：单列集合，用来存储一个一个的对象</p>
+<p>​		|—-Set接口：存储无序的、不可重复的数据   –&gt;高中讲的“集合”</p>
+<p>​				|—-HashSet：作为Set接口的主要实现类  线程不安全：可																	以存储null值</p>
+<p>​						|—-LinkedHashSet ：作为HashSet的子类，遍历其内													部数据时，可以按照添加的顺序遍历												对于频繁的遍历操作，LinkedHashSet													效率高于HashSet.</p>
+<p>​				|—-TreeSet：可以按照添加对象的指定属性进行排序（只											可以添加一类对象）</p>
+<ol>
+<li><p>Set接口中没有额外定义新的方法，使用的都是Collection中声明过的方法。</p>
+</li>
+<li><p>要求：向Set(主要指：HashSet、LinkedHashSet)中添加的数据，其所在的类一定要重写hashCode()和equals()</p>
+</li>
+</ol>
+<p>​		要求：重写的hashCode()和equals()尽可能保持一致性：相等的		对象必须具有相等的散列码</p>
+<p>​		重写两个方法的小技巧：对象中用作 equals() 方法比Field，都		应该用来计算 hashCode 值。</p>
+<p>Set：存储无序的、不可重复的数据</p>
+<h5 id="HashSet底层结构"><a href="#HashSet底层结构" class="headerlink" title="HashSet底层结构"></a>HashSet底层结构</h5><p>作为Set接口的主要实现类  线程不安全：可以存储null值</p>
+<p><img src="/../images/%E9%9B%86%E5%90%88/image-20221111164100163.png" alt="image-20221111164100163"></p>
+<p>以HashSet为例说明：<br>    1. 无序性：不等于随机性。存储的数据在底层数组中并非按照数组索引的顺序添加，而是根据数据的哈希值决定的。</p>
+<ol start="2">
+<li>不可重复性：保证添加的元素按照equals()判断时，不能返回true.即：相同的元素只能添加一个。</li>
+</ol>
+<p> 二、添加元素的过程：以HashSet为例：p537<br>        我们向HashSet中添加元素a,首先调用元素a所在类的hashCode()方法，计算元素a的哈希值，<br>        此哈希值接着通过某种算法计算出在HashSet底层数组中的存放位置（即为：索引位置），判断<br>        数组此位置上是否已经有元素：<br>                如果此位置上没有其他元素，则元素a添加成功。 —&gt;情况1<br>                如果此位置上有其他元素b(或以链表形式存在的多个元素），则比较元素a与元素b的hash值：<br>                   	 如果hash值不相同，则元素a添加成功。—&gt;情况2<br>                        如果hash值相同，进而需要调用元素a所在类的equals()方法：<br>                               equals()返回true,元素a添加失败<br>                               equals()返回false,则元素a添加成功。—&gt;情况2</p>
+<p>​    	对于添加成功的情况2和情况3而言：元素a 与已经存在指定索引位置上数据以链表的方式存储。<br>        jdk 7 :元素a放到数组中，指向原来的元素。<br>        jdk 8 :原来的元素在数组中，指向元素a<br>​    	总结：七上八下</p>
+<p>​    	HashSet底层：数组+链表的结构。</p>
+<h5 id="LinkedHashSet底层结构"><a href="#LinkedHashSet底层结构" class="headerlink" title="LinkedHashSet底层结构"></a>LinkedHashSet底层结构</h5><p>作为HashSet的子类，遍历其内部数据时，可以按照添加的顺序遍历对于频繁的遍历操作，LinkedHashSet效率高于HashSet.</p>
+<p><img src="/../images/%E9%9B%86%E5%90%88/image-20221111163325747.png" alt="image-20221111163325747"></p>
+<h5 id="TreeSet底层结构"><a href="#TreeSet底层结构" class="headerlink" title="TreeSet底层结构"></a>TreeSet底层结构</h5><p>可以按照添加对象的指定属性进行排序（只可以添加一类对象）</p>
+<p>①向TreeSet中添加的数据，要求是相同类的对象。<br>②两种排序方式：自然排序（实现Comparable接口） 和 定制排序（Comparator）</p>
+<p>③自然排序中，比较两个对象是否相同的标准为：compareTo()返回0.不再是equals().<br>④定制排序中，比较两个对象是否相同的标准为：compare()返回0.不再是equals().</p>
+<p>例：实现自然排序Comparable接口(实体类内，先按名字排序，再按年龄)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//按照姓名从大到小排列,年龄从小到大排列</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">       <span class="keyword">if</span>(o <span class="keyword">instanceof</span> User)&#123;</span><br><span class="line">           <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User)o;</span><br><span class="line"><span class="comment">//return -this.name.compareTo(user.name);</span></span><br><span class="line">           <span class="type">int</span> <span class="variable">compare</span> <span class="operator">=</span> -<span class="built_in">this</span>.name.compareTo(user.name);</span><br><span class="line">           <span class="keyword">if</span>(compare != <span class="number">0</span>)&#123;</span><br><span class="line">               <span class="keyword">return</span> compare;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               <span class="keyword">return</span> Integer.compare(<span class="built_in">this</span>.age,user.age);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;输入的类型不匹配&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>例：实现定制排序（Comparator）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Comparator</span> <span class="variable">com</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Comparator</span>() &#123;</span><br><span class="line">            <span class="comment">//按照年龄从小到大排列</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Object o1, Object o2)</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(o1 <span class="keyword">instanceof</span> User &amp;&amp; o2 <span class="keyword">instanceof</span> User)&#123;</span><br><span class="line">                    <span class="type">User</span> <span class="variable">u1</span> <span class="operator">=</span> (User)o1;</span><br><span class="line">                    <span class="type">User</span> <span class="variable">u2</span> <span class="operator">=</span> (User)o2;</span><br><span class="line">                    <span class="keyword">return</span> Integer.compare(u1.getAge(),u2.getAge());</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;输入的数据类型不匹配&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="type">TreeSet</span> <span class="variable">set</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeSet</span>(com);</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">12</span>));</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jerry&quot;</span>,<span class="number">32</span>));</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jim&quot;</span>,<span class="number">2</span>));</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Mike&quot;</span>,<span class="number">65</span>));</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Mary&quot;</span>,<span class="number">33</span>));</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jack&quot;</span>,<span class="number">33</span>));</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jack&quot;</span>,<span class="number">56</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">iterator</span> <span class="operator">=</span> set.iterator();</span><br><span class="line">        <span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">            System.out.println(iterator.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>练习题 p547</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">HashSet</span> <span class="variable">set</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>();</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="number">1001</span>,<span class="string">&quot;AA&quot;</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="number">1002</span>,<span class="string">&quot;BB&quot;</span>);</span><br><span class="line"></span><br><span class="line">        set.add(p1);</span><br><span class="line">        set.add(p2);</span><br><span class="line">        System.out.println(set); <span class="comment">//AA BB</span></span><br><span class="line"></span><br><span class="line">        p1.name = <span class="string">&quot;CC&quot;</span>;</span><br><span class="line">        set.remove(p1);</span><br><span class="line">        System.out.println(set); <span class="comment">//BB CC</span></span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="number">1001</span>,<span class="string">&quot;CC&quot;</span>));<span class="comment">//BB CC CC</span></span><br><span class="line">        System.out.println(set);</span><br><span class="line">        set.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="number">1001</span>,<span class="string">&quot;AA&quot;</span>));</span><br><span class="line">        System.out.println(set);<span class="comment">//BB CC CC AA</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题：为什么自定义元素使用HashSet要重写hashCode()和equals()方法，而使用TreeSet要重写compareTo方法或传入Comparator</p>
+<p>答：HashSet和TreeSet对元素的要求是不一样的，HashSet要求自定义类重写HashCode方法和equals方法。TreeSet要求元素要有比较性（继承Comparable接口，重写compareTo方法，这是让对象具有比较性；传入Comparator比较器，这是让集合具有比较性）。</p>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><h4 id="Map的实现类的结构"><a href="#Map的实现类的结构" class="headerlink" title="Map的实现类的结构"></a>Map的实现类的结构</h4><p>|—-Map接口：双列集合，用来存储一对(key - value)一对的数据   –&gt;高中函数：y &#x3D; f(x)</p>
+<p>​				|—-HashMap：作为Map的主要实现类，线程不安全效率高；可以存储null的key和value</p>
+<p>​						|—-LinkedHashMap：保证在遍历map元素时，可以按照添加的顺序实现遍历。</p>
+<p>​										原因：在原有的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元素。对于频繁遍历操作，效率会高于HashMap</p>
+<p>​				|—-TreeMap：保证按照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序，底层使用红黑树</p>
+<p>​				|—-Hashtable：作为古老的实现类，线程安全效率低，不可以存储null的key和value，健壮性差</p>
+<p>​						|—-Properties：常用来处理配置文件。key和value都是String类型</p>
+<p>​			HashMap的底层：数组+链表  （jdk7及之前）</p>
+<p>​					数组+链表+红黑树 （jdk 8） </p>
+<p>面试题：</p>
+<p>HashMap的底层实现原理？</p>
+<p>HashMap 和 Hashtable的异同？</p>
+<p>CurrentHashMap 与 Hashtable的异同？</p>
+<h4 id="Map结构的理解"><a href="#Map结构的理解" class="headerlink" title="Map结构的理解"></a>Map结构的理解</h4><ul>
+<li>Map中的key:无序的、不可重复的，使用Set存储所有的key  —&gt; key所在的类要重写equals()和hashCode() （以HashMap为例）</li>
+<li>Map中的value:无序的、可重复的，使用Collection存储所有的value —&gt;value所在的类要重写equals()</li>
+<li>一个键值对：key-value构成了一个Entry对象。</li>
+<li>Map中的entry:无序的、不可重复的，使用Set存储所有的entry</li>
+</ul>
+<h4 id="HashMap的底层实现原理"><a href="#HashMap的底层实现原理" class="headerlink" title="HashMap的底层实现原理"></a>HashMap的底层实现原理</h4><p>以jdk7为例说明：</p>
+<p>HashMap map &#x3D; new HashMap():</p>
+<p>在实例化以后，底层创建了长度是16的一维数组Entry[] table。</p>
+<p>…可能已经执行过多次put…</p>
+<p>map.put(key1,value1):</p>
+<p>首先，调用key1所在类的hashCode()计算key1哈希值，此哈希值经过某种算法计算以后，得到在Entry数组中的存放位置。</p>
+<p>如果此位置上的数据为空，此时的key1-value1添加成功。 —-情况1</p>
+<p>如果此位置上的数据不为空，(意味着此位置上存在一个或多个数据(以链表形式存在)),比较key1和已经存在的一个或多个数据的哈希值：</p>
+<p>如果key1的哈希值与已经存在的数据的哈希值都不相同，此时key1-value1添加成功。—-情况2</p>
+<p>如果key1的哈希值和已经存在的某一个数据(key2-value2)的哈希值相同，继续比较：调用key1所在类的equals(key2)方法，比较：</p>
+<p>如果equals()返回false:此时key1-value1添加成功。—-情况3</p>
+<p>如果equals()返回true:使用value1替换value2。</p>
+<p>补充：关于情况2和情况3：此时key1-value1和原来的数据以链表的方式存储。 </p>
+<p>在不断的添加过程中，会涉及到扩容问题，当超出临界值(且要存放的位置非空)时，扩容。默认的扩容方式：扩容为原来容量的2倍，并将原有的数据复制过来。</p>
+<p> jdk8 相较于jdk7在底层实现方面的不同：</p>
+<p>1.new HashMap():底层没有创建一个长度为16的数组</p>
+<p>2.jdk 8底层的数组是：Node[],而非Entry[]</p>
+<p>3.首次调用put()方法时，底层创建长度为16的数组</p>
+<p>4.jdk7底层结构只有：数组+链表。jdk8中底层结构：数组+链表+红黑树。</p>
+<p>​		4.1 形成链表时，七上八下（jdk7:新的元素指向旧的元素。jdk8：旧的元素指向新的元素）<br>​		4.2 当数组的某一个索引位置上的元素以链表形式存在的数据个数 &gt; 8 且当前数组的长度 &gt; 64时，此时此索引位置上的所数据改为使用红黑树存储。</p>
+<p><img src="/../images/%E9%9B%86%E5%90%88/image-20221112141717829.png" alt="image-20221112141717829"></p>
+<h4 id="LinkedHashMap的底层实现原理（了解）"><a href="#LinkedHashMap的底层实现原理（了解）" class="headerlink" title="LinkedHashMap的底层实现原理（了解）"></a>LinkedHashMap的底层实现原理（了解）</h4><p>源码中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Entry</span>&lt;K,V&gt; <span class="keyword">extends</span> <span class="title class_">HashMap</span>.Node&lt;K,V&gt; &#123;</span><br><span class="line">             Entry&lt;K,V&gt; before, after;<span class="comment">//能够记录添加的元素的先后顺序</span></span><br><span class="line">             Entry(<span class="type">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">                <span class="built_in">super</span>(hash, key, value, next);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Map中定义的方法"><a href="#Map中定义的方法" class="headerlink" title="Map中定义的方法"></a>Map中定义的方法</h4><p> 添加、删除、修改操作：<br> Object put(Object key,Object value)：将指定key-value添加到(或修改)当前map对象中<br> void putAll(Map m):将m中的所有key-value对存放到当前map中<br> Object remove(Object key)：移除指定key的key-value对，并返回value void clear()：清空当前map中的所有数据<br> 元素查询的操作：<br> Object get(Object key)：获取指定key对应的value<br> boolean containsKey(Object key)：是否包含指定的key<br> boolean containsValue(Object value)：是否包含指定的value<br> int size()：返回map中key-value对的个数<br> boolean isEmpty()：判断当前map是否为空<br> boolean equals(Object obj)：判断当前map和参数对象obj是否相等<br> 元视图操作的方法：<br> Set keySet()：返回所有key构成的Set集合<br> Collection values()：返回所有value构成的Collection集合<br> Set entrySet()：返回所有key-value对构成的Set集合</p>
+<p> *总结：常用方法： </p>
+<p>​		添加：put(Object key,Object value)</p>
+<p>​		删除：remove(Object key)</p>
+<p>​		修改：put(Object key,Object value)</p>
+<p>​		查询：get(Object key)</p>
+<p>​		长度：size()</p>
+<p>​		遍历：keySet() &#x2F; values() &#x2F; entrySet()</p>
+<pre><code> 元视图操作的方法：
+     Set keySet()：返回所有key构成的Set集合
+     Collection values()：返回所有value构成的Collection集合
+     Set entrySet()：返回所有key-value对构成的Set集合
+</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">HashMap</span> <span class="variable">hashMap</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    <span class="type">Object</span> <span class="variable">aaa</span> <span class="operator">=</span> hashMap.put(<span class="string">&quot;aaa&quot;</span>, <span class="string">&quot;aaa1&quot;</span>);</span><br><span class="line">    System.out.println(aaa);</span><br><span class="line"></span><br><span class="line">    <span class="type">LinkedHashMap</span> <span class="variable">Map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>();</span><br><span class="line">    Map.put(<span class="number">123</span>,<span class="string">&quot;AA&quot;</span>);</span><br><span class="line">    Map.put(<span class="number">345</span>,<span class="string">&quot;BB&quot;</span>);</span><br><span class="line">    Map.put(<span class="number">12</span>,<span class="string">&quot;CC&quot;</span>);</span><br><span class="line">    System.out.println(Map);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">HashMap</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    <span class="comment">//添加</span></span><br><span class="line">    map.put(<span class="string">&quot;AA&quot;</span>,<span class="number">123</span>);</span><br><span class="line">    map.put(<span class="number">45</span>,<span class="number">123</span>);</span><br><span class="line">    map.put(<span class="string">&quot;BB&quot;</span>,<span class="number">56</span>);</span><br><span class="line">    <span class="comment">//修改</span></span><br><span class="line">    map.put(<span class="string">&quot;AA&quot;</span>,<span class="number">87</span>);</span><br><span class="line">    System.out.println(map);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加一个map集合</span></span><br><span class="line">    <span class="type">Map</span> <span class="variable">map1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    map1.put(<span class="string">&quot;CC&quot;</span>,<span class="number">123</span>);</span><br><span class="line">    map1.put(<span class="string">&quot;DD&quot;</span>,<span class="number">123</span>);</span><br><span class="line">    map.putAll(map1);</span><br><span class="line">    System.out.println(map);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//remove(Object key)</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">dd</span> <span class="operator">=</span> map.remove(<span class="string">&quot;DD&quot;</span>);</span><br><span class="line">    System.out.println(map);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//clear()</span></span><br><span class="line">    map.clear();</span><br><span class="line">    System.out.println(map.size());</span><br><span class="line">    System.out.println(map);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Map</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    map.put(<span class="string">&quot;AA&quot;</span>,<span class="number">123</span>);</span><br><span class="line">    map.put(<span class="number">45</span>,<span class="number">123</span>);</span><br><span class="line">    map.put(<span class="string">&quot;BB&quot;</span>,<span class="number">56</span>);</span><br><span class="line">    <span class="comment">// Object get(Object key)</span></span><br><span class="line">    System.out.println(map.get(<span class="number">45</span>));</span><br><span class="line">    <span class="comment">//containsKey(Object key)</span></span><br><span class="line">    <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> map.containsKey(<span class="number">45</span>);</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">b1</span> <span class="operator">=</span> map.containsValue(<span class="number">12223</span>);</span><br><span class="line">    System.out.println(b + <span class="string">&quot;--&quot;</span> + b1);</span><br><span class="line">    map.clear();</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">empty</span> <span class="operator">=</span> map.isEmpty();</span><br><span class="line">    System.out.println(empty);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Map</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">    map.put(<span class="string">&quot;AA&quot;</span>, <span class="number">123</span>);</span><br><span class="line">    map.put(<span class="number">45</span>, <span class="number">1234</span>);</span><br><span class="line">    map.put(<span class="string">&quot;BB&quot;</span>, <span class="number">56</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> map.toString();</span><br><span class="line">    <span class="comment">//遍历key-map集合</span></span><br><span class="line">    System.out.println(s);</span><br><span class="line"></span><br><span class="line">    System.out.println();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历key</span></span><br><span class="line">    <span class="type">Set</span> <span class="variable">set</span> <span class="operator">=</span> map.keySet();</span><br><span class="line">    <span class="type">Iterator</span> <span class="variable">iterator</span> <span class="operator">=</span> set.iterator();</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">        System.out.println(iterator.next());</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历value</span></span><br><span class="line">    <span class="type">Collection</span> <span class="variable">values</span> <span class="operator">=</span> map.values();</span><br><span class="line">    <span class="keyword">for</span> (Object obj : values) &#123;</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历所有的key-value</span></span><br><span class="line">    <span class="comment">//方式一：entrySet()</span></span><br><span class="line">    <span class="type">Set</span> <span class="variable">set1</span> <span class="operator">=</span> map.entrySet();</span><br><span class="line">    <span class="type">Iterator</span> <span class="variable">iterator1</span> <span class="operator">=</span> set1.iterator();</span><br><span class="line">    <span class="keyword">while</span> (iterator1.hasNext()) &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> iterator1.next();</span><br><span class="line">        Map.<span class="type">Entry</span> <span class="variable">entry</span> <span class="operator">=</span> (Map.Entry) obj;</span><br><span class="line">        System.out.println(entry.getKey() + <span class="string">&quot;---&gt;&quot;</span> + entry.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二：</span></span><br><span class="line">    <span class="type">Set</span> <span class="variable">set2</span> <span class="operator">=</span> map.keySet();</span><br><span class="line">    <span class="type">Iterator</span> <span class="variable">iterator2</span> <span class="operator">=</span> set2.iterator();</span><br><span class="line">    <span class="keyword">while</span> (iterator2.hasNext()) &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">key</span> <span class="operator">=</span> iterator2.next();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">value</span> <span class="operator">=</span> map.get(key);</span><br><span class="line">        System.out.println(key + <span class="string">&quot;====&quot;</span> +value);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="TreeMap添加方法"><a href="#TreeMap添加方法" class="headerlink" title="TreeMap添加方法"></a>TreeMap添加方法</h4><p>向TreeMap中添加key-value，要求key必须是由同一个类创建的对象<br> 因为要按照key进行排序：自然排序 、定制排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自然排序</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">TreeMap</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeMap</span>();</span><br><span class="line">        <span class="type">User</span> <span class="variable">u1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">23</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jerry&quot;</span>,<span class="number">32</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jack&quot;</span>,<span class="number">20</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Rose&quot;</span>,<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        map.put(u1,<span class="number">98</span>);</span><br><span class="line">        map.put(u2,<span class="number">89</span>);</span><br><span class="line">        map.put(u3,<span class="number">76</span>);</span><br><span class="line">        map.put(u4,<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Set</span> <span class="variable">entrySet</span> <span class="operator">=</span> map.entrySet();</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">iterator1</span> <span class="operator">=</span> entrySet.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator1.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> iterator1.next();</span><br><span class="line">            Map.<span class="type">Entry</span> <span class="variable">entry</span> <span class="operator">=</span> (Map.Entry) obj;</span><br><span class="line">            System.out.println(entry.getKey() + <span class="string">&quot;----&gt;&quot;</span> + entry.getValue());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定制排序</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">TreeMap</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeMap</span>(<span class="keyword">new</span> <span class="title class_">Comparator</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Object o1, Object o2)</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(o1 <span class="keyword">instanceof</span> User &amp;&amp; o2 <span class="keyword">instanceof</span> User)&#123;</span><br><span class="line">                    <span class="type">User</span> <span class="variable">u1</span> <span class="operator">=</span> (User)o1;</span><br><span class="line">                    <span class="type">User</span> <span class="variable">u2</span> <span class="operator">=</span> (User)o2;</span><br><span class="line">                    <span class="keyword">return</span> Integer.compare(u1.getAge(),u2.getAge());</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;输入的类型不匹配！&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">23</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jerry&quot;</span>,<span class="number">32</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Jack&quot;</span>,<span class="number">20</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">u4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Rose&quot;</span>,<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        map.put(u1,<span class="number">98</span>);</span><br><span class="line">        map.put(u2,<span class="number">89</span>);</span><br><span class="line">        map.put(u3,<span class="number">76</span>);</span><br><span class="line">        map.put(u4,<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Set</span> <span class="variable">entrySet</span> <span class="operator">=</span> map.entrySet();</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">iterator1</span> <span class="operator">=</span> entrySet.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator1.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> iterator1.next();</span><br><span class="line">            Map.<span class="type">Entry</span> <span class="variable">entry</span> <span class="operator">=</span> (Map.Entry) obj;</span><br><span class="line">            System.out.println(entry.getKey() + <span class="string">&quot;----&gt;&quot;</span> + entry.getValue());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Properties处理配置文件"><a href="#Properties处理配置文件" class="headerlink" title="Properties处理配置文件"></a>Properties处理配置文件</h4><p>Properties:常用来处理配置文件。key和value都是String类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PropertiesTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Properties:常用来处理配置文件。key和value都是String类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Properties</span> <span class="variable">pros</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line"></span><br><span class="line">            fis = <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;jdbc1.properties&quot;</span>);</span><br><span class="line">            pros.load(fis);<span class="comment">//加载流对应的文件</span></span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> pros.getProperty(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> pros.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;name = &quot;</span> + name + <span class="string">&quot;, password = &quot;</span> + password);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (fis != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    fis.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h4><p>操作Collection、Map的工具类</p>
+<p>面试题：Collection 和 Collections的区别？</p>
+<p>答：Collection是集合接口，Collections是操作Collection、Map的工具类</p>
+<p>常用方法：</p>
+<p>reverse(List)：反转 List 中元素的顺序<br>shuffle(List)：对 List 集合元素进行随机排序<br>sort(List)：根据元素的自然顺序对指定 List 集合元素按升序排序<br>sort(List，Comparator)：根据指定的 Comparator 产生的顺序对 List 集合元素进行排序<br>swap(List，int， int)：将指定 list 集合中的 i 处元素和 j 处元素进行交换</p>
+<p>Object max(Collection)：根据元素的自然顺序，返回给定集合中的最大元素<br>Object max(Collection，Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最大元素<br>Object min(Collection)<br>Object min(Collection，Comparator)<br>int frequency(Collection，Object)：返回指定集合中指定元素的出现次数<br>void copy(List dest,List src)：将src中的内容复制到dest中<br>boolean replaceAll(List list，Object oldVal，Object newVal)：使用新值替换 List 对象的所有旧值</p>
+<p>*Collections 类中提供了多个 synchronizedXxx() 方法，该方法可使将指定集合包装成线程同步的集合，从而可以解决多线程并发访问集合时的线程安全问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list.add(<span class="number">123</span>);</span><br><span class="line">        list.add(<span class="number">43</span>);</span><br><span class="line">        list.add(<span class="number">765</span>);</span><br><span class="line">        list.add(<span class="number">765</span>);</span><br><span class="line">        list.add(<span class="number">765</span>);</span><br><span class="line">        list.add(-<span class="number">97</span>);</span><br><span class="line">        list.add(<span class="number">0</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//反转 List 中元素的顺序</span></span><br><span class="line">        Collections.reverse(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//对 List 集合元素进行随机排序</span></span><br><span class="line">        Collections.shuffle(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据元素的自然顺序对指定 List 集合元素按升序排序</span></span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将指定 list 集合中的 i 处元素和 j 处元素进行交换</span></span><br><span class="line">        Collections.swap(list,<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="type">Object</span> <span class="variable">max</span> <span class="operator">=</span> Collections.max(list);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">min</span> <span class="operator">=</span> Collections.min(list);</span><br><span class="line">        System.out.println(<span class="string">&quot;max:&quot;</span>+max+<span class="string">&quot;--min:&quot;</span>+min);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//返回指定集合中指定元素的出现次数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">frequency</span> <span class="operator">=</span> Collections.frequency(list,<span class="number">765</span>);</span><br><span class="line">        System.out.println(frequency);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        list.add(<span class="number">123</span>);</span><br><span class="line">        list.add(<span class="number">43</span>);</span><br><span class="line">        list.add(<span class="number">765</span>);</span><br><span class="line">        list.add(-<span class="number">97</span>);</span><br><span class="line">        list.add(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//报异常：IndexOutOfBoundsException(&quot;Source does not fit in dest&quot;)</span></span><br><span class="line"><span class="comment">//        List dest = new ArrayList();</span></span><br><span class="line"><span class="comment">//        Collections.copy(dest,list);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//Arrays.asList():该方法是将数组转化成List集合的方法。</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">dest</span> <span class="operator">=</span> Arrays.asList(<span class="keyword">new</span> <span class="title class_">Object</span>[list.size()]);</span><br><span class="line">        System.out.println(dest.size());</span><br><span class="line">        Collections.copy(dest,list);</span><br><span class="line">        System.out.println(dest);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Collections 类中提供了多个 synchronizedXxx() 方法，该方法可使将指定集合包装成线程同步的集合，从而可以解决多线程并发访问集合时的线程安全问题</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list1</span> <span class="operator">=</span> Collections.synchronizedList(list);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>p565</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/08/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E4%B8%8E%E6%B3%A8%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1598,300 +2170,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/hexo%E9%85%8D%E5%90%88typora/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/hexo%E9%85%8D%E5%90%88typora/" class="post-title-link" itemprop="url">hexo配合typora的使用</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-26 15:13:56" itemprop="dateCreated datePublished" datetime="2022-10-26T15:13:56+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-29 14:57:11" itemprop="dateModified" datetime="2022-10-29T14:57:11+08:00">2022-10-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="hexo-typora图片插入解决方法"><a href="#hexo-typora图片插入解决方法" class="headerlink" title="hexo+typora图片插入解决方法"></a>hexo+typora图片插入解决方法</h1><p>使用 hexo 搭建好博客后，主要是用 Markdown 来编写博客，typora 便是我的首选编辑器。但直接使用 typora 编写的 Markdown 文件，图片路径可能存在问题，就导致页面上图片无法显示。</p>
-<h2 id="本地图片"><a href="#本地图片" class="headerlink" title="本地图片"></a>本地图片</h2><p>博客的 Markdown 文档都存储在 <code>source/_posts</code> 下，然后博客相关图片都存在 <code>source/images</code> 下，接着来修改 typora 的设置。</p>
-<p>打开 <code>文件 - 偏好设置 - 图像</code> 进行修改如下图修改</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151600614.png" alt="image-20221026151600614"></p>
-<p>这样拖拽或粘贴过来的图片会自动复制到 <code>source/images</code> 下面，不过这样只是可以在 typora 中查看图片了，要想在 hexo 中查看就需要图片路径与服务器中相符合， <code>source/images</code> 文件夹下的图片在 hexo 中可以用如 <code>/images/abc.png</code> 的路径访问到，而 typora 可以设置图片根目录，设置完了后图片路径都是 <code>/images/abc.png</code> 这样的，这样一配合就解决了图片路径问题，具体做法是在 <code>格式 - 图像 - 设置图片根目录</code> 中 将 <code>source</code> 文件夹设置为图片根目录，也可在每篇 Markdown 文档中 YAML Front Matter 中添加 <code>typora-root-url: ..</code>，或者直接在 <code>scaffolds</code> 中的模板里直接添加，这样每次 <code>hexo new post</code> 时就会自动生成了。</p>
-<h2 id="上传到图床"><a href="#上传到图床" class="headerlink" title="上传到图床"></a>上传到图床</h2><p>上边的方法适用于博客文件放在根目录的情况，如果文件放在子目录下的话暂时没找到解决办法，便直接上传到图床采用绝对路径了。</p>
-<p>在 typora 里可以设置插入图片时自动上传，如下图设置，这里使用 <code>PicGo</code> App 来上传图片。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151643590.png" alt="image-20221026151643590"></p>
-<p>PicGo 可以点击下载按钮到浏览器下载，安装完成后配置好图床，就可以上传图片了。这里使用 GitHub 图床（SM.MS 体验应该更好）。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151700513.png" alt="image-20221026151700513"></p>
-<p>具体就是在 GitHub 新建一个仓库专门用来存放图片，然后在 PicGo 里填写 用户名&#x2F;仓库名，分支一般写 main ，token 在 GitHub 设置里生成。</p>
-<p>下边是 PicGo 文档里 GitHub 图床的详细步骤，其他图床可参考官方文档。<br>如果 GitHub 图片访问过慢的话，可以将自定义域名设置为 <code>https://fastly.jsdelivr.net/gh/&#123;用户名&#125;/&#123;仓库名&#125;@&#123;分支名&#125;</code>。<br>鉴于网络环境，建议自行寻找可用的图床。</p>
-<p><strong>1.</strong> 首先你得有一个 GitHub 账号。注册 GitHub 就不用我多言。</p>
-<p><strong>2.</strong> 新建一个仓库</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151809681.png" alt="image-20221026151809681"></p>
-<p>记下你取的仓库名。</p>
-<p><strong>3.</strong> 生成一个 token 用于 PicGo 操作你的仓库：</p>
-<p>访问：<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
-<p>然后点击<code>Generate new token</code>。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151836687.png" alt="image-20221026151836687"></p>
-<p>把 repo 的勾打上即可。然后翻到页面最底部，点击<code>Generate token</code>的绿色按钮生成 token。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151851471.png" alt="image-20221026151851471">一下存到其他地方以备以后要用。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151908411.png" alt="image-20221026151908411"></p>
-<p><strong>注意：</strong>仓库名的格式是<code>用户名/仓库</code>，比如我创建了一个叫做<code>test</code>的仓库，在 PicGo 里我要设定的仓库名就是<code>Molunerfinn/test</code>。一般我们选择<code>main</code>分支即可。然后记得点击确定以生效，然后可以点击<code>设为默认图床</code>来确保上传的图床是 GitHub。</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151921929.png" alt="image-20221026151921929"></p>
-<p>至此配置完毕，已经可以使用了。当你上传的时候，你会发现你的仓库里也会增加新的图片了：</p>
-<p><img src="/../images/hexo%E9%85%8D%E5%90%88typora/image-20221026151939076.png" alt="image-20221026151939076"></p>
-<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/himeka/p/16306906.html">链接</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/24/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/24/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/" class="post-title-link" itemprop="url">面向对象1</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-24 09:20:50" itemprop="dateCreated datePublished" datetime="2022-10-24T09:20:50+08:00">2022-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-29 14:56:27" itemprop="dateModified" datetime="2022-10-29T14:56:27+08:00">2022-10-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="面向对象三条主线"><a href="#面向对象三条主线" class="headerlink" title="面向对象三条主线"></a>面向对象三条主线</h2><p>1.Java类及类的成员（结构）：属性，方法，构造器，代码块，内部类（前三个重要）<br>2.面向对象三大特征：封装性，继承性，多态性<br>3.其他关键字：this,super,static,final,abstract,interface,package,import…</p>
-<h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p>类：对一类事物的描述，是抽象，概念的定义<br>对象：是实际存在的每个个 体，因而称为实例（instance）</p>
-<p>属性：对应类中的成员变量（属性&#x3D;成员变量&#x3D;field&#x3D;域&#x3D;字段）<br>行为：对于类中的成员方法（行为&#x3D;方法&#x3D;成员方法&#x3D;函数&#x3D;method）</p>
-<h3 id="类和对象的使用"><a href="#类和对象的使用" class="headerlink" title="类和对象的使用"></a>类和对象的使用</h3><h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>1.创建类，设计类的成员<br>2.创建类的对象<br>3.通过“对象.属性”或“对象.方法”调用对象的结构</p>
-<p>举例：<br><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/426905610239491.png" alt="类，属性举例"><br><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/46500011227358.png" alt="调用属性，方法"><br>若声明对象属性未赋值，则自动为默认值<br><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/582392213221065.png"><br>令p1&#x3D;p3，若修改p3（即地址赋值)，则p1的值也会相应修改</p>
-<h5 id="jvm对象内存解析"><a href="#jvm对象内存解析" class="headerlink" title="jvm对象内存解析"></a>jvm对象内存解析</h5><p>对象的内存解析</p>
-<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/454613513239491.png" alt="jvm对象内存解析"></p>
-<p>对象数组的内存解析</p>
-<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/image-20221026103152826.png" alt="image-20221026103152826"></p>
-<p>虚拟机栈：局部变量存在栈结构中。</p>
-<p>堆：将new出来的结构（比如：数组，对象）加载在堆空间中。  补充：对象的属性（非static的）加载在堆空间中。</p>
-<p>方法区：类的加载信息，常量池，</p>
-<p>引用类型的变量：只可能存在两类值：null或地址值（含变量的类型）</p>
-<h4 id="①变量（属性）"><a href="#①变量（属性）" class="headerlink" title="①变量（属性）"></a>①变量（属性）</h4><h5 id="类中属性（成员变量）和局部变量的使用区别"><a href="#类中属性（成员变量）和局部变量的使用区别" class="headerlink" title="类中属性（成员变量）和局部变量的使用区别"></a>类中属性（成员变量）和局部变量的使用区别</h5><p>1.相同点：<br>   1.1.定义变量的格式：数据类型 变量名 &#x3D; 变量值<br>   1.2.先声明，后使用<br>   1.3变量都有其对应的作用域</p>
-<p>2.不同点<br>   2.1在类中声明的位置不同<br>        属性：直接定义在类的一对{}内。<br>        局部变量：声明在方法内，方法形参，代码块内，构造器形参，构造器内部的变量。</p>
-<p>   2.2.关于权限修饰符的不同<br>        属性：可以在声明属性时，指明其权限，使用权限修饰符。（常用的权限修饰符：private，public，缺省，protected）<br>        局部变量：不可以使用权限修饰符。</p>
-<p>   2.3.默认初始化值的情况：<br>        属性：类的属性，根据其类型，都有默认初始化值。<br>            整型（byte，short，int，long）：0<br>            浮点型（float，double）：0.0<br>            字符型（char）：”0”或’\u0000’<br>            布尔型（boolea）：false<br>            引用数据类型（类，数组，接口）：null</p>
-<pre><code> 局部变量：没有默认初始化值（需要手段赋值）
-   特别的：形参在调用时赋值即可。
-</code></pre>
-<p>   2.4.在内存中加载的位置：<br>        属性：加载到对象的堆空间中（非static）<br>        局部变量：加载到栈空间中</p>
-<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/552865113227358.png" alt="属性和局部变量"></p>
-<h4 id="②方法举例和声明格式"><a href="#②方法举例和声明格式" class="headerlink" title="②方法举例和声明格式"></a>②方法举例和声明格式</h4><h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><p>方法：描述类应该有的功能<br>如：Math类：sqrt()\random()</p>
-<h6 id="1-举例"><a href="#1-举例" class="headerlink" title="1.举例"></a>1.举例</h6><p>public void eat(){}<br>public void sleep(int hour){}<br>public String getName(){}<br>public String getNation(String nation){}</p>
-<h6 id="2-方法的声明："><a href="#2-方法的声明：" class="headerlink" title="2.方法的声明："></a>2.方法的声明：</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">权限修饰符 返回值类型 方法名（形参列表）&#123;</span><br><span class="line">    方法体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：还有static，final，abstract来修饰的方法</p>
-<h6 id="3-说明"><a href="#3-说明" class="headerlink" title="3.说明"></a>3.说明</h6><p>   3.1.权限修饰符<br>        Java规定的4种权限修饰符：private，public，缺省，protected</p>
-<p>   3.2.有返回值vs无返回值<br>  有返回值 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//return name;</span></span><br><span class="line">    <span class="comment">//return &quot;Tom&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>无返回值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sleep</span><span class="params">(<span class="type">int</span> hour)</span>&#123;</span><br><span class="line">    System.out.println(hour)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>   3.2.1.如果有返回值，则必须在方法声明时，指定返回值的类型。同时，方法中需要使用return关键字来返回指定的变量或常量。<br>        如果方法没有返回值，则方法声明使用void，如果没有返回值的方法中，就不使用return，但是如果使用的话，只能”return“表示结束此方法的意思。</p>
-<p>   3.3.形参列表：方法可以声明0个，1个，或多个形参。<br>        3.3.1格式：数据类型1 形参1，数据类型2，形参2，……</p>
-<p>   3.4.return 关键字的使用：<br>        1.使用范围：使用在方法体中<br>        2.作用：<br>            (1)结束一个方法<br>            (2)针对有返回值类型的方法，使用”return 数据”方法返回所要的数据<br>        3.return后面不可以有执行语句</p>
-<h6 id="4-方法的属性方法"><a href="#4-方法的属性方法" class="headerlink" title="4.方法的属性方法"></a>4.方法的属性方法</h6><p>方法的使用中，可以调用当前类的属性或方法<br>    特殊的：方法a中又调用的方法a，称为递归。<br>    不能在一个方法中再<em><strong>定义</strong></em>一个方法</p>
-<h6 id="匿名对象的使用"><a href="#匿名对象的使用" class="headerlink" title="匿名对象的使用"></a>匿名对象的使用</h6><p>1.理解：我们创建的对象，没有显式的赋值给一个变量名，即为匿名对象。<br>2.特征：匿名对象只能调用一次<br>3.使用：如下</p>
-<p>举例1：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Phone</span>().sendEmail();</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Phone</span>().playGame();</span><br><span class="line">或者</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Phone</span>().price = <span class="number">1999</span>;</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Phone</span>().showPrice();<span class="comment">//0.0</span></span><br></pre></td></tr></table></figure>
-
-<p>举例2：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PhoneMall</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(Phone phone)</span>&#123;</span><br><span class="line">        phone.sendEmail();</span><br><span class="line">        phone.playGame();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mall.show(<span class="keyword">new</span> <span class="title class_">Phone</span>())</span><br></pre></td></tr></table></figure>
-
-<h5 id="方法的重载（overload）"><a href="#方法的重载（overload）" class="headerlink" title="方法的重载（overload）"></a>方法的重载（overload）</h5><p>重载</p>
-<p>1.定义：在同一个方法中，允许存在一个同名方法，只要他们的参数个数或者参数类型不同即可</p>
-<p>“两同一不同”：<br>“同”–同一个类，相同方法名<br>“不同”–参数列表不同，参数个数不同，参数类型不同</p>
-<p>2.举例：<br>    Arrays类中重载的sort()&#x2F;binarySearch()</p>
-<p>3:判断是否重载:<br>    跟方法的权限修饰符，返回值类型，形参变量名，方法体（void或int等等）都没有关系。</p>
-<p>4.在通过对象调用方法时，如何确定某一个指定的方法：<br>    方法名和参数列表</p>
-<h5 id="可变类型的重载"><a href="#可变类型的重载" class="headerlink" title="可变类型的重载"></a>可变类型的重载</h5><p>使用：<br>    1.可变个数形参的格式：class 类名（数据类型 … 变量名）<br>    2.当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个，2个或更多<br>    3.可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载。<br>    4.可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。<br>    5.可变个数形参在方法的形参中，必须声明在末尾<br>    6.可变个数形参在方法的形参中，最多只能声明一个可变形参</p>
-<h4 id="参数传递机制："><a href="#参数传递机制：" class="headerlink" title="参数传递机制："></a>参数传递机制：</h4><p>基本数据类型：数据值</p>
-<p>引用数据类型：地址值(含变量的数据类型)</p>
-<h4 id="值传递"><a href="#值传递" class="headerlink" title="值传递"></a>值传递</h4><p>如果变量是基本数据类型，此时赋值的是变量所保存的数据值。</p>
-<p>如果变量是引用数据类型，此时赋值的是变量所保存的数据地址值</p>
-<h4 id="方法形参的传递机制"><a href="#方法形参的传递机制" class="headerlink" title="方法形参的传递机制"></a>方法形参的传递机制</h4><p>1.形参：方法定义时，声明的小括号内的参数<br>2.实参：方法调用时，实际传递给形参的数据</p>
-<h4 id="jvm传递内存解析"><a href="#jvm传递内存解析" class="headerlink" title="jvm传递内存解析"></a>jvm传递内存解析</h4><p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/464795216247525.png" alt="jvm基本数据类型传递内存解析"></p>
-<p>只会修改方法里的局部变量，不会修改main里面的成员变量</p>
-<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/511175116227359.png" alt="jvm引用数据类型传递内存解析"></p>
-<p>p213例题 </p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>使用基本数据类型(int,double等)，不能在方法中完成交换，<br>使用引用数据类型可以。<br><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/508354416221066.png" alt="交换值的方法"></p>
-<h3 id="递归（了解）"><a href="#递归（了解）" class="headerlink" title="递归（了解）"></a>递归（了解）</h3><h3 id="封装和隐藏"><a href="#封装和隐藏" class="headerlink" title="封装和隐藏"></a>封装和隐藏</h3><p>高内聚：类的内部数据操作细节自己完成</p>
-<p>低耦合：仅对外暴露少量的方法用于使用（API）</p>
-<h4 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h4><h5 id="封装性体现"><a href="#封装性体现" class="headerlink" title="封装性体现"></a>封装性体现</h5><p>封装性的一个体现：我们将类的属性XXX私有化（private），同时提供公共的（public）方法来获取（getXXX）和设置(setXXX)此属性值。</p>
-<p>*拓展：封装性的体现：①如上 ②不对外暴露的私有方法③单例模式</p>
-<p>设置变量为private类型：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">int</span> age;</span><br></pre></td></tr></table></figure>
-
-<p>无法直接用<code>对象.函数名</code>来设置参数，需要使用get和set方法修改值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span>&#123; <span class="comment">//不需要参数</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        age = <span class="number">10</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        age = a;</span><br><span class="line">        <span class="comment">//或者抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h5><p>封装性的体现，需要权限修饰符来配合</p>
-<p>1.Java规定的四种权限（从小到大）：private，缺省，protected，public</p>
-<p>2.四种权限可以用来修饰类以及类的内部结构:四种权限可以用来修饰类及类的内部结构：属性，方法，构造器，内部类</p>
-<p>3.具体的：4种权限都可以用来修饰类的内部结构：属性，方法，构造器，内部类。修饰类的话，只能使用：缺省，public</p>
-<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/image-20221026144320930.png" alt="image-20221026144320930"></p>
-<p>*protected在面向对象2（继承性）</p>
-<h4 id="③构造器"><a href="#③构造器" class="headerlink" title="③构造器"></a>③构造器</h4><p>类的结构之三：构造器（或构造方法，constructor）的使用</p>
-<h5 id="一-构造其的作用"><a href="#一-构造其的作用" class="headerlink" title="一.构造其的作用"></a>一.构造其的作用</h5><p>1.创建对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建类的对象：new + 构造器</span></span><br><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br></pre></td></tr></table></figure>
-
-<p>2.初始化对象的属性&#x2F;信息</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name:此对象的name属性 </span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String n)</span>&#123;</span><br><span class="line">     name = n; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>3.一个类中定义的多个构造器，彼此构成重载</p>
-<p>4.一旦显式定义了类的构造器后，系统就不再提供默认的构造器</p>
-<p>5.一个类中，至少会有一个 构造器</p>
-<h5 id="二-说明："><a href="#二-说明：" class="headerlink" title="二.说明："></a>二.说明：</h5><p>1.如果没有显示定义类的构造器的话，则系统默认提供一个空参的构造器</p>
-<p>2.定义构造器的格式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">权限修饰符 类名（形参列表）&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>*总结：属性赋值的先后顺序</p>
-<p>1.默认初始化值</p>
-<p>2.显式初始化</p>
-<p>3.构造器中赋值</p>
-<p>4.通过<em><strong>“对象.方法”</strong></em>或<em><strong>“对象.属性”</strong></em>的方式赋值</p>
-<p>以上操作先后顺序：1-2-3-4（最后一次的值为最终结果）</p>
-<h5 id="拓展：1-JavaBean"><a href="#拓展：1-JavaBean" class="headerlink" title="拓展：1.JavaBean"></a>拓展：1.JavaBean</h5><p>JavaBean是一种Java语言写成的可重用组件。</p>
-<p>JavaBean符合如下标准：</p>
-<ul>
-<li>类是公共的（public）</li>
-<li>有一个无参的公共构造器</li>
-<li>有属性，且有对应的get，set方法</li>
-</ul>
-<h5 id="拓展：2-UML图"><a href="#拓展：2-UML图" class="headerlink" title="拓展：2.UML图"></a>拓展：2.UML图</h5><p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/image-20221026164455501.png" alt="image-20221026164455501"></p>
-<h5 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h5><p>1.this可以用来修饰：属性，方法，构造器</p>
-<p>2.this修饰属性和方法：this理解为：当前对象 或 当前正在创建的对象</p>
-<p>2.1在类的<em><strong>方法中</strong></em>，我们可以使用“this.属性”或“this.方法”的方式，调用当前属性或方法。但是通常情况下，我们都选择省略”this.“特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用“this.变量”的方式，表面此变量是<em><strong>属性</strong></em>，而非<em><strong>形参</strong></em>。</p>
-<p>2.2在类的<em><strong>构造器中</strong></em>，我们可以使用“this.属性”或“this.方法”的方式，调用当前（正在创建的）属性或方法。但是通常情况下，我们都选择省略”this.“特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用“this.变量”的方式，表面此变量是<em><strong>属性</strong></em>，而非<em><strong>形参</strong></em>。</p>
-<p>3.this调用构造器</p>
-<p>①我们在类的构造中，可以显式的使用“this(形参列表)”方式，调用本类中指定的其他构造器</p>
-<p>②构造器中不能通过“this(形参列表)”方式调用自己</p>
-<p>③如果一个类中有n个构造器，，则最多有n-1个构造器使用了“this(形参列表)”</p>
-<p>④规定：“this(形参列表)”：必须声明在当前构造器的首行</p>
-<p>⑤构造器内部，最多只能声明一个“this(形参列表)”，用来调用其他构造器</p>
-<h3 id="package关键字"><a href="#package关键字" class="headerlink" title="package关键字"></a>package关键字</h3><h4 id="一-package关键字的使用"><a href="#一-package关键字的使用" class="headerlink" title="一.package关键字的使用"></a>一.package关键字的使用</h4><p>1.为了更好的实现项目中类的管理，提供包的概念</p>
-<p>2.使用package声明类或接口所属的包，声明在源文件的首行</p>
-<p>3.包，属于标识符，遵循标识符的命名规则，规范（xxxyyyzzz）</p>
-<p>4.每“.”一次就代表一层文件目录</p>
-<p>5.同一个包下，不能命名同名的接口，类。不同的包下，可以命名同名的接口，类</p>
-<h4 id="二-import关键字的使用"><a href="#二-import关键字的使用" class="headerlink" title="二.import关键字的使用"></a>二.import关键字的使用</h4><p>使用import导入</p>
-<p>1.在源文件中显式的使用import结构导入指定包下的类，接口</p>
-<p>2.声明在包的声明和类的声明之间</p>
-<p>3.如果需要导入多个结构，则并列写出即可</p>
-<p>4.可以使用“XXX.*”方式，表示可以导入XXX包下的所有结构</p>
-<p>5.如果使用的类或接口是java.lang包下定义的，则可以省略import结构</p>
-<p>6.如果使用的类或接口是本地包下定义的，则可以省略import结构</p>
-<p>7.如果在源文件中，使用了不同包下的同名的类，则必须至少有一个类需要以全类名的方式显示</p>
-<p>8.使用“XXX.*”方式表明可以调用XXX包下的所有结构。但是如果使用的是XXX子包下的结构，则仍需要显式导入</p>
-<p>9.<em><strong>import static</strong></em>：导入指定类或接口中的静态结构：属性或方法</p>
-<h2 id="Eclipse快捷键"><a href="#Eclipse快捷键" class="headerlink" title="Eclipse快捷键"></a>Eclipse快捷键</h2><p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/image-20221026224241474.png" alt="image-20221026224241474"></p>
-<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11/image-20221026224356170.png" alt="image-20221026224356170"></p>
-<p>p260</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1961,12 +2239,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
