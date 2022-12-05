@@ -1,320 +1,214 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		
-<title>MySQL-Quiet</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/index.css">
-
-
-
-<meta name="keywords" content="MySQL,">
-<meta name="description" content="">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基础篇通用语法及分类 DDL: 数据定义语言，用来定义数据库对象（数据库、表、字段） DML: 数据操作语言，用来对数据库表中的数据进行增删改 DQL: 数据查询语言，用来查询数据库中表的记录 DCL: 数据控制语言，用来创建数据库用户、控制数据库的控制权限  DDL（数据定义语言）数据定义语言 数据库操作查询所有数据库：SHOW DATABASES;查询当前数据库：SELECT DATABASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="http://example.com/2022/11/22/MySQL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基础篇通用语法及分类 DDL: 数据定义语言，用来定义数据库对象（数据库、表、字段） DML: 数据操作语言，用来对数据库表中的数据进行增删改 DQL: 数据查询语言，用来查询数据库中表的记录 DCL: 数据控制语言，用来创建数据库用户、控制数据库的控制权限  DDL（数据定义语言）数据定义语言 数据库操作查询所有数据库：SHOW DATABASES;查询当前数据库：SELECT DATABASE">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/MySQL/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_20220315034329549927.png">
+<meta property="og:image" content="https://dhc.pythonanywhere.com/media/editor/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%B1%82%E7%BA%A7%E5%90%AB%E4%B9%89_20220315034359342837.png">
+<meta property="og:image" content="http://example.com/images/MySQL/%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84_20220316030616590001.png">
+<meta property="og:image" content="http://example.com/images/MySQL/%E4%BA%8C%E5%8F%89%E6%A0%91_20220316153214227108.png">
+<meta property="og:image" content="http://example.com/images/MySQL/%E7%BA%A2%E9%BB%91%E6%A0%91_20220316163142686602.png">
+<meta property="og:image" content="http://example.com/source/images/MySQL/B-Tree%E7%BB%93%E6%9E%84_20220316163813441163.png">
+<meta property="og:image" content="http://example.com/images/MySQL/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE_20220316170700591277.png">
+<meta property="og:image" content="http://example.com/images/MySQL/%E7%BB%93%E6%9E%84%E5%9B%BE_20220316171730865611.png">
+<meta property="og:image" content="http://example.com/images/MySQL/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE_20220317143226150679.png">
+<meta property="og:image" content="http://example.com/images/MySQL/%E5%8E%9F%E7%90%86%E5%9B%BE_20220318194454880073.png">
+<meta property="og:image" content="http://example.com/images/MySQL/%E6%BC%94%E7%A4%BA%E5%9B%BE_20220319215403721066.png">
+<meta property="article:published_time" content="2022-11-22T06:14:46.000Z">
+<meta property="article:modified_time" content="2022-11-24T12:26:20.910Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/MySQL/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_20220315034329549927.png">
+
+<link rel="canonical" href="http://example.com/2022/11/22/MySQL/">
 
 
-<script src="/js/index.js"></script>
-
-
-<script src="/js/fancybox.umd.js"></script>
-
-
-<script src="/js/fancybox-images.js"></script>
-
-
-<script src="/js/gitalk.min.js"></script>
-
-
-<script src="/js/hljs.min.js"></script>
- 
-<script>hljs.highlightAll();</script>
-
-	<meta name="generator" content="Hexo 6.3.0"></head>
-
-	<body>
-		
-	<div class="header">
-		<div class="header-top" id="header-top">
-			<div class="h-left">
-				<a href="/">
-					<img src="/image/logo.png" alt="Quiet">
-				</a>
-			</div>
-			<div class="h-right">
-				<ul>
-					
-						
-								<li>
-									<a href="/">
-										HOME
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/archives">
-										ARCHIVE
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/categories">
-										CATEGORIES
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/tags">
-										TAGS
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/links">
-										LINKS
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/about">
-										ABOUT
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-				</ul>
-			</div>
-			<div class="h-right-close">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-					<path fill="none" d="M0 0h24v24H0z" />
-					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
-				</svg>
-			</div>
-		</div>
-	</div>
-	<div class="sidebar">
-    <div class="topo">
-        <h2>Joey</h2>
-    </div>
-    <ul>
-        
-        <li>
-            <a href="/">HOME</a>
-        </li>
-        
-        <li>
-            <a href="/archives">ARCHIVE</a>
-        </li>
-        
-        <li>
-            <a href="/categories">CATEGORIES</a>
-        </li>
-        
-        <li>
-            <a href="/tags">TAGS</a>
-        </li>
-        
-        <li>
-            <a href="/links">LINKS</a>
-        </li>
-        
-        <li>
-            <a href="/about">ABOUT</a>
-        </li>
-        
-    </ul>
-    <div class="my_foot">
-        
-        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
-            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
-        </a>
-        
-    </div>
-</div>
-<div class='shelter'>
-</div>
-<style>
-    .shelter{
-        background-color: #333;
-        opacity:0.5;
-        cursor: pointer;
-        display: none; 
-        position: fixed;
-        left: 0;
-        top: 0; 
-        right: 0;
-        bottom: 0;
-        z-index: 1998;
-    }
-    .sidebar {
-        width: 66%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        bottom: 0;
-        background: #fff;
-        z-index: 1999;
-        text-align: center;
-        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
-    }
-
-    .topo {
-        width: 100%;
-        height: 200px;
-        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
-        background-size: 100% 100%;
-        position: relative;
-        display: flex;
-        align-items: flex-end
-    }
-
-    .topo h2 {
-        color: #fff;
-        z-index: 1;
-        position: relative;
-        margin: 0 0 10px 10px;
-        font-size: 1.2em;
-        box-sizing: border-box
-    }
-
-    .topo:before {
-        content: '';
-        background-image: url(/image/pattern.png);
-        background-repeat: repeat;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 1
-    }
-
-    .sidebar ul {
-        width: 100%;
-        margin-top: 50px
-    }
-
-    .sidebar ul li {
-        height: 50px;
-        list-style: none;
-        font-size: 1.2em;
-        text-align: right;
-        margin-right: 10px
-    }
-
-    .sidebar ul li a {
-        display: grid;
-        color: #5d606a;
-        text-overflow: ellipsis;
-        width: 100%;
-        text-decoration: none
-    }
-
-    .my_foot {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        position: absolute;
-        bottom: 0
-    }
-
-    .my_foot a {
-        text-decoration: none;
-        margin-right: 10px;
-        display: inline-block
-    }
-
-    .my_foot a img {
-        width: 30px;
-        height: 30px
-    }
-</style>
-
-<script>
-    $( function () {
-	$( '.h-right-close>svg' )
-		.click( function () {
-			$( '.sidebar' )
-				.animate( {
-					right: "0"
-				}, 500 );
-			$( '.shelter' )
-				.fadeIn( "slow" )
-		} );
-	$( '.shelter' )
-		.click( function ( e ) {
-			$( '.sidebar' )
-				.animate( {
-					right: "-100%"
-				}, 500 );
-			$( '.shelter' )
-				.fadeOut( "slow" )
-		} )
-} )
-
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
 </script>
 
-<div class="post">
-    <div class="post-header-background post-header-img"
-    style="background: url('https://api.ixiaowai.cn/gqapi/gqapi.php')" 
->
-    <div class="post-header-background-content">
-        <ul class="post-header-tag">
-            
-            
-            <li><a href="/tags/MySQL">MySQL</a></li>
-            
-            
-        </ul>
-        
-        <h1>MySQL</h1>
-        <div class="post-header-info">
-            <div class="post-header-info-author">
-                
-                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
-                        <path
-                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
-                            p-id="2902" fill="#ffffff"></path>
-                    </svg>
-                    
-                <span class="post-header-info-author-text"> <a href="../../about">Joey</a></span>
-                <div class="post-header-info-author-categories">
-                    
-                </div>
-                <p>2022-11-22 14:14:46</p>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="post-content" id="content">
+  <title>MySQL | Hexo</title>
   
-  <div id="article" class="post-content-info">
-    
 
-    <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="通用语法及分类"><a href="#通用语法及分类" class="headerlink" title="通用语法及分类"></a>通用语法及分类</h2><ul>
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/22/MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-22 14:14:46" itemprop="dateCreated datePublished" datetime="2022-11-22T14:14:46+08:00">2022-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-24 20:26:20" itemprop="dateModified" datetime="2022-11-24T20:26:20+08:00">2022-11-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="通用语法及分类"><a href="#通用语法及分类" class="headerlink" title="通用语法及分类"></a>通用语法及分类</h2><ul>
 <li>DDL: 数据定义语言，用来定义数据库对象（数据库、表、字段）</li>
 <li>DML: 数据操作语言，用来对数据库表中的数据进行增删改</li>
 <li>DQL: 数据查询语言，用来查询数据库中表的记录</li>
@@ -1954,194 +1848,193 @@
 </ol>
 <h1 id="后续内容"><a href="#后续内容" class="headerlink" title="后续内容"></a>后续内容</h1><p>后续内容因为跟当前学习、工作计划有冲突，所以后续课程的学习计划会无限期推后。<br>目前的工作重点放在重做一个学习笔记网站，当然这是边做边学的，开发过程中遇到的难点和知识点我也会记录下来供大家学习。<br><strong>在此感谢B站同样爱学习的同学 @守心-人 提供的后续课程笔记，大家有条件一定要去给个star，你的每一个star和点赞都是我们前进的动力</strong><br><strong><a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/README.md">https://github.com/Buildings-Lei/mysql_note&#x2F;blob&#x2F;main&#x2F;README.md</a></strong></p>
 
-  </div>
-  <div id="gitalk-container"></div>
-</div>
-
-<script>
-  
-Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
-  dragToClose: true,
-  Toolbar: true,
-  closeButton: "top",
-  Image: {
-    zoom: true,
-  },
-  on: {
-    initCarousel: (fancybox) => {
-      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-    "Carousel.change": (fancybox, carousel, to, from) => {
-      const slide = carousel.slides[to];
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-  },
-});
-</script>
-
-<style>
-    #noneimg img {
-        display: none;
-        z-index: 9999;
-        /* width: 600px !important; */
-        min-width: 0%;
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: 0px;
-        position: fixed;
-        box-shadow: 0 0 0px #c3c3c300 !important;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto !important;
-    }
-
-    @media screen and (max-width:600px) {
-        #noneimg img {
-            max-width: 88%
-        }
-    }
-</style>
-
-    <div class="post-paging">
-    
-    <a href="/2022/11/26/JDBC/">
-        <div class="post-paging-last">
-            <span>上一篇</span>
-            <p>JDBC</p>
-        </div>
-    </a>
-    
+    </div>
 
     
-    <a href="/2022/11/21/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">
-        <div class="post-paging-next">
-            <span>下一篇</span>
-            <p>Java8新特性</p>
-        </div>
-    </a>
     
-</div>
-</div>
-		
-<div class="footer">
-	<div class="Copyright">
-		©2022 By Joey. 主题：<a
-			style="text-decoration: none;display: contents; color: #898F9F;"
-			target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet">Quiet</a>
-	</div>
-	<div class="contact">
-		
-		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
-			<img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
-		</a>
-		
-	</div>
-</div>
+    
 
-<script src="/js/gotop.js"></script>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
 
-
-<style type="text/css">
-    @media screen and (min-width: 600px) {
-        .goTop>span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            opacity: 0.8;
-            background: rgba(18, 24, 58, 0.06);
-            text-align: center;
-            transition: border .5s;
-            border: 1px solid rgba(18, 24, 58, 0.06);
-
-            -moz-transition: border .5s;
-            /* Firefox 4 */
-            -webkit-transition: border .5s;
-            /* Safari 和 Chrome */
-            -o-transition: border .5s;
-            /* Opera */
-        }
-
-        .goTop>span:hover {
-            border: 1px solid #6680B3;
-        }
-
-
-        .goTop {
-            position: fixed;
-            right: 30px;
-            bottom: 80px;
-        }
-
-        .goTop>span>svg {
-            width: 20px;
-            height: 20px;
-            opacity: 0.7;
-        }
-
-    }
-
-    @media screen and (max-width: 600px) {
-        .goTop {
-            display: none;
-        }
-    }
-</style>
-<div class="goTop" id="js-go_top">
-    <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <g>
-                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
-            </g>
-        </svg>
-    </span>
-</div>
-<script>
-    $( '#js-go_top' )
-	.gotoTop( {
-		offset: 500,
-		speed: 300,
-		animationShow: {
-			'transform': 'translate(0,0)',
-			'transition': 'transform .5s ease-in-out'
-		},
-		animationHide: {
-			'transform': 'translate(100px,0)',
-			'transition': 'transform .5s ease-in-out'
-		}
-	} );
-</script>
-
-
-    <!-- Gitalk -->
-    <script>
-        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
-        const gitalk = new Gitalk({
-            ...JSON.parse( data),
-            id:location.pathname,
-            distractionFreeMode:false
-        })
         
-        if(Boolean('true')){
-            gitalk.render('gitalk-container')
-        }
-    </script>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/21/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" rel="prev" title="Java8新特性">
+      <i class="fa fa-chevron-left"></i> Java8新特性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/26/JDBC/" rel="next" title="JDBC">
+      JDBC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
 
 <script>
-	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/79e/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
-	</body>
-</html>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">基础篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%AF%AD%E6%B3%95%E5%8F%8A%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">通用语法及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">DDL（数据定义语言）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">表操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML%EF%BC%88%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">DML（数据操作语言）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">添加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%92%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">更新和删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL%EF%BC%88%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">DQL（数据查询语言）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">基础查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">聚合查询（聚合函数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">分组查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="nav-number">1.1.3.4.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">排序查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-3"><span class="nav-number">1.1.3.5.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.1.3.6.</span> <span class="nav-text">分页查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-4"><span class="nav-number">1.1.3.6.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DQL%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.1.3.7.</span> <span class="nav-text">DQL执行顺序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCL"><span class="nav-number">1.1.4.</span> <span class="nav-text">DCL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">管理用户</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-5"><span class="nav-number">1.1.4.1.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-6"><span class="nav-number">1.1.4.2.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">数值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">日期函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.4.</span> <span class="nav-text">流程函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.3.</span> <span class="nav-text">约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">常用约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">外键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-x2F-%E6%9B%B4%E6%96%B0%E8%A1%8C%E4%B8%BA"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">删除&#x2F;更新行为</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.</span> <span class="nav-text">多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">多表关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">一对多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">多对多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">一对一</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.3.</span> <span class="nav-text">内连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.4.</span> <span class="nav-text">外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.5.</span> <span class="nav-text">自连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2-union-union-all"><span class="nav-number">1.4.6.</span> <span class="nav-text">联合查询 union, union all</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-7"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.7.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E9%87%8F%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.7.1.</span> <span class="nav-text">标量子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.7.2.</span> <span class="nav-text">列子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.7.3.</span> <span class="nav-text">行子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.7.4.</span> <span class="nav-text">表子查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7ACID"><span class="nav-number">1.5.1.</span> <span class="nav-text">四大特性ACID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.5.2.</span> <span class="nav-text">并发事务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E7%AF%87"><span class="nav-number">2.</span> <span class="nav-text">进阶篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="nav-number">2.1.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB"><span class="nav-number">2.1.1.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyISAM"><span class="nav-number">2.1.2.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory"><span class="nav-number">2.1.3.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="nav-number">2.1.4.</span> <span class="nav-text">存储引擎特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.5.</span> <span class="nav-text">存储引擎的选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">性能分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%A7%E8%A1%8C%E9%A2%91%E6%AC%A1"><span class="nav-number">2.2.1.</span> <span class="nav-text">查看执行频次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97"><span class="nav-number">2.2.2.</span> <span class="nav-text">慢查询日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#profile"><span class="nav-number">2.2.3.</span> <span class="nav-text">profile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explain"><span class="nav-number">2.2.4.</span> <span class="nav-text">explain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.1.</span> <span class="nav-text">索引结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">B-Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree-1"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">B+Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">面试题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="nav-number">2.3.2.</span> <span class="nav-text">索引分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">思考题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.3.3.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99"><span class="nav-number">2.3.4.</span> <span class="nav-text">使用规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E6%B3%95%E5%88%99"><span class="nav-number">2.3.4.1.</span> <span class="nav-text">最左前缀法则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E6%83%85%E5%86%B5"><span class="nav-number">2.3.4.2.</span> <span class="nav-text">索引失效情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-%E6%8F%90%E7%A4%BA"><span class="nav-number">2.3.4.3.</span> <span class="nav-text">SQL 提示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95-amp-%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.3.4.4.</span> <span class="nav-text">覆盖索引&amp;回表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.4.5.</span> <span class="nav-text">前缀索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95-amp-%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.4.6.</span> <span class="nav-text">单列索引&amp;联合索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-8"><span class="nav-number">2.3.4.6.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">2.3.5.</span> <span class="nav-text">设计原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-%E4%BC%98%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">SQL 优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.1.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E4%BC%98%E5%8C%96"><span class="nav-number">2.4.2.</span> <span class="nav-text">主键优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by%E4%BC%98%E5%8C%96"><span class="nav-number">2.4.3.</span> <span class="nav-text">order by优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#group-by%E4%BC%98%E5%8C%96"><span class="nav-number">2.4.4.</span> <span class="nav-text">group by优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#limit%E4%BC%98%E5%8C%96"><span class="nav-number">2.4.5.</span> <span class="nav-text">limit优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count%E4%BC%98%E5%8C%96"><span class="nav-number">2.4.6.</span> <span class="nav-text">count优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update%E4%BC%98%E5%8C%96%EF%BC%88%E9%81%BF%E5%85%8D%E8%A1%8C%E9%94%81%E5%8D%87%E7%BA%A7%E4%B8%BA%E8%A1%A8%E9%94%81%EF%BC%89"><span class="nav-number">2.4.7.</span> <span class="nav-text">update优化（避免行锁升级为表锁）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">整型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">浮点型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4"><span class="nav-number">3.3.</span> <span class="nav-text">日期和时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.4.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.5.</span> <span class="nav-text">二进制类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E4%B8%80%E8%A7%88%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">权限一览表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E5%B7%A5%E5%85%B7"><span class="nav-number">5.</span> <span class="nav-text">图形化界面工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">6.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">7.</span> <span class="nav-text">小技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E5%86%85%E5%AE%B9"><span class="nav-number">8.</span> <span class="nav-text">后续内容</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,320 +1,413 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		
-<title>JavaWeb学习-heima-Quiet</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/index.css">
-
-
-
-<meta name="keywords" content="Web,">
-<meta name="description" content="">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Maven&amp;MyBatis目标   能够使用Maven进行项目的管理 能够完成Mybatis代理方式查询数据 能够理解Mybatis核心配置文件的配置   1.MavenMaven是专门用于管理和构建Java项目的工具，它的主要功能有：  提供了一套标准化的项目结构  提供了一套标准化的构建流程（编译，测试，打包，发布……）  提供了一套依赖管理机制   标准化的项目结构： 项目结构我们都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb学习-heima">
+<meta property="og:url" content="http://example.com/2022/12/02/JavaWeb%E5%AD%A6%E4%B9%A0-heima/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Maven&amp;MyBatis目标   能够使用Maven进行项目的管理 能够完成Mybatis代理方式查询数据 能够理解Mybatis核心配置文件的配置   1.MavenMaven是专门用于管理和构建Java项目的工具，它的主要功能有：  提供了一套标准化的项目结构  提供了一套标准化的构建流程（编译，测试，打包，发布……）  提供了一套依赖管理机制   标准化的项目结构： 项目结构我们都">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726153521381.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726153815028.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154144488.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154753631.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726154922337.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726155212733.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726155759621.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726160928515.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726161340796.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726161616034.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726162605394.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726162815045.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726163219682.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726163518885.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726164058589.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726164146832.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726164306480.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726164348048.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726170404545.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726170549907.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726171047324.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726171346824.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726171558786.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726171747125.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726172343933.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726172709112.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20221203100030186.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726173153576.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726173619353.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726174202898.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726174229396.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726174248050.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726174718176.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726175049876.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726175109822.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726175244826.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726182702336.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726182648891.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726182634466.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726182902961.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726192212026.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726192224914.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726192244567.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726192430371.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193105765.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193121384.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193603724.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193625229.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193121384.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193854438.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726193909276.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726194703845.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726202410311.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726202858441.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726203656847.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726204849309.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726205328999.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726212621722.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726213046072.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726213305893.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726213541418.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726213857620.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726214648112.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726214636108.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726215339568.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726215946951.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726220053883.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726223216517.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726221454927.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20221203100258664.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729111159534.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729112907106.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729113304743.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729164450524.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729165337223.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729165724838.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729171208737.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729171146911.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729172544230.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729173210433.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729180118287.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729180604529.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729180709318.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729182223137.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729184156019.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729184756094.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729185128686.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729185030318.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729203804276.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729204458815.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729212510291.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729213613029.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729214548756.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729214917317.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729215351651.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729215537167.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729220348255.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729221207962.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729221049462.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729221058898.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729222642700.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729224205522.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729224549305.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210729225713894.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210805230303461.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210805231727206.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210805235229938.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210805235405070.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210805234302849.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210805234842497.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811151737929.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811151658928.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811152519471.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811152558939.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811155026210.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811155211181.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811155404506.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811160100054.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811160719292.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811160839423.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811161810610.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811171740881.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811172254664.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811172511287.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811172704525.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811172942861.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811173034453.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811173605496.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811175246763.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811175442896.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811175649409.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811180041023.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811180336928.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811180702247.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811180755814.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811180929858.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811181303117.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811190840184.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811191514642.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811191725308.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811191852726.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811192332854.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811192512960.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811192825145.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811192905834.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811193105881.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811193819851.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811194410699.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210811194739313.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812215311168.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812215704511.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812215857298.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812220926114.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812221656295.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812221801965.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812222334790.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812222623912.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812223004607.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812223150373.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812223956360.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812223708205.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812223744522.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812224152747.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812225424174.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812231514311.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812233107495.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812233415060.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210812233510734.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814173417834.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814173719505.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814174242688.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814181419691.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814182345236.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814181419691.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814190302845.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210814190906202.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815170848426.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815170952829.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815171128095.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815173003408.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815183147297.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815183207660.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815183225718.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815190319166.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815190601340.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815192504884.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815192544172.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815193420418.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815194911914.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815200625592.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815201323329.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815201600493.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815202406490.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815203345262.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815203623739.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815224826535.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815225059114.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815225243560.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815225707580.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815231028430.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210815233232924.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/%E6%9F%A5%E7%9C%8B%E6%96%87%E6%A1%A3.png">
+<meta property="og:image" content="http://example.com/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816000520457.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816194143246.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816194333252.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816214900928.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816215235969.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816220149093.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816225925955.png">
+<meta property="og:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210816235112754.png">
+<meta property="article:published_time" content="2022-12-02T10:35:12.000Z">
+<meta property="article:modified_time" content="2022-12-04T12:07:48.946Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/12/02/images/JavaWeb%E5%AD%A6%E4%B9%A0-heima/image-20210726153521381.png">
+
+<link rel="canonical" href="http://example.com/2022/12/02/JavaWeb%E5%AD%A6%E4%B9%A0-heima/">
 
 
-<script src="/js/index.js"></script>
-
-
-<script src="/js/fancybox.umd.js"></script>
-
-
-<script src="/js/fancybox-images.js"></script>
-
-
-<script src="/js/gitalk.min.js"></script>
-
-
-<script src="/js/hljs.min.js"></script>
- 
-<script>hljs.highlightAll();</script>
-
-	<meta name="generator" content="Hexo 6.3.0"></head>
-
-	<body>
-		
-	<div class="header">
-		<div class="header-top" id="header-top">
-			<div class="h-left">
-				<a href="/">
-					<img src="/image/logo.png" alt="Quiet">
-				</a>
-			</div>
-			<div class="h-right">
-				<ul>
-					
-						
-								<li>
-									<a href="/">
-										HOME
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/archives">
-										ARCHIVE
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/categories">
-										CATEGORIES
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/tags">
-										TAGS
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/links">
-										LINKS
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-						
-								<li>
-									<a href="/about">
-										ABOUT
-									</a>
-									<span class="dot"></span>
-								</li>
-								
-									
-				</ul>
-			</div>
-			<div class="h-right-close">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-					<path fill="none" d="M0 0h24v24H0z" />
-					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
-				</svg>
-			</div>
-		</div>
-	</div>
-	<div class="sidebar">
-    <div class="topo">
-        <h2>Joey</h2>
-    </div>
-    <ul>
-        
-        <li>
-            <a href="/">HOME</a>
-        </li>
-        
-        <li>
-            <a href="/archives">ARCHIVE</a>
-        </li>
-        
-        <li>
-            <a href="/categories">CATEGORIES</a>
-        </li>
-        
-        <li>
-            <a href="/tags">TAGS</a>
-        </li>
-        
-        <li>
-            <a href="/links">LINKS</a>
-        </li>
-        
-        <li>
-            <a href="/about">ABOUT</a>
-        </li>
-        
-    </ul>
-    <div class="my_foot">
-        
-        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
-            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
-        </a>
-        
-    </div>
-</div>
-<div class='shelter'>
-</div>
-<style>
-    .shelter{
-        background-color: #333;
-        opacity:0.5;
-        cursor: pointer;
-        display: none; 
-        position: fixed;
-        left: 0;
-        top: 0; 
-        right: 0;
-        bottom: 0;
-        z-index: 1998;
-    }
-    .sidebar {
-        width: 66%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        bottom: 0;
-        background: #fff;
-        z-index: 1999;
-        text-align: center;
-        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
-    }
-
-    .topo {
-        width: 100%;
-        height: 200px;
-        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
-        background-size: 100% 100%;
-        position: relative;
-        display: flex;
-        align-items: flex-end
-    }
-
-    .topo h2 {
-        color: #fff;
-        z-index: 1;
-        position: relative;
-        margin: 0 0 10px 10px;
-        font-size: 1.2em;
-        box-sizing: border-box
-    }
-
-    .topo:before {
-        content: '';
-        background-image: url(/image/pattern.png);
-        background-repeat: repeat;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 1
-    }
-
-    .sidebar ul {
-        width: 100%;
-        margin-top: 50px
-    }
-
-    .sidebar ul li {
-        height: 50px;
-        list-style: none;
-        font-size: 1.2em;
-        text-align: right;
-        margin-right: 10px
-    }
-
-    .sidebar ul li a {
-        display: grid;
-        color: #5d606a;
-        text-overflow: ellipsis;
-        width: 100%;
-        text-decoration: none
-    }
-
-    .my_foot {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        position: absolute;
-        bottom: 0
-    }
-
-    .my_foot a {
-        text-decoration: none;
-        margin-right: 10px;
-        display: inline-block
-    }
-
-    .my_foot a img {
-        width: 30px;
-        height: 30px
-    }
-</style>
-
-<script>
-    $( function () {
-	$( '.h-right-close>svg' )
-		.click( function () {
-			$( '.sidebar' )
-				.animate( {
-					right: "0"
-				}, 500 );
-			$( '.shelter' )
-				.fadeIn( "slow" )
-		} );
-	$( '.shelter' )
-		.click( function ( e ) {
-			$( '.sidebar' )
-				.animate( {
-					right: "-100%"
-				}, 500 );
-			$( '.shelter' )
-				.fadeOut( "slow" )
-		} )
-} )
-
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
 </script>
 
-<div class="post">
-    <div class="post-header-background post-header-img"
-    style="background: url('https://api.ixiaowai.cn/gqapi/gqapi.php')" 
->
-    <div class="post-header-background-content">
-        <ul class="post-header-tag">
-            
-            
-            <li><a href="/tags/Web">Web</a></li>
-            
-            
-        </ul>
-        
-        <h1>JavaWeb学习-heima</h1>
-        <div class="post-header-info">
-            <div class="post-header-info-author">
-                
-                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
-                        <path
-                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
-                            p-id="2902" fill="#ffffff"></path>
-                    </svg>
-                    
-                <span class="post-header-info-author-text"> <a href="../../about">Joey</a></span>
-                <div class="post-header-info-author-categories">
-                    
-                </div>
-                <p>2022-12-02 18:35:12</p>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="post-content" id="content">
+  <title>JavaWeb学习-heima | Hexo</title>
   
-  <div id="article" class="post-content-info">
-    
 
-    <h1 id="Maven-amp-MyBatis"><a href="#Maven-amp-MyBatis" class="headerlink" title="Maven&amp;MyBatis"></a>Maven&amp;MyBatis</h1><p><strong>目标</strong></p>
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/02/JavaWeb%E5%AD%A6%E4%B9%A0-heima/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaWeb学习-heima
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-12-02 18:35:12" itemprop="dateCreated datePublished" datetime="2022-12-02T18:35:12+08:00">2022-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-12-04 20:07:48" itemprop="dateModified" datetime="2022-12-04T20:07:48+08:00">2022-12-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Maven-amp-MyBatis"><a href="#Maven-amp-MyBatis" class="headerlink" title="Maven&amp;MyBatis"></a>Maven&amp;MyBatis</h1><p><strong>目标</strong></p>
 <blockquote>
 <ul>
 <li>能够使用Maven进行项目的管理</li>
@@ -2985,187 +3078,190 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>欢迎注册<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;../css/register.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-div&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;reg-content&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>欢迎注册<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>已有帐号？<span class="tag">&lt;/<span class="name">span</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;reg-form&quot;</span> <span class="attr">action</span>=<span class="string">&quot;#&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">&quot;inputs&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;username_err&quot;</span> <span class="attr">class</span>=<span class="string">&quot;err_msg&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span>&gt;</span>用户名不太受欢迎<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">&quot;inputs&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">id</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;password_err&quot;</span> <span class="attr">class</span>=<span class="string">&quot;err_msg&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span>&gt;</span>密码格式有误<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>手机号<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">&quot;inputs&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;tel&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;tel&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;tel_err&quot;</span> <span class="attr">class</span>=<span class="string">&quot;err_msg&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span>&gt;</span>手机号格式有误<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;buttons&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">&quot;注 册&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">id</span>=<span class="string">&quot;reg_btn&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span> <span class="attr">class</span>=<span class="string">&quot;clear&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1. 验证用户名是否符合规则</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.1 获取用户名的输入框</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> usernameInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;username&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.2 绑定onblur事件 失去焦点</span></span></span><br><span class="line"><span class="language-javascript">    usernameInput.<span class="property">onblur</span> = checkUsername;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">checkUsername</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.3 获取用户输入的用户名</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> username = usernameInput.<span class="property">value</span>.<span class="title function_">trim</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.4 判断用户名是否符合规则：长度 6~12,单词字符组成</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> reg = <span class="regexp">/^\w&#123;6,12&#125;$/</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> flag = reg.<span class="title function_">test</span>(username);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//var flag = username.length &gt;= 6 &amp;&amp; username.length &lt;= 12;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (flag) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//符合规则</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;username_err&quot;</span>).<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//不合符规则</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;username_err&quot;</span>).<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> flag;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1. 验证密码是否符合规则</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.1 获取密码的输入框</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> passwordInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;password&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.2 绑定onblur事件 失去焦点</span></span></span><br><span class="line"><span class="language-javascript">    passwordInput.<span class="property">onblur</span> = checkPassword;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">checkPassword</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.3 获取用户输入的密码</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> password = passwordInput.<span class="property">value</span>.<span class="title function_">trim</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.4 判断密码是否符合规则：长度 6~12</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> reg = <span class="regexp">/^\w&#123;6,12&#125;$/</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> flag = reg.<span class="title function_">test</span>(password);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//var flag = password.length &gt;= 6 &amp;&amp; password.length &lt;= 12;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (flag) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//符合规则</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;password_err&quot;</span>).<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//不合符规则</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;password_err&quot;</span>).<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> flag;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1. 验证手机号是否符合规则</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.1 获取手机号的输入框</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> telInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;tel&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.2 绑定onblur事件 失去焦点</span></span></span><br><span class="line"><span class="language-javascript">    telInput.<span class="property">onblur</span> = checkTel;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">checkTel</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.3 获取用户输入的手机号</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> tel = telInput.<span class="property">value</span>.<span class="title function_">trim</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.4 判断手机号是否符合规则：长度 11，数字组成，第一位是1</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//var flag = tel.length == 11;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> reg = <span class="regexp">/^[1]\d&#123;10&#125;$/</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> flag = reg.<span class="title function_">test</span>(tel);</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (flag) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//符合规则</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;tel_err&quot;</span>).<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//不合符规则</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;tel_err&quot;</span>).<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">        </span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> flag;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1. 获取表单对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> regForm = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;reg-form&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2. 绑定onsubmit 事件</span></span></span><br><span class="line"><span class="language-javascript">    regForm.<span class="property">onsubmit</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//挨个判断每一个表单项是否都符合要求，如果有一个不合符，则返回false</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> flag = <span class="title function_">checkUsername</span>() &amp;&amp; <span class="title function_">checkPassword</span>() &amp;&amp; <span class="title function_">checkTel</span>();</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> flag;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
-  </div>
-  <div id="gitalk-container"></div>
-</div>
-
-<script>
-  
-Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
-  dragToClose: true,
-  Toolbar: true,
-  closeButton: "top",
-  Image: {
-    zoom: true,
-  },
-  on: {
-    initCarousel: (fancybox) => {
-      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-    "Carousel.change": (fancybox, carousel, to, from) => {
-      const slide = carousel.slides[to];
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-  },
-});
-</script>
-
-<style>
-    #noneimg img {
-        display: none;
-        z-index: 9999;
-        /* width: 600px !important; */
-        min-width: 0%;
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: 0px;
-        position: fixed;
-        box-shadow: 0 0 0px #c3c3c300 !important;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto !important;
-    }
-
-    @media screen and (max-width:600px) {
-        #noneimg img {
-            max-width: 88%
-        }
-    }
-</style>
-
-    <div class="post-paging">
-    
+    </div>
 
     
-    <a href="/2022/12/01/JavaWeb%E5%AD%A6%E4%B9%A0/">
-        <div class="post-paging-next">
-            <span>下一篇</span>
-            <p>JavaWeb学习—尚硅谷</p>
-        </div>
-    </a>
     
-</div>
-</div>
-		
-<div class="footer">
-	<div class="Copyright">
-		©2022 By Joey. 主题：<a
-			style="text-decoration: none;display: contents; color: #898F9F;"
-			target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet">Quiet</a>
-	</div>
-	<div class="contact">
-		
-		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
-			<img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
-		</a>
-		
-	</div>
-</div>
+    
 
-<script src="/js/gotop.js"></script>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
 
-
-<style type="text/css">
-    @media screen and (min-width: 600px) {
-        .goTop>span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            opacity: 0.8;
-            background: rgba(18, 24, 58, 0.06);
-            text-align: center;
-            transition: border .5s;
-            border: 1px solid rgba(18, 24, 58, 0.06);
-
-            -moz-transition: border .5s;
-            /* Firefox 4 */
-            -webkit-transition: border .5s;
-            /* Safari 和 Chrome */
-            -o-transition: border .5s;
-            /* Opera */
-        }
-
-        .goTop>span:hover {
-            border: 1px solid #6680B3;
-        }
-
-
-        .goTop {
-            position: fixed;
-            right: 30px;
-            bottom: 80px;
-        }
-
-        .goTop>span>svg {
-            width: 20px;
-            height: 20px;
-            opacity: 0.7;
-        }
-
-    }
-
-    @media screen and (max-width: 600px) {
-        .goTop {
-            display: none;
-        }
-    }
-</style>
-<div class="goTop" id="js-go_top">
-    <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <g>
-                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
-            </g>
-        </svg>
-    </span>
-</div>
-<script>
-    $( '#js-go_top' )
-	.gotoTop( {
-		offset: 500,
-		speed: 300,
-		animationShow: {
-			'transform': 'translate(0,0)',
-			'transition': 'transform .5s ease-in-out'
-		},
-		animationHide: {
-			'transform': 'translate(100px,0)',
-			'transition': 'transform .5s ease-in-out'
-		}
-	} );
-</script>
-
-
-    <!-- Gitalk -->
-    <script>
-        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
-        const gitalk = new Gitalk({
-            ...JSON.parse( data),
-            id:location.pathname,
-            distractionFreeMode:false
-        })
         
-        if(Boolean('true')){
-            gitalk.render('gitalk-container')
-        }
-    </script>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/12/01/JavaWeb%E5%AD%A6%E4%B9%A0/" rel="prev" title="JavaWeb学习—尚硅谷">
+      <i class="fa fa-chevron-left"></i> JavaWeb学习—尚硅谷
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
 
 <script>
-	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/79e/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
-	</body>
-</html>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-amp-MyBatis"><span class="nav-number">1.</span> <span class="nav-text">Maven&amp;MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Maven"><span class="nav-number">1.1.</span> <span class="nav-text">1.Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Maven%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1  Maven简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-Maven%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1.1.1  Maven模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1.1.2  仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Maven%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2  Maven安装配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Maven%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3  Maven基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-Maven-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1.3.1  Maven 常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-idea%E5%AE%89%E8%A3%85Maven-Helper%E6%8F%92%E4%BB%B6"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">1.3.3 idea安装Maven Helper插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-Maven-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">1.3.3  Maven 生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-IDEA%E4%BD%BF%E7%94%A8Maven"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4  IDEA使用Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-IDEA%E9%85%8D%E7%BD%AEMaven%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">1.4.1  IDEA配置Maven环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-Maven-%E5%9D%90%E6%A0%87%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">1.4.2  Maven 坐标详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-IDEA-%E5%88%9B%E5%BB%BA-Maven%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">1.4.3  IDEA 创建 Maven项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-IDEA-%E5%AF%BC%E5%85%A5-Maven%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">1.4.4  IDEA 导入 Maven项目</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5  依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1-%E4%BD%BF%E7%94%A8%E5%9D%90%E6%A0%87%E5%BC%95%E5%85%A5jar%E5%8C%85"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">1.5.1  使用坐标引入jar包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2-%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">1.5.2  依赖范围</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Mybatis"><span class="nav-number">1.2.</span> <span class="nav-text">2.Mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Mybatis%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1  Mybatis概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Mybatis%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2.1.1  Mybatis概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-JDBC-%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2.1.2  JDBC 缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-Mybatis-%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">2.1.3  Mybatis 优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Mybatis%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2  Mybatis快速入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Mapper%E4%BB%A3%E7%90%86%E5%BC%80%E5%8F%91"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3  Mapper代理开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-Mapper%E4%BB%A3%E7%90%86%E5%BC%80%E5%8F%91%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1  Mapper代理开发概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-%E4%BD%BF%E7%94%A8Mapper%E4%BB%A3%E7%90%86%E8%A6%81%E6%B1%82"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2.3.2  使用Mapper代理要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-%E6%A1%88%E4%BE%8B%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">2.3.3  案例代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4  核心配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1  多环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2  类型别名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-MyBatis%E6%A1%88%E4%BE%8B"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 MyBatis案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#idea%E5%AE%89%E8%A3%85MyBatisX"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">* idea安装MyBatisX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2.5.1查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-1-%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.5.2.1.</span> <span class="nav-text">2.5.1.1 查询所有数据</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#SQL%E5%B1%9E%E6%80%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%9E%E6%80%A7%E7%9A%84%E5%8C%B9%E9%85%8D"><span class="nav-number">1.2.5.2.1.1.</span> <span class="nav-text">SQL属性和数据库属性的匹配</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-2-%E6%9F%A5%E7%9C%8B%E8%AF%A6%E6%83%85%EF%BC%88%E6%A0%B9%E6%8D%AEId%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">1.2.5.2.2.</span> <span class="nav-text">2.5.1.2 查看详情（根据Id查询）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-3-%E5%A4%9A-%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.2.5.2.3.</span> <span class="nav-text">2.5.1.3 (多)条件查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-4-%E5%8D%95%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%8A%A8%E6%80%81%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.2.5.2.4.</span> <span class="nav-text">2.5.1.4 单条件的动态条件查询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-%E6%B7%BB%E5%8A%A0"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">2.5.2 添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-3-%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">2.5.3 修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-3-1-%E4%BF%AE%E6%94%B9%E5%85%A8%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">1.2.5.4.1.</span> <span class="nav-text">2.5.3.1 修改全部字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-3-2-%E4%BF%AE%E6%94%B9%E5%8A%A8%E6%80%81%E5%AD%97%E6%AE%B5"><span class="nav-number">1.2.5.4.2.</span> <span class="nav-text">2.5.3.2 修改动态字段</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-4-%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.5.5.</span> <span class="nav-text">2.5.4 删除</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-4-1-%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA"><span class="nav-number">1.2.5.5.1.</span> <span class="nav-text">2.5.4.1 删除一个</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-4-2-%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.5.5.2.</span> <span class="nav-text">2.5.4.2 批量删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-5-MyBatis%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">1.2.5.5.3.</span> <span class="nav-text">2.5.5 MyBatis参数传递</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-5-%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="nav-number">1.2.5.6.</span> <span class="nav-text">2.5.5 注解开发</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Mybatis%E7%BB%83%E4%B9%A0"><span class="nav-number">1.3.</span> <span class="nav-text">3.Mybatis练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0CRUD"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1配置文件实现CRUD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">3.1.1  环境准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">3.1.2  查询所有数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">3.1.2.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.2.2.</span> <span class="nav-text">3.1.2.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.2.3.</span> <span class="nav-text">3.1.2.3  编写测试方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-4-%E8%B5%B7%E5%88%AB%E5%90%8D%E8%A7%A3%E5%86%B3%E4%B8%8A%E8%BF%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.1.2.4.</span> <span class="nav-text">3.1.2.4  起别名解决上述问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-5-%E4%BD%BF%E7%94%A8resultMap%E8%A7%A3%E5%86%B3%E4%B8%8A%E8%BF%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.1.2.5.</span> <span class="nav-text">3.1.2.5  使用resultMap解决上述问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-6-%E5%B0%8F%E7%BB%93"><span class="nav-number">1.3.1.2.6.</span> <span class="nav-text">3.1.2.6  小结</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-%E6%9F%A5%E8%AF%A2%E8%AF%A6%E6%83%85"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">3.1.3  查询详情</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.3.1.</span> <span class="nav-text">3.1.3.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.3.2.</span> <span class="nav-text">3.1.3.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.3.3.</span> <span class="nav-text">3.1.3.3  编写测试方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-4-%E5%8F%82%E6%95%B0%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">1.3.1.3.4.</span> <span class="nav-text">3.1.3.4  参数占位符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-5-parameterType%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.1.3.5.</span> <span class="nav-text">3.1.3.5  parameterType使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-6-SQL%E8%AF%AD%E5%8F%A5%E4%B8%AD%E7%89%B9%E6%AE%8A%E5%AD%97%E6%AE%B5%E5%A4%84%E7%90%86"><span class="nav-number">1.3.1.3.6.</span> <span class="nav-text">3.1.3.6  SQL语句中特殊字段处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">3.1.4  多条件查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.4.1.</span> <span class="nav-text">3.1.4.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.4.2.</span> <span class="nav-text">3.1.4.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.4.3.</span> <span class="nav-text">3.1.4.3  编写测试方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-4-%E5%8A%A8%E6%80%81SQL"><span class="nav-number">1.3.1.4.4.</span> <span class="nav-text">3.1.4.4  动态SQL</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-5-%E5%8D%95%E4%B8%AA%E6%9D%A1%E4%BB%B6%EF%BC%88%E5%8A%A8%E6%80%81SQL%EF%BC%89"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">3.1.5 单个条件（动态SQL）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-5-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.5.1.</span> <span class="nav-text">3.1.5.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-5-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.5.2.</span> <span class="nav-text">3.1.5.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-5-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.5.3.</span> <span class="nav-text">3.1.5.3  编写测试方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-6-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">3.1.6  添加数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-6-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.6.1.</span> <span class="nav-text">3.1.6.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-6-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.6.2.</span> <span class="nav-text">3.1.6.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-6-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.6.3.</span> <span class="nav-text">3.1.6.3  编写测试方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-6-4-%E6%B7%BB%E5%8A%A0-%E4%B8%BB%E9%94%AE%E8%BF%94%E5%9B%9E"><span class="nav-number">1.3.1.6.4.</span> <span class="nav-text">3.1.6.4  添加-主键返回</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-7-%E4%BF%AE%E6%94%B9"><span class="nav-number">1.3.1.7.</span> <span class="nav-text">3.1.7  修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-7-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.7.1.</span> <span class="nav-text">3.1.7.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-7-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.7.2.</span> <span class="nav-text">3.1.7.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-7-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.7.3.</span> <span class="nav-text">3.1.7.3  编写测试方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-8-%E5%88%A0%E9%99%A4%E4%B8%80%E8%A1%8C%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.1.8.</span> <span class="nav-text">3.1.8  删除一行数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-8-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.8.1.</span> <span class="nav-text">3.1.8.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-8-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.8.2.</span> <span class="nav-text">3.1.8.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-8-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.8.3.</span> <span class="nav-text">3.1.8.3  编写测试方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-9-%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4"><span class="nav-number">1.3.1.9.</span> <span class="nav-text">3.1.9  批量删除</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-9-1-%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.9.1.</span> <span class="nav-text">3.1.9.1  编写接口方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-9-2-%E7%BC%96%E5%86%99SQL%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.1.9.2.</span> <span class="nav-text">3.1.9.2  编写SQL语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-9-3-%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.9.3.</span> <span class="nav-text">3.1.9.3  编写测试方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-10-Mybatis%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">1.3.1.10.</span> <span class="nav-text">3.1.10  Mybatis参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-10-1-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.1.10.1.</span> <span class="nav-text">3.1.10.1  多个参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-10-2-%E5%8D%95%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.1.10.2.</span> <span class="nav-text">3.1.10.2  单个参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0CRUD"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2.注解实现CRUD</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML-amp-CSS"><span class="nav-number">2.</span> <span class="nav-text">HTML&amp;CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HTML"><span class="nav-number">2.1.</span> <span class="nav-text">1.HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1  介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2  快速入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3  基础标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-%E6%A0%87%E9%A2%98%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">1.3.1  标题标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-hr%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">1.3.2  hr标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-%E5%AD%97%E4%BD%93%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">1.3.3  字体标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-4-%E6%8D%A2%E8%A1%8C%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">1.3.4  换行标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-5-%E6%AE%B5%E8%90%BD%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.5.</span> <span class="nav-text">1.3.5  段落标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-6-%E5%8A%A0%E7%B2%97%E3%80%81%E6%96%9C%E4%BD%93%E3%80%81%E4%B8%8B%E5%88%92%E7%BA%BF%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.6.</span> <span class="nav-text">1.3.6  加粗、斜体、下划线标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-7-%E5%B1%85%E4%B8%AD%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.3.7.</span> <span class="nav-text">1.3.7  居中标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-8-%E6%A1%88%E4%BE%8B"><span class="nav-number">2.1.3.8.</span> <span class="nav-text">1.3.8  案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%9B%BE%E7%89%87%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E8%A7%86%E9%A2%91%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.4.</span> <span class="nav-text">1.4  图片、音频、视频标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E8%B6%85%E9%93%BE%E6%8E%A5%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.5.</span> <span class="nav-text">1.5  超链接标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-%E5%88%97%E8%A1%A8%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.6.</span> <span class="nav-text">1.6  列表标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-%E8%A1%A8%E6%A0%BC%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.7.</span> <span class="nav-text">1.7  表格标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-%E5%B8%83%E5%B1%80%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.8.</span> <span class="nav-text">1.8  布局标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-%E8%A1%A8%E5%8D%95%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.9.</span> <span class="nav-text">1.9  表单标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-1-%E8%A1%A8%E5%8D%95%E6%A0%87%E7%AD%BE%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.9.1.</span> <span class="nav-text">1.9.1  表单标签概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-2-form%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.9.2.</span> <span class="nav-text">1.9.2  form标签属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-9-3-%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="nav-number">2.1.9.3.</span> <span class="nav-text">1.9.3  代码演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.10.</span> <span class="nav-text">1.10  表单项标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-CSS"><span class="nav-number">2.2.</span> <span class="nav-text">2.CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1  概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-css-%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2  css 导入方式</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
