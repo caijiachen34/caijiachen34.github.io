@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Docker学习-Quiet</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="Docker,">
+<meta name="description" content="">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="Quiet">
+				</a>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										HOME
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										ARCHIVE
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										CATEGORIES
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										TAGS
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/links">
+										LINKS
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										ABOUT
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>Joey</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">HOME</a>
+        </li>
+        
+        <li>
+            <a href="/archives">ARCHIVE</a>
+        </li>
+        
+        <li>
+            <a href="/categories">CATEGORIES</a>
+        </li>
+        
+        <li>
+            <a href="/tags">TAGS</a>
+        </li>
+        
+        <li>
+            <a href="/links">LINKS</a>
+        </li>
+        
+        <li>
+            <a href="/about">ABOUT</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    style="background: url('https://api.ixiaowai.cn/gqapi/gqapi.php')" 
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+            
+            <li><a href="/tags/Docker">Docker</a></li>
+            
+            
+        </ul>
+        
+        <h1>Docker学习</h1>
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                    
+                <span class="post-header-info-author-text"> <a href="../../about">Joey</a></span>
+                <div class="post-header-info-author-categories">
+                    
+                </div>
+                <p>2022-11-09 18:55:45</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+
+    <h1 id="新手篇"><a href="#新手篇" class="headerlink" title="新手篇"></a>新手篇</h1><h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><p>环境配置相当麻烦，换一台机器，就要重来一次，费力费时。很多人想到，能不能从根本上解决问题，软件可以带环境安装？也就是说，安装的时候，把原始环境一模一样地复制过来。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109185759428.png" alt="image-20221109185759428"></p>
+<p>Docker透过镜像(images)将作业系统核心除外，运作应用程式所需要的系统环境，由下而上打包，达到应用程式跨平台间的无缝接轨运作。</p>
+<h3 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2.介绍"></a>2.介绍</h3><p>Docker是基于Go语言实现的云开源项目。Linux的基础上发展过来。将应用打成镜像，通过镜像成为运行在Docker容器上面的实例，而 Docker容器在任何操作系统上都是一致的，这就实现了跨平台、跨服务器。只需要一次配置好环境，换到别的机子上就可以一键部署好，大大简化了操作。</p>
+<p>*解决了运行环境和配置问题的软件容器， 方便做持续集成并有助于整体发布的容器虚拟化技术。</p>
+<h3 id="3-容器VS虚拟机"><a href="#3-容器VS虚拟机" class="headerlink" title="3.容器VS虚拟机"></a>3.容器VS虚拟机</h3><h4 id="虚拟机技术"><a href="#虚拟机技术" class="headerlink" title="虚拟机技术"></a>虚拟机技术</h4><p>虚拟机（virtual machine）就是带环境安装的一种解决方案。</p>
+<p>它可以在一种操作系统里面运行另一种操作系统，比如在Windows10系统里面运行Linux系统CentOS7。应用程序对此毫无感知，因为虚拟机看上去跟真实系统一模一样，而对于底层系统来说，虚拟机就是一个普通文件，不需要了就删掉，对其他部分毫无影响。这类虚拟机完美的运行了另一套系统，能够使应用程序，操作系统和硬件三者之间的逻辑不变。 </p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190238223.png" alt="image-20221109190238223"></p>
+<p>虚拟机缺点：①资源占用多②冗余步骤多③启动慢</p>
+<h4 id="容器虚拟化技术"><a href="#容器虚拟化技术" class="headerlink" title="容器虚拟化技术"></a>容器虚拟化技术</h4><p>由于前面虚拟机存在某些缺点，Linux发展出了另一种虚拟化技术：</p>
+<p>Linux容器(Linux Containers，缩写为 LXC)</p>
+<p>Linux容器是与系统其他部分隔离开的一系列进程，从另一个镜像运行，并由该镜像提供支持进程所需的全部文件。容器提供的镜像包含了应用的所有依赖项，因而在从开发到测试再到生产的整个过程中，它都具有可移植性和一致性。</p>
+<p>Linux 容器不是模拟一个完整的操作系统而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190414995.png" alt="image-20221109190414995"></p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190508270.png" alt="image-20221109190508270"></p>
+<p>比较了 Docker 和传统虚拟化方式的不同之处：</p>
+<p>*传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；</p>
+<p>*容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</p>
+<p>* 每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</p>
+<h4 id="Docker实际作用"><a href="#Docker实际作用" class="headerlink" title="Docker实际作用"></a>Docker实际作用</h4><p>传统的应用开发完成后，需要提供一堆安装程序和配置说明文档，安装部署后需根据配置文档进行繁杂的配置才能正常运行。Docker化之后只需要交付少量容器镜像文件，在正式生产环境加载镜像并运行即可，应用安装配置在镜像里已经内置好，大大节省部署配置和测试验证时间。</p>
+<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><h3 id="Windows下安装Docker"><a href="#Windows下安装Docker" class="headerlink" title="Windows下安装Docker"></a>Windows下安装Docker</h3><p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190812495.png" alt="image-20221109190812495"></p>
+<p><strong>前提条件</strong></p>
+<p>目前，CentOS 仅发行版本中的内核支持 Docker。Docker 运行在CentOS 7 (64-bit)上，要求系统为64位、Linux系统内核版本为 3.8以上，这里选用Centos7.x</p>
+<p><strong>查看自己的内核</strong></p>
+<p>uname命令用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109190854867.png" alt="image-20221109190854867"></p>
+<h3 id="Docer基本组成"><a href="#Docer基本组成" class="headerlink" title="Docer基本组成"></a>Docer基本组成</h3><h4 id="镜像-image"><a href="#镜像-image" class="headerlink" title="镜像(image)"></a>镜像(image)</h4><p>Docker 镜像（Image）就是一个<strong>只读</strong>的模板。镜像可以用来创建 Docker 容器，一个镜像可以创建很多容器。它也相当于是一个root文件系统。比如官方镜像 centos7 就包含了完整的一套 centos7 最小系统的 root 文件系统。相当于容器的“源代码”，docker镜像文件类似于Java的类模板，而docker容器实例类似于java中new出来的实例对象。</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109191316117.png" alt="image-20221109191316117"></p>
+<h4 id="容器-container"><a href="#容器-container" class="headerlink" title="容器(container)"></a>容器(container)</h4><h5 id="从面向对象角度"><a href="#从面向对象角度" class="headerlink" title="从面向对象角度"></a>从面向对象角度</h5><p>Docker 利用容器（Container）独立运行的一个或一组应用，应用程序或服务运行在容器里面，容器就类似于一个虚拟化的运行环境，容器是用镜像创建的运行实例。就像是Java中的类和实例对象一样，镜像是静态的定义，容器是镜像运行时的实体。容器为镜像提供了一个标准的和隔离的运行环境，它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台</p>
+<h5 id="从镜像容器角度"><a href="#从镜像容器角度" class="headerlink" title="从镜像容器角度"></a>从镜像容器角度</h5><p>可以把容器看做是一个简易版的<strong>Linux</strong>环境（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。</p>
+<h4 id="仓库-repository"><a href="#仓库-repository" class="headerlink" title="仓库(repository)"></a>仓库(repository)</h4><p>仓库（Repository）是集中存放镜像文件的场所。</p>
+<p>类似于Maven仓库，存放各种jar包的地方；github仓库，存放各种git项目的地方；Docker公司提供的官方registry被称为Docker Hub，存放各种镜像模板的地方。</p>
+<p>仓库分为公开仓库（Public）和私有仓库（Private）两种形式。</p>
+<p>最大的公开仓库是 Docker Hub(<a target="_blank" rel="noopener" href="https://hub.docker.com/)%EF%BC%8C">https://hub.docker.com/)，</a></p>
+<p>存放了数量庞大的镜像供用户下载。国内的公开仓库包括阿里云 、网易云等。<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/">阿里云容器服务镜像地址</a></p>
+<p>加速器地址：<a target="_blank" rel="noopener" href="https://osz18i1m.mirror.aliyuncs.com/">https://osz18i1m.mirror.aliyuncs.com</a></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>需要正确的理解仓库&#x2F;镜像&#x2F;容器这几个概念:</p>
+<p>Docker 本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包好形成一个可交付的运行环境，这个打包好的运行环境就是image镜像文件。只有通过这个镜像文件才能生成Docker容器实例(类似Java中new出来一个对象)。</p>
+<p>image文件可以看作是容器的模板。Docker 根据 image 文件生成容器的实例。同一个 image 文件，可以生成多个同时运行的容器实例。</p>
+<p>镜像文件</p>
+<p>*  image 文件生成的容器实例，本身也是一个文件，称为镜像文件。</p>
+<p>容器实例</p>
+<p>*  一个容器运行一种服务，当我们需要的时候，就可以通过docker客户端创建一个对应的运行实例，也就是我们的容器</p>
+<p>仓库</p>
+<p>* 就是放一堆镜像的地方，我们可以把镜像发布到仓库中，需要的时候再从仓库中拉下来就可以了。</p>
+<h3 id="Docker平台架构图解-架构版"><a href="#Docker平台架构图解-架构版" class="headerlink" title="Docker平台架构图解(架构版)"></a>Docker平台架构图解(架构版)</h3><p>Docker 是一个 C&#x2F;S 模式的架构，后端是一个松耦合架构，众多模块各司其职。 </p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002.jpg" alt="graphic"></p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109192329642.png" alt="image-20221109192329642"></p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">Docker官方文档</a></p>
+<p>①确定是Centos7及以上版本：<code>cat /etc/redhat-release</code></p>
+<p>②卸载旧版本</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109192913037.png" alt="image-20221109192913037"></p>
+<p>③yum安装gcc相关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>④安装需要的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+<p>⑤设置stable镜像仓库</p>
+<p>使用阿里镜像仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>⑥更新yum软件包索引</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<p>⑦安装DOCKER CE</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>⑧启动docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>⑨测试安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>⑩卸载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop docker</span><br><span class="line">yum remove docker-ce docker-ce-cli containerd.io</span><br><span class="line">rm -rf /var/lib/docker</span><br><span class="line">rm -rf /var/lib/containerd</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="阿里云镜像加速"><a href="#阿里云镜像加速" class="headerlink" title="阿里云镜像加速"></a>阿里云镜像加速</h3><p>点击控制台</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994168595-2.jpg" alt="graphic"></p>
+<p>选择容器镜像服务</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004.jpg" alt="graphic"></p>
+<p>获取加速器地址</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image006.jpg" alt="graphic"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://osz18i1m.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><p>启动Docker后台容器(测试运行 hello-world)</p>
+<p>docker run hello-world</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994283685-6.jpg" alt="graphic"></p>
+<p>输出这段提示以后，hello world就会停止运行，容器自动终止。</p>
+<p>run干了什么</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004-1667994283685-7.jpg" alt="graphic"></p>
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p>为什么Docker会比VM虚拟机快?</p>
+<p>①docker有着比虚拟机更少的抽象层</p>
+<p>  由于docker不需要Hypervisor(虚拟机)实现硬件资源虚拟化,运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。因此在CPU、内存利用率上docker将会在效率上有明显优势。</p>
+<p>②docker利用的是<em><strong>宿主机</strong></em>的内核,而不需要加载操作系统OS内核，当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统内核。进而避免引寻、加载操作系统内核返回等比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载OS,返回新建过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了返回过程,因此新建一个docker容器只需要几秒钟。</p>
+<p> <img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667994372991-10.jpg" alt="graphic"></p>
+<p> <img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004.gif" alt="graphic"></p>
+<h2 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h2><h3 id="帮助启动类命令"><a href="#帮助启动类命令" class="headerlink" title="帮助启动类命令"></a>帮助启动类命令</h3><p>①启动docker： <code>systemctl start docker</code></p>
+<p>②停止docker： <code>systemctl stop docker</code></p>
+<p>③重启docker： <code>systemctl restart docker</code></p>
+<p>④查看docker状态： <code>systemctl status docker</code></p>
+<p>⑤开机启动： <code>systemctl enable docker</code></p>
+<p>⑥查看docker概要信息： <code>docker info</code></p>
+<p>⑦查看docker总体帮助文档： <code>docker --help</code></p>
+<p>⑧查看docker命令帮助文档： <code>docker 具体命令 --help</code></p>
+<h3 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h3><p>①列出本地主机上的镜像：<code>docker images [OPTIONS]</code></p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109195814818.png" alt="image-20221109195814818"></p>
+<p>各个选项说明</p>
+<p>REPOSITORY：表示镜像的仓库源</p>
+<p>TAG：镜像的标签版本号</p>
+<p>IMAGE ID：镜像ID</p>
+<p>CREATED：镜像创建时间</p>
+<p>SIZE：镜像大小</p>
+<p>同一仓库源可以有多个 TAG版本，代表这个仓库源的不同个版本，我们使用 REPOSITORY:TAG 来定义不同的镜像。</p>
+<p>如果你不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像</p>
+<p>[OPTIONS]说明：</p>
+<p>-a :列出本地所有的镜像（含历史映像层）</p>
+<p>-q :只显示镜像ID。</p>
+<p>②docker search [OPTIONS] 镜像名字</p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker镜像库</a></p>
+<p> docker search [OPTIONS] 镜像名字</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002.gif" alt="graphic"></p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image004-1667996115362-13.jpg" alt="graphic"></p>
+<p>[OPTIONS]说明：</p>
+<p>–limit : 只列出N个镜像，默认25个</p>
+<p><code>docker search --limit 5 redis</code></p>
+<p>③docker pull 镜像名字 [:TAG]</p>
+<p>*不加TAG就是最新版，等价于<code>docker pull 镜像名字:latest</code></p>
+<p>④docker system df 查看镜像&#x2F;容器&#x2F;数据卷所占的空间</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/clip_image002-1667996368769-16.jpg" alt="graphic"></p>
+<p>⑤docker rmi 某个XXX镜像名字ID</p>
+<p>删除单个：<code>docker rmi -f 镜像ID</code></p>
+<p>删除多个：<code>docker rmi -f 镜像名1:TAG 镜像名2:TAG</code></p>
+<p>删除全部：<code>docker rmi -f $(docker images -qa)</code></p>
+<p>*面试题：谈谈docker虚悬镜像是什么？</p>
+<p>仓库名、标签都是<none>的镜像，俗称虚悬镜像dangling image</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202324670.png" alt="image-20221109202324670"></p>
+<h3 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h3><p>有镜像才能创建容器， 这是根本前提(下载一个CentOS或者ubuntu镜像演示)</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202612232.png" alt="image-20221109202612232"></p>
+<p>使用Ubuntu容器：</p>
+<ul>
+<li><code>docker pull ubuntu</code></li>
+</ul>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109202638970.png" alt="image-20221109202638970"></p>
+<ul>
+<li>新建+启动容器</li>
+</ul>
+<p><code>docker run [OPTIONS] **IMAGE** [COMMAND] [ARG...]</code></p>
+<p>[OPTIONS]说明</p>
+<p> OPTIONS说明（常用）：有些是一个减号，有些是两个减号</p>
+<p>–name&#x3D;”容器新名字”    为容器指定一个名称；</p>
+<p>-d: 后台运行容器并返回容器ID，也即启动守护式容器(后台运行)；</p>
+<p>-i：以交互模式运行容器，通常与 -t 同时使用；</p>
+<p>-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用；</p>
+<p>也即启动交互式容器(前台有伪终端，等待交互)；</p>
+<p>-P: 随机端口映射，大写P</p>
+<p>-p: 指定端口映射，小写p</p>
+<p><img src="/../images/Docker%E5%AD%A6%E4%B9%A0/image-20221109203132538.png" alt="image-20221109203132538"></p>
+<p>例：启动交互式容器(前台命令行)</p>
+<p>使用镜像centos:latest以交互模式启动一个容器,在容器内执行&#x2F;bin&#x2F;bash命令。<code>docker run -it centos /bin/bash</code>或</p>
+<p><code>docker run -it centos bash</code></p>
+<p>*参数说明：</p>
+<p>-i: 交互式操作 interactive</p>
+<p>-t: 终端 terminal</p>
+<p>centos : centos 镜像。</p>
+<p>&#x2F;bin&#x2F;bash：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash。要退出终端，直接输入 exit:</p>
+<ul>
+<li>列出当前所有正在运行的容器<code>docker ps [OPTIONS]</code></li>
+</ul>
+<p>p19</p>
+
+  </div>
+  <div id="gitalk-container"></div>
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2022/11/13/%E6%B3%9B%E5%9E%8B/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>泛型</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2022/11/09/%E9%9B%86%E5%90%88/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>集合</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2022 By Joey. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+			<img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: rgba(18, 24, 58, 0.06);
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        if(Boolean('true')){
+            gitalk.render('gitalk-container')
+        }
+    </script>
+
+<script>
+	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/79e/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+</script>
+	</body>
+</html>
+

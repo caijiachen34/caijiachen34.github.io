@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>面向对象2-Quiet</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="JavaSe,">
+<meta name="description" content="">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="Quiet">
+				</a>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										HOME
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										ARCHIVE
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										CATEGORIES
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										TAGS
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/links">
+										LINKS
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										ABOUT
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>Joey</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">HOME</a>
+        </li>
+        
+        <li>
+            <a href="/archives">ARCHIVE</a>
+        </li>
+        
+        <li>
+            <a href="/categories">CATEGORIES</a>
+        </li>
+        
+        <li>
+            <a href="/tags">TAGS</a>
+        </li>
+        
+        <li>
+            <a href="/links">LINKS</a>
+        </li>
+        
+        <li>
+            <a href="/about">ABOUT</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    style="background: url('https://api.ixiaowai.cn/gqapi/gqapi.php')" 
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+            
+            <li><a href="/tags/JavaSe">JavaSe</a></li>
+            
+            
+        </ul>
+        
+        <h1>面向对象2</h1>
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                    
+                <span class="post-header-info-author-text"> <a href="../../about">Joey</a></span>
+                <div class="post-header-info-author-categories">
+                    
+                </div>
+                <p>2022-10-27 09:22:50</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+
+    <h2 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h2><p>面向对象的特征二：继承性</p>
+<p>一.继承性的好处：</p>
+<p>①减少了代码冗余，提高代码的复用性</p>
+<p>②便于功能的扩展</p>
+<p>③为之后的多态性使用，提供了前提</p>
+<p>二.继承性的格式：<code>   class A extends B&#123;&#125;</code></p>
+<p>​	A:子类，派生类，subclass</p>
+<p>​	B:父类，超类，基类，superclass</p>
+<p>​	2.1体现：一旦子类A继承父类B后，子类A中就获取了父类B中声明的所有属性和方法。</p>
+<p>​	特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类的私有结构。只有因为封装性的影响，使得子类不能调用父类的结构而已。</p>
+<p>​	2.2子类继承父类以后，还可以声明自己特有的属性或方法，实现功能的扩展。</p>
+<p>三.Java中关于继承性的规定</p>
+<p>1.一个类可以被多个子类继承</p>
+<p>2.Java中类的单继承性：一个类只能有一个父类</p>
+<p>3.子分类是相对的概念</p>
+<p>4.子类直接继承的父类称为直接父类。间接继承的父类称为间接父类</p>
+<p>5.子类继承父类以后，就获取的直接父类以及所有间接父类中声明的属性和方法</p>
+<p>四.1.如果我们没有显式声明一个类的父类的话，则此类继承于java.lang.Object类</p>
+<p>2.所有的Java类(除java.lang.Object类之外)都直接或间接的继承于java.lang.Object类</p>
+<p>3.意味着，所有的Java类具有java.lang.Object类声明的功能</p>
+<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>1.重写：子类继承父类以后，可以对父类中<em><strong>同名同参数</strong></em>的方法进行覆盖操作。</p>
+<p>2.应用2：重写以后，当创建子类对象后，通过子类对象调用父类中的<em><strong>同名同参数</strong></em>的方法时，实际执行的是子类重写父类的方法。</p>
+<p>3.重写的规定</p>
+<p>​	方法的声明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">权限修饰符 返回值类型 方法名(形参列表) throws 异常的类型&#123;</span><br><span class="line">	//方法体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	约定俗称：子类中叫重写的方法，父类中的叫被重写的方法	</p>
+<p>​	①子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</p>
+<p>​	②子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</p>
+<p>​	*特殊情况：子类不能重写父类中声明为private权限的方法</p>
+<p>​	③返回值类型：</p>
+<p>​		&gt;父类被重写的方法的返回值都是void，则子类重写的方法的返回值的类型只能是void</p>
+<p>​		&gt;父类被重写方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是<em><strong>A类或者A类的子类</strong></em></p>
+<p>​		&gt;父类被重写方法的返回值类型是基本数据类型（如double），则子类重写的方法的返回值类型必须是相同的基本数据类型（如double）</p>
+<p>​	④子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</p>
+<p>*子类和父类的同名同参数的方法要么声明为非static（考虑重写），要么都声明为static（不是重写）。</p>
+<h3 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h3><p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12/image-20221027152820291.png" alt="image-20221027152820291"></p>
+<p>不同包下的普通类（非子类）要使用其他类，不可以调用声明为private，缺省，protected权限的属性，方法</p>
+<h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><h4 id="super的使用"><a href="#super的使用" class="headerlink" title="super的使用"></a>super的使用</h4><p>​	①我们可以在子类的方法或构造器中。通过使用“super.属性”或“super.方法”的方式，显式调用父类中声明的属性或方法。但是，通常情况下，我们习惯<em><strong>省略</strong></em>“super.”</p>
+<p>​	②特殊情况1：当子类和父类中定义了同名的属性时，我们想要在子类中调用父类中声明的属性，则必须显式使用“<em><strong>super.属性</strong></em>”的方式，表面调用的是父类中声明的属性。</p>
+<p>​	③特殊情况2：当子类重写了父类的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用“<em><strong>super.方法</strong></em>”的方式，表面调用的是父类中被重写的方法。</p>
+<h4 id="super调用构造器-难"><a href="#super调用构造器-难" class="headerlink" title="super调用构造器(难)"></a>super调用构造器(难)</h4><p>​	①我们可以在子类的构造器中显式的使用“super(形参列表)”的方式，调用父类中声明的指定构造器</p>
+<p>​	②<code>super(形参列表)</code>的使用，必须声明在子类构造器的首行</p>
+<p>​	③我们在类的构造器中，针对于<code>this(形参列表)</code>或<code>super(形参列表)</code>只能二选一，不能同时出现</p>
+<p>​	④在构造器的首行，没有显式的声明<code>this(形参列表)</code>或<code>super(形参列表)</code>，则默认使用的是父类中空参的构造器super()</p>
+<p>​	⑤在类的多个构造器中，至少有一个类的构造器中使用了<code>super(形参列表)</code>，调用父类中的构造器</p>
+<p>*this和super区别：①this调用本类重载的其他构造器</p>
+<p>​								   ②super调用父类指定的构造器</p>
+<p>子类对象实例化的全过程</p>
+<p>1.从结果看：（继承性）</p>
+<p>​		子类继承父类以后，就获取了父类中声明的属性或方法。</p>
+<p>​		创建子类的对象，在堆空间中，就会加载所以父类中声明的属性（不会创建父类对象）。</p>
+<p>2.从过程看</p>
+<p>​		当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的的调用其父类的构造器，进而调用父类的父类的构造器，直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所有的父类结构，所才看到内存中有父类中的结构，子类对象才可以考虑进行调用。</p>
+<p>*明确：虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
+<p>​	</p>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><p>①理解多态性：一个事物的多种形态。</p>
+<p>②何为多态性：</p>
+<p>​	对象的多态性：父类的引用指向子类的对象（或子类的对象赋值给父类的引用）</p>
+<p>③多态的使用：虚拟方法的调用</p>
+<p>​	有了对象的多态性后，我们在编译期间，只能调用父类中声明的昂发，在运行期，我们实际执行的是子类重写父类的方法</p>
+<p>​	*直接：编译看左边，运行看右边</p>
+<p>④多态性使用前提：①类的继承关系②方法的重写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Charge</span> <span class="variable">charge1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">QC</span>();</span><br><span class="line"><span class="type">Charge</span> <span class="variable">charge2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PD</span>();</span><br></pre></td></tr></table></figure>
+
+<p>举例：type_c口，各厂家使用通用type-c接口（体现为Charge）,其内部使用自己的协议（体现为QC，PD）</p>
+<p>⑤对象的多态性，只适用于方法不适用于属性。对于属性，还是父类的属性值（编译看左边，运行看左边）</p>
+<p>方法的重载和重写：</p>
+<p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12/image-20221027224732342.png" alt="image-20221027224732342"></p>
+<p>重载：早绑定或静态绑定</p>
+<p>重写：多态，晚绑定或静态绑定</p>
+<h3 id="调用子类方法"><a href="#调用子类方法" class="headerlink" title="调用子类方法"></a>调用子类方法</h3><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。若要调用，需要<em><strong>向下转型</strong></em>，即强制类型转换。</p>
+<p>*当类型不能转换时，会报ClassCastException异常。</p>
+<p>​	a instanceof A:判断a对象是否是类A的实例。是，返回true。不是返回false</p>
+<p>​	instanceof 使用情形：为了避免在向下转型时出现ClassCastException异常，我们在向下转型之前，先进行instanceof 的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</p>
+<p>​	如果a instanceof A返回true，则a instanceof B也返回true，其中类B是类A的父类。</p>
+<p>正确：左边父类右边子类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Woman</span>();</span><br><span class="line"><span class="type">Woman</span> <span class="variable">w3</span> <span class="operator">=</span> (Woman)p3</span><br></pre></td></tr></table></figure>
+
+<p>错误1：类型不一样，不能强转</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line"><span class="type">Woman</span> <span class="variable">w3</span> <span class="operator">=</span> (Woman)p3;</span><br></pre></td></tr></table></figure>
+
+<p>错误2：创建对象时内存中并没有新建加载Woman的东西，类型不一样，不能强转</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="type">Woman</span> <span class="variable">w3</span> <span class="operator">=</span> (Woman)p3;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h2><p>java.lang.Object类</p>
+<p>①所有类的根父类</p>
+<p>②如果在类的声明中未使用extends指明其父类，则默认父类为Object类</p>
+<p>③Object类中声明的功能（属性，方法）具有通用性</p>
+<p>④Object类只声明了一个空参的构造器</p>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><h4 id="x3D-x3D-：运算符"><a href="#x3D-x3D-：运算符" class="headerlink" title="&#x3D;&#x3D;：运算符"></a>&#x3D;&#x3D;：运算符</h4><p>①可以使用在基本数据类型和引用数据类型变量中</p>
+<p>②如果比较的是基本数据类型：比较两个变量保存是数据是否相等。（类型不一定要相同）</p>
+<p>​	如果比较的是引用数据类型：比较两个对象的地址值是否相等。即两个引用是否指向同一个对象实体</p>
+<h4 id="equals-：方法"><a href="#equals-：方法" class="headerlink" title="equals()：方法"></a>equals()：方法</h4><p>①是一个方法，而非运算符</p>
+<p>②只能适用于引用数据类型</p>
+<p>③Object类中定义的equals()和&#x3D;&#x3D;作用是一样的，即比较两个对象的地址值是否相等。即两个引用是否指向同一个对象实体</p>
+<p>④像String，Date，File，包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的“实体类容”是否相同</p>
+<p>⑤通常情况下，我妈妈自定义类如果使用equals()的话，也通常是比较两个对象的”实体类容“是否相同。那么我们就需要对Object类中的equals()进行重写</p>
+<p>举例：手动实现equals()，比较name和age是否相同<img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12/image-20221028162633457.png" alt="image-20221028162633457"></p>
+<h3 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h3><p>①当我们输出一个对象的引用(对象名)时，实际上就是调用当前对象的toString()</p>
+<p>②String，Date，File，包装类等都重写了Object类的toStirng()方法。使得在调用对象的toString()时，返回”实体内容“信息</p>
+<p>③自定义类也可以重写toString()方法，当调用此方法时，返回对象的”实体类容”信息</p>
+<h2 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h2><p><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12/image-20221028184726322.png" alt="image-20221028184726322"><img src="/../images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12/image-20221028184615339.png" alt="image-20221028184615339"></p>
+<h3 id="包装类的使用："><a href="#包装类的使用：" class="headerlink" title="包装类的使用："></a>包装类的使用：</h3><p>①Java提供了8中基本数据类型对应的包装类，使得基本数据类型的变量具有类的特征</p>
+<p>②掌握：基本数据类型，包装类，Stirng三者之间的转换</p>
+<p>基本数据类型 —-&gt; 包装类：调用包装类的构造器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//int -- -&gt; Integer</span></span><br><span class="line"><span class="comment">//toString可加可不加</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(num1);</span><br><span class="line">System.out.println(in1.toString());</span><br><span class="line"></span><br><span class="line"><span class="comment">//带引号</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(in1.toString());<span class="comment">//123</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//报错，无法转换</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="string">&quot;123abc&quot;</span>);</span><br><span class="line">System.out.println(in1.toString());</span><br><span class="line"></span><br><span class="line"><span class="comment">//同int</span></span><br><span class="line"><span class="type">Float</span> <span class="variable">f1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="number">12.3f</span>);</span><br><span class="line"><span class="type">Float</span> <span class="variable">f2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="string">&quot;12.3&quot;</span>);</span><br><span class="line">System.out.println(f1); <span class="comment">//12.3</span></span><br><span class="line">System.out.println(f2); <span class="comment">//12.3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//boolean ----&gt; Boolean</span></span><br><span class="line"><span class="type">Boolean</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">true</span>);<span class="comment">//true</span></span><br><span class="line"><span class="type">Boolean</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="string">&quot;true&quot;</span>);<span class="comment">//ture</span></span><br><span class="line"><span class="type">Boolean</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="string">&quot;true123&quot;</span>);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>包装类 —-&gt; 基本数据类型：调用包装类的xxxValue()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Integer ----&gt; int</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">12</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> in1.intValue();</span><br><span class="line">System.out.println(i1);<span class="comment">//12</span></span><br><span class="line"></span><br><span class="line"><span class="type">Float</span> <span class="variable">f1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="number">12.3</span>);</span><br><span class="line"><span class="type">float</span> <span class="variable">f2</span> <span class="operator">=</span> f1.floatValue();</span><br><span class="line">System.out.println(f2);<span class="comment">//12.3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="自动装箱与自动拆箱："><a href="#自动装箱与自动拆箱：" class="headerlink" title="自动装箱与自动拆箱："></a>自动装箱与自动拆箱：</h3><p>装箱：基本数据类型 —-&gt; 包装类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例1</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> num1;<span class="comment">//自动装箱</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例2</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">method(num1);<span class="comment">//自动装箱</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">	System.out.method(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拆箱：包装类 —-&gt; 基本数据类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> num1;<span class="comment">//自动装箱</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> in1;<span class="comment">//自动拆箱</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>*注意点：</p>
+<p>Integer内部定义了IntegerCache结构，IntergerCache中定义了Integer[]，保存了从-128<del>127范围内的整数。如果我们用自动装箱的方式，给Integer赋值的范围在-128</del>127范围内时，可以直接使用数组中的元素，不用再去new了。目的：提高效率</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">Integer</span> <span class="variable">j</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);</span><br><span class="line">System.out.method(i == j);<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="type">Integer</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">System.out.method(m == n);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="type">Integer</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">128</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">128</span>;</span><br><span class="line">System.out.method(x == y);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="*单元测试"></a>*单元测试</h2><p>Junit单元测试</p>
+<p>步骤：1.添加Junit依赖</p>
+<p>2.创建Java类，进行单元测试。</p>
+<p>​	此时的Java类要求：①此类是public的 ②此类提供公共的午餐构造器</p>
+<p>3.此类中声明单元测试方法：方法的权限是public，没有返回值，没有形参</p>
+<p>4.此单元测试方法上需要声明注解：@Test，并且在单元测试类中导入：import org.junit.Test</p>
+<p>5.声明好单元测试后，就可以在方法体内测试相关代码</p>
+<p>6.写完代码后，左键双击单元测试方法名，右键：run as - Junit Test</p>
+<p>说明：①如果执行结果没有任何异常：绿条</p>
+<p>②如果执行结果出现异常：红条</p>
+<p>p315</p>
+
+  </div>
+  <div id="gitalk-container"></div>
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2022/10/28/mysql%E5%AD%A6%E4%B9%A0/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>mysql学习</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2022/10/26/hexo%E9%85%8D%E5%90%88typora/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>hexo配合typora的使用</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2022 By Joey. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+			<img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: rgba(18, 24, 58, 0.06);
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        if(Boolean('true')){
+            gitalk.render('gitalk-container')
+        }
+    </script>
+
+<script>
+	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/79e/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+</script>
+	</body>
+</html>
+
